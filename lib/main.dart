@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 //new
+//nwe2
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
@@ -39,7 +40,8 @@ class MyApp extends StatelessWidget {
               ),
         ),
         debugShowCheckedModeBanner: false,
-        home: const SplashScreen(),
+        home: 
+        const SplashScreen(),
       ),
     );
   }
