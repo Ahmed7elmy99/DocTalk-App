@@ -1,16 +1,32 @@
+import 'package:bloc/bloc.dart';
+import 'package:doc_talk/features/auth_feature/presentation/cubit/auth_cubit.dart';
+import 'package:doc_talk/features/home_feature/presentation/screens/home_screen.dart';
 import 'package:doc_talk/features/splash_and_onboarding_feature/presentation/screens/splash_screen.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+
+import 'app/utils/cach_helper.dart';
+import 'app/utils/dio_helper.dart';
 
 //new
 //nwe2
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  DioHelper.init();
+  await CashHelper.init();
   runApp(
-    const MyApp(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider (
+        create: (BuildContext context) => AuthCubit(),
+        )
+      ],
+        child: const MyApp(),
+    ),
   );
 }
 
@@ -40,7 +56,8 @@ class MyApp extends StatelessWidget {
               ),
         ),
         debugShowCheckedModeBanner: false,
-        home: const SplashScreen(),
+        home: CashHelper.getString(key: "token") == null?
+        const SplashScreen(): const HomeScreen(),
       ),
     );
   }

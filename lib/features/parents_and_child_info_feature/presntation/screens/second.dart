@@ -6,9 +6,14 @@ import 'package:doc_talk/features/parents_and_child_info_feature/widgets/parent_
 import 'package:flutter/material.dart';
 
 
-class Second extends StatelessWidget {
+class Second extends StatefulWidget {
   const Second({Key? key}) : super(key: key);
 
+  @override
+  State<Second> createState() => _SecondState();
+}
+
+class _SecondState extends State<Second> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +75,7 @@ void _showModalBottomSheet(BuildContext context) {
     context: context,
     isScrollControlled: true,
     builder: (BuildContext context) {
-      
+
       return const BottomSheetWidget();
     },
   );

@@ -67,6 +67,8 @@ dependencies:
   dots_indicator: ^3.0.0
   get: ^4.6.6
   google_fonts: ^6.1.0
+  dio: ^5.4.0
+
  
 
 dev_dependencies:
