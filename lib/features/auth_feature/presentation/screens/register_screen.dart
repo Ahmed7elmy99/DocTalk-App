@@ -72,15 +72,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   CustomFormField(
                     hint: "Type password",
                     controller: cubit.passwordCon,
-                    obscure: true,
-                    suffixIcon: Icons.remove_red_eye,
+                    obscure: cubit.isVisiable,
+                    suffixIconWidget: IconButton(
+                      onPressed: () {
+                        cubit.changePass();
+                      },
+                      icon: Icon(
+                          cubit.isVisiable?Icons.visibility:Icons.visibility_off
+                      ),
+                    ),
                   ),
                   16.verticalSpace,
                   CustomFormField(
                     hint: "Confirm password",
                     controller: cubit.conFirmPasswordCon,
-                    obscure: true,
-                    suffixIcon: Icons.remove_red_eye,
+                    obscure: cubit.isConfirm,
+                    suffixIconWidget: IconButton(
+                      onPressed: () {
+                        cubit.changeIsConfirm();
+                      },
+                      icon: Icon(
+                          cubit.isConfirm?Icons.visibility:Icons.visibility_off
+                      ),
+                    ),
                   ),
                   40.verticalSpace,
                   ButtonWidget(

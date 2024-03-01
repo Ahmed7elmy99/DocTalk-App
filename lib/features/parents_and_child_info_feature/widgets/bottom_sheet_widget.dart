@@ -178,6 +178,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                               imagePath: imagePath,
                               childName: controller.text,
                               age: age,
+                          gender: isBoySelected?"FEMALE":"MALE",
                             )),
                   );
                 }

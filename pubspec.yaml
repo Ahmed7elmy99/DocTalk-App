@@ -68,7 +68,7 @@ dependencies:
   get: ^4.6.6
   google_fonts: ^6.1.0
   dio: ^5.4.0
-  flutter_gif: ^0.0.4
+  gif: ^2.3.0
 
  
 

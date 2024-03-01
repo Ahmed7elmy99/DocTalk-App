@@ -56,6 +56,15 @@ class LoginScreen extends StatelessWidget {
                 CustomFormField(
                   hint: "Type password",
                   controller: cubit.loginPasswordCon,
+                  obscure: cubit.isConfirm,
+                  suffixIconWidget: IconButton(
+                    onPressed: () {
+                      cubit.changeIsConfirm();
+                    },
+                    icon: Icon(
+                        cubit.isConfirm?Icons.visibility:Icons.visibility_off
+                    ),
+                  ),
                 ),
                 8.verticalSpace,
                 Align(

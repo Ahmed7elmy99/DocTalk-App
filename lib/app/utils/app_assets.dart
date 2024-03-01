@@ -21,7 +21,11 @@ class AppImages{
   static const String homeList2="${imagesBase}home2.png";
   static const String facebook="${imagesBase}facebook.png";
     static const String apple="${imagesBase}apple.png";
-
+  static const String Frame="${imagesBase}Frame.png";
+  static const String image="${imagesBase}image.png";
+  static const String player="${imagesBase}player.png";
+  static const String quiz="${imagesBase}quiz.png";
+  static const String thank="${imagesBase}thank.png";
 
 
 

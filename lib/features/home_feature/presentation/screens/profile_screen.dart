@@ -1,10 +1,15 @@
 import 'package:doc_talk/app/utils/app_assets.dart';
 import 'package:doc_talk/app/utils/app_colors.dart';
+import 'package:doc_talk/app/utils/consts.dart';
+import 'package:doc_talk/app/widgets/button_widget.dart';
 import 'package:doc_talk/app/widgets/default_app_bar_widget.dart';
 import 'package:doc_talk/app/widgets/image_widget.dart';
 import 'package:doc_talk/app/widgets/text_widget.dart';
+import 'package:doc_talk/features/home_feature/presentation/screens/alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../auth_feature/presentation/screens/welcome_screen.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
@@ -151,6 +156,42 @@ class AccountScreen extends StatelessWidget {
                 ),
               ],
             ),
+            92.verticalSpace,
+            ButtonWidget(
+              onPressed: () {
+                globalAlertDialogue(
+                    "You are about to delete your account.\nDo you want to continue.?",
+                    context: context,
+                    cancelButtonText: "Cancel",
+                    okButtonText: "Continue ",
+                    onOk: () {
+                      Navigator.pop(context);
+                      globalAlertDialogue(
+                          "Your Account is deleted",
+                          context: context,
+                          okButtonText: "Make new account ",
+                          onOk: () {
+                            navigateAndRemove(context: context, widget:const WelcomeScreen());
+                          },
+                          canCancel: false
+                      );
+                    },
+                    onCancel: () {
+                      Navigator.pop(context);
+                    },
+                    canCancel: true
+                );
+              },
+              mainAxisAlignment: MainAxisAlignment.center,
+              color: Colors.transparent,
+              border: Border.all(color: Color(0xffFF5252)),
+              width: 200.w,
+              outlined: false,
+              text: "Delete Account",
+              textSize: 20.sp,
+              fontWeight: FontWeight.bold,
+              textColor: Color(0xffFF5252),
+            )
           ],
         ),
       ),

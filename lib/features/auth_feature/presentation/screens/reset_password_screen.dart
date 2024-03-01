@@ -64,11 +64,29 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   CustomFormField(
                     hint: "Enter new password",
                     controller: cubit.newPassCon,
+                    obscure: cubit.isVisiable,
+                    suffixIconWidget: IconButton(
+                      onPressed: () {
+                        cubit.changePass();
+                      },
+                      icon: Icon(
+                          cubit.isVisiable?Icons.visibility:Icons.visibility_off
+                      ),
+                    ),
                   ),
                   16.verticalSpace,
                   CustomFormField(
                     hint: "Confirm new password",
                     controller: cubit.confirmNewPassCon,
+                    obscure: cubit.isConfirm,
+                    suffixIconWidget: IconButton(
+                      onPressed: () {
+                        cubit.changeIsConfirm();
+                      },
+                      icon: Icon(
+                          cubit.isConfirm?Icons.visibility:Icons.visibility_off
+                      ),
+                    ),
                   ),
                   56.verticalSpace,
                   ButtonWidget(

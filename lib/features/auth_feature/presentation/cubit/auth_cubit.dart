@@ -6,6 +6,7 @@ import 'package:doc_talk/features/auth_feature/data/model/user_model.dart';
 import 'package:doc_talk/features/auth_feature/presentation/screens/login_screen.dart';
 import 'package:doc_talk/features/auth_feature/presentation/screens/reset_password_screen.dart';
 import 'package:doc_talk/features/home_feature/presentation/screens/home_screen.dart';
+import 'package:doc_talk/features/loading_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
@@ -39,11 +40,23 @@ class AuthCubit extends Cubit<AuthState> {
 
 
   UserModel ? userModel;
+  bool isVisiable = true;
+  bool isConfirm = true;
+
+  void changePass(){
+    isVisiable = ! isVisiable;
+    emit(AuthInitial());
+  }
+  void changeIsConfirm(){
+    isConfirm = ! isConfirm;
+    emit(AuthInitial());
+  }
+
   void signup({
     required BuildContext context,
     required String name,
     required String image,
-    //required String gender,
+    required String gender,
     required int age,
   }){
     emit(AuthLoading());
@@ -54,14 +67,14 @@ class AuthCubit extends Cubit<AuthState> {
           "email": signupEmailCon.text,
           "age":age,
           "phone":"+2${phoneCon.text}",
-          //"gender":gender
+          "gender":gender,
           "password": passwordCon.text,
           "image":image
         },
     ).then((value) {
       print(value.data);
       print("from Success");
-      navigateTo(context: context, widget: LoginScreen ());
+      navigateTo(context: context, widget: LoadingScreen ());
       emit(AuthInitial());
     }).catchError((e){
       print(e);

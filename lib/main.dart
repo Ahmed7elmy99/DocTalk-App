@@ -56,7 +56,8 @@ class MyApp extends StatelessWidget {
               ),
         ),
         debugShowCheckedModeBanner: false,
-        home: CashHelper.getString(key: "token") == null?
+        home:
+        CashHelper.getString(key: "token") == null?
         const SplashScreen(): const HomeScreen(),
       ),
     );

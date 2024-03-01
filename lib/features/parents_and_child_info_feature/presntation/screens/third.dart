@@ -13,10 +13,11 @@ import 'package:flutter/material.dart';
 import '../../../auth_feature/presentation/cubit/auth_cubit.dart';
 
 class Third extends StatelessWidget {
-  const Third({Key? key, required this.childName, required this.imagePath, required this.avatarImagePath, required this.age})
+  const Third({Key? key, required this.childName, required this.imagePath, required this.avatarImagePath, required this.age, required this.gender})
       : super(key: key);
   final String childName;
   final String imagePath;
+  final String gender;
    final String avatarImagePath;
    final int age;
   @override
@@ -88,6 +89,7 @@ class Third extends StatelessWidget {
                   context: context,
                   name: childName,
                   image:imagePath,
+                  gender: gender,
                   age: age,
                 );
 
