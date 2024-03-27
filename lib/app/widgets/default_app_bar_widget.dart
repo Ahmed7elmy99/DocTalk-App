@@ -7,6 +7,7 @@ import 'text_widget.dart';
 class DefaultAppBarWidget extends StatelessWidget
     implements PreferredSizeWidget {
   final String? title;
+  final Color appBarIconColor;
   final bool actions;
   final bool notify;
   final bool? centerTitle;
@@ -21,7 +22,7 @@ class DefaultAppBarWidget extends StatelessWidget
   final SystemUiOverlayStyle? systemUiOverlayStyle;
   final List<Widget>? actionsWidgets;
   final FontWeight? titleFontWeight;
-  final  double? titleSize;
+  final double? titleSize;
 
   const DefaultAppBarWidget({
     this.title,
@@ -39,14 +40,15 @@ class DefaultAppBarWidget extends StatelessWidget
     this.systemUiOverlayStyle,
     this.centerTitle,
     this.shapeBorder = false,
-    this.titleFontWeight, this.titleSize,
+    this.titleFontWeight,
+    this.titleSize,
+    this.appBarIconColor=  AppColors.black101010,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
-      
       shape: shapeBorder
           ? const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
@@ -57,7 +59,6 @@ class DefaultAppBarWidget extends StatelessWidget
       centerTitle: centerTitle,
       systemOverlayStyle: systemUiOverlayStyle,
       backgroundColor: backColor,
-      
       leading: canBack
           ? IconButton(
               alignment: Alignment.center,
@@ -68,7 +69,7 @@ class DefaultAppBarWidget extends StatelessWidget
               icon: leading ??
                   Icon(
                     Icons.arrow_back_ios,
-                    color: AppColors.black101010,
+                    color: appBarIconColor,
                     size: 20.sp,
                   ),
             )
@@ -76,7 +77,7 @@ class DefaultAppBarWidget extends StatelessWidget
       title: titleWidget ??
           TextWidget(
               title: title ?? "",
-              titleSize:titleSize??20.sp,
+              titleSize: titleSize ?? 20.sp,
               titleFontWeight: titleFontWeight ?? FontWeight.w400,
               titleColor: AppColors.black101010),
       actions: actions

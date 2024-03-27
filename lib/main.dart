@@ -1,4 +1,7 @@
+import 'package:doc_talk/categories.dart';
+import 'package:doc_talk/family_screen.dart';
 import 'package:doc_talk/features/splash_and_onboarding_feature/presentation/screens/splash_screen.dart';
+import 'package:doc_talk/levels.dart';
 
 import 'package:flutter/material.dart';
 
@@ -40,7 +43,10 @@ class MyApp extends StatelessWidget {
               ),
         ),
         debugShowCheckedModeBanner: false,
-        home: const SplashScreen(),
+        home://FamilyScreen()
+      //  CategoriesScreen()
+        LevelsScreen(),
+        // const SplashScreen(),
       ),
     );
   }
