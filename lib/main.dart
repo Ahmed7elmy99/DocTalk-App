@@ -1,6 +1,4 @@
-import 'package:doc_talk/categories.dart';
-import 'package:doc_talk/family_screen.dart';
-import 'package:doc_talk/features/splash_and_onboarding_feature/presentation/screens/splash_screen.dart';
+
 import 'package:doc_talk/levels.dart';
 
 import 'package:flutter/material.dart';
