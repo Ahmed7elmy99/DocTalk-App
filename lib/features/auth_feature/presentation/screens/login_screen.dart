@@ -1,8 +1,10 @@
+import 'package:doc_talk/features/auth_feature/presentation/cubit/auth_cubit.dart';
 import 'package:doc_talk/features/auth_feature/presentation/screens/forget_password_screen.dart';
 import 'package:doc_talk/features/auth_feature/presentation/screens/register_screen.dart';
 import 'package:doc_talk/features/parents_and_child_info_feature/presntation/screens/first.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../app/utils/app_assets.dart';
@@ -22,108 +24,127 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
-      appBar:const DefaultAppBarWidget(
-        backColor: Colors.transparent,
-        systemUiOverlayStyle: const SystemUiOverlayStyle(
-            statusBarColor: Colors.transparent,
-            statusBarBrightness: Brightness.dark,
-            statusBarIconBrightness: Brightness.dark
+        resizeToAvoidBottomInset: true,
+        appBar: const DefaultAppBarWidget(
+          backColor: Colors.transparent,
+          systemUiOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: Colors.transparent,
+              statusBarBrightness: Brightness.dark,
+              statusBarIconBrightness: Brightness.dark
+          ),
+          centerTitle: true,
+          title: "Sign in",
         ),
-        centerTitle: true,
-        title: "Sign in",
-      ),
-      body:ListView(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        children: [
-          ImageWidget(
-              imageUrl: AppImages.authLogo,
-            width: 170.w,
-            height: 170.h,
-          ),
-          64.verticalSpace,
-          const CustomFormField(
-            hint: "Enter email",
-          ),
-          16.verticalSpace,
-          const CustomFormField(
-            hint: "Type password",
-          ),
-          8.verticalSpace,
-          Align(
-            alignment: AlignmentDirectional.centerEnd,
-            child: CustomTextButton(
-              title: "Forget password?",
-              onPressed: () {
-                navigateTo(context: context, widget: const ForgetPasswordScreen());
-              },
-              titleSize: 14.sp,
-              textDecoration: TextDecoration.underline,
-            ),
-          ),
-          56.verticalSpace,
-          ButtonWidget(
-            onPressed: () {
-  navigateTo(context: context, widget: const First());
-            },
-            color: AppColors.mainColor,
-            mainAxisAlignment: MainAxisAlignment.center,
-            outlined: false,
-            border: Border.all(color: AppColors.mainColor),
-            text: "Sign in",
-            textSize: 20.sp,
-            textColor: AppColors.white,
-          ),
-          16.verticalSpace,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextWidget(
-                title: "Don’t have account?",
-                titleColor: AppColors.black,
-                titleSize: 18.sp,
-              ),
-              CustomTextButton(
-                title: "Create one",
-                onPressed: () {
-                  navigateTo(context: context, widget: const RegisterScreen());
-                },
-                titleSize: 18.sp,
-                titleColor: AppColors.mainColor,
-                textDecoration: TextDecoration.underline,
-              ),
+        body: BlocBuilder<AuthCubit, AuthState>(
+          builder: (context, state) {
+            var cubit = AuthCubit.get(context);
+            return ListView(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              children: [
+                ImageWidget(
+                  imageUrl: AppImages.authLogo,
+                  width: 170.w,
+                  height: 170.h,
+                ),
+                64.verticalSpace,
+                 CustomFormField(
+                  hint: "Enter email",
+                  controller: cubit.loginEmailCon,
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                16.verticalSpace,
+                CustomFormField(
+                  hint: "Type password",
+                  controller: cubit.loginPasswordCon,
+                  obscure: cubit.isConfirm,
+                  suffixIconWidget: IconButton(
+                    onPressed: () {
+                      cubit.changeIsConfirm();
+                    },
+                    icon: Icon(
+                        cubit.isConfirm?Icons.visibility:Icons.visibility_off
+                    ),
+                  ),
+                ),
+                8.verticalSpace,
+                Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: CustomTextButton(
+                    title: "Forget password?",
+                    onPressed: () {
+                      navigateTo(context: context,
+                          widget: const ForgetPasswordScreen());
+                    },
+                    titleSize: 14.sp,
+                    textDecoration: TextDecoration.underline,
+                  ),
+                ),
+                56.verticalSpace,
+                ButtonWidget(
+                  onPressed: () {
+                   cubit.login(context);
+                  },
+                  color: AppColors.mainColor,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  outlined: false,
+                  border: Border.all(color: AppColors.mainColor),
+                  text: "Sign in",
+                  textSize: 20.sp,
+                  textColor: AppColors.white,
+                ),
+                16.verticalSpace,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextWidget(
+                      title: "Don’t have account?",
+                      titleColor: AppColors.black,
+                      titleSize: 18.sp,
+                    ),
+                    CustomTextButton(
+                      title: "Create one",
+                      onPressed: () {
+                        navigateTo(
+                            context: context, widget: const RegisterScreen());
+                      },
+                      titleSize: 18.sp,
+                      titleColor: AppColors.mainColor,
+                      textDecoration: TextDecoration.underline,
+                    ),
 
-            ],
-          ),
-          56.verticalSpace,
-          TextWidget(
-            title: "Or sign in with",
-            titleColor: AppColors.black,
-            titleSize: 20.sp,
-          ),
-          16.verticalSpace,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ImageWidget(
-                imageUrl: AppImages.twitter,
-                width: 50.w,
-                height: 50.h,
-              ),
-              24.horizontalSpace,
-              ImageWidget(
-                imageUrl: AppImages.google,
-                width: 50.w,
-                height: 50.h,
-              ),
+                  ],
+                ),
+                56.verticalSpace,
+                TextWidget(
+                  title: "Or sign in with",
+                  titleColor: AppColors.black,
+                  titleSize: 20.sp,
+                ),
+                16.verticalSpace,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ImageWidget(
+                      imageUrl: AppImages.twitter,
+                      width: 50.w,
+                      height: 50.h,
+                    ),
+                    24.horizontalSpace,
+                    ImageWidget(
+                      imageUrl: AppImages.google,
+                      width: 50.w,
+                      height: 50.h,
+                    ),
 
-            ],
-          ),
-          50.verticalSpace,
+                  ],
+                ),
+                50.verticalSpace,
 
 
-        ],
-      )
+              ],
+            );
+          },
+        )
     );
   }
 }

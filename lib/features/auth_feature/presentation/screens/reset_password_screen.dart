@@ -1,9 +1,5 @@
-import 'package:doc_talk/app/utils/consts.dart';
-import 'package:doc_talk/app/widgets/flutter_toast.dart';
 import 'package:doc_talk/features/auth_feature/presentation/cubit/auth_cubit.dart';
-import 'package:doc_talk/features/auth_feature/presentation/screens/login_screen.dart';
-import 'package:doc_talk/features/parents_and_child_info_feature/presntation/screens/second.dart';
-import 'package:doc_talk/features/questionair_feature/presentation/screens/q1_screen.dart';
+import 'package:doc_talk/features/auth_feature/presentation/screens/otp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,24 +7,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../app/utils/app_assets.dart';
 import '../../../../app/utils/app_colors.dart';
+import '../../../../app/utils/consts.dart';
 import '../../../../app/widgets/button_widget.dart';
-import '../../../../app/widgets/custom_drop_down.dart';
 import '../../../../app/widgets/custom_form_field.dart';
 import '../../../../app/widgets/default_app_bar_widget.dart';
+import '../../../../app/widgets/flutter_toast.dart';
 import '../../../../app/widgets/image_widget.dart';
-import '../../../../app/widgets/text_button_widget.dart';
+
 import '../../../../app/widgets/text_widget.dart';
 
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+class ResetPasswordScreen extends StatefulWidget {
+  const ResetPasswordScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
- final formKey = GlobalKey<FormState>();
+class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +39,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               statusBarIconBrightness: Brightness.dark
           ),
           centerTitle: true,
-          title: "Create account",
+          title: "Forget Password!",
         ),
         body: BlocBuilder<AuthCubit, AuthState>(
           builder: (context, state) {
@@ -56,22 +54,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     width: 170.w,
                     height: 170.h,
                   ),
-                  64.verticalSpace,
-                   CustomFormField(
-                    hint: "Enter email",
-                    controller: cubit.signupEmailCon,
-                     keyboardType: TextInputType.emailAddress,
+                  40.verticalSpace,
+                  TextWidget(
+                    title: "Now you can change your password.!",
+                    titleColor: AppColors.black,
+                    titleSize: 20.sp,
                   ),
-                  16.verticalSpace,
+                  32.verticalSpace,
                   CustomFormField(
-                    hint: "Type Phone",
-                    controller: cubit.phoneCon,
-                    keyboardType: TextInputType.phone,
-                  ),
-                  16.verticalSpace,
-                  CustomFormField(
-                    hint: "Type password",
-                    controller: cubit.passwordCon,
+                    hint: "Enter new password",
+                    controller: cubit.newPassCon,
                     obscure: cubit.isVisiable,
                     suffixIconWidget: IconButton(
                       onPressed: () {
@@ -84,8 +76,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   16.verticalSpace,
                   CustomFormField(
-                    hint: "Confirm password",
-                    controller: cubit.conFirmPasswordCon,
+                    hint: "Confirm new password",
+                    controller: cubit.confirmNewPassCon,
                     obscure: cubit.isConfirm,
                     suffixIconWidget: IconButton(
                       onPressed: () {
@@ -96,48 +88,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                   ),
-                  40.verticalSpace,
+                  56.verticalSpace,
                   ButtonWidget(
                     onPressed: () {
-                     if(cubit.passwordCon.text == cubit.conFirmPasswordCon.text&&formKey.currentState!.validate()){
-                       navigateTo(context: context, widget:const Second());
-                     }else{
-                       showToast(msg: "Chek That password and Confirmed password are the Same");
+                      if(cubit.passwordCon.text == cubit.conFirmPasswordCon.text&&formKey.currentState!.validate()){
+                        cubit.resetPassword(context);
+                      }else{
+                        showToast(msg: "Chek That password and Confirmed password are the Same");
 
-                     }
+                      }
+
                     },
-                    loading: state is AuthLoading,
                     color: AppColors.mainColor,
                     mainAxisAlignment: MainAxisAlignment.center,
                     outlined: false,
                     border: Border.all(color: AppColors.mainColor),
-                    text: "Join DocTalk",
+                    text: "Confirm",
                     textSize: 20.sp,
                     textColor: AppColors.white,
                   ),
                   16.verticalSpace,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextWidget(
-                        title: "Already have one.",
-                        titleColor: AppColors.black,
-                        titleSize: 18.sp,
-                      ),
-                      CustomTextButton(
-                        title: "Sign in",
-                        onPressed: () {
-                          navigateTo(
-                              context: context, widget: const LoginScreen());
-                        },
-                        titleSize: 18.sp,
-                        titleColor: AppColors.mainColor,
-                        textDecoration: TextDecoration.underline,
-                      ),
-
-                    ],
-                  ),
-                  50.verticalSpace,
 
 
                 ],
