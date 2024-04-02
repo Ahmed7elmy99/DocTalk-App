@@ -1,8 +1,15 @@
+import 'package:doc_talk/app/utils/consts.dart';
 import 'package:doc_talk/features/drawer_feature/presentation/screens/drawer.dart';
 import 'package:doc_talk/features/home_feature/presentation/screens/home_screen.dart';
 import 'package:doc_talk/features/home_feature/presentation/screens/settings_view.dart';
 import 'package:doc_talk/features/home_feature/presentation/widgets/custom_button_bottom_app_bar.dart';
+import 'package:doc_talk/features/loading_screen.dart';
+import 'package:doc_talk/features/questionair_feature/cubit/states_survey.dart';
+import 'package:doc_talk/features/questionair_feature/cubit/survey_cubit.dart';
+import 'package:doc_talk/features/questionair_feature/presentation/screens/q1_screen.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
@@ -35,30 +42,50 @@ class _BottomNavBarState extends State<BottomNavBar> {
       floatingActionButton: SizedBox(
         width: 72,
         height: 72,
-        child: FloatingActionButton(
-          backgroundColor: Color(0xFF2A7473),
-          onPressed: () {},
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                "assets/images/floatingActionButtonIcon.png",
-                width: 24,
-                height: 24,
-              ),
-              Text(
-                'Test',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  height: 1,
+        child:
+            BlocConsumer<SurveyCubit, SurveyStates>(listener: (context, state) {
+          if (state is SurveyLoadingStates) {
+            showDialog(
+              context: context,
+              builder: (context) =>
+                  const Center(child: CircularProgressIndicator()),
+            );
+          } else if (state is SurveySuccessStates) {
+            navigateTo(
+                context: context,
+                widget: Q1Screen(
+                    surveyModel: SurveyCubit.get(context).surveyModel));
+          }
+        }, builder: (context, state) {
+          var cubit = SurveyCubit.get(context);
+          return FloatingActionButton(
+            backgroundColor: Color(0xFF2A7473),
+            onPressed: () async {
+              await cubit.getSurveyData(context: context, id: 1);
+              // navigateTo(context: context, widget: Q1Screen());
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  "assets/images/floatingActionButtonIcon.png",
+                  width: 24,
+                  height: 24,
                 ),
-              ),
-            ],
-          ),
-          shape: const CircleBorder(),
-        ),
+                Text(
+                  'Servey',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    height: 1,
+                  ),
+                ),
+              ],
+            ),
+            shape: const CircleBorder(),
+          );
+        }),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: bottomScreens[currentIndex],
@@ -75,7 +102,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
             left: 0,
             right: 0,
             child: BottomAppBar(
-          
               elevation: 0,
               child: Row(
                 children: [
@@ -103,7 +129,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   Row(
                     children: [
                       CustomButtonBottomAppBar(
-                      
                         active: currentIndex == 2,
                         imageUrl: "assets/images/icon-bookmark.png",
                         textButton: "Library",

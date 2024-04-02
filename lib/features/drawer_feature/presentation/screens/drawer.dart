@@ -1,3 +1,6 @@
+import 'package:doc_talk/app/utils/cach_helper.dart';
+import 'package:doc_talk/app/utils/consts.dart';
+import 'package:doc_talk/features/auth_feature/presentation/screens/login_screen.dart';
 import 'package:doc_talk/features/drawer_feature/presentation/widgets/custom_listile_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -75,6 +78,14 @@ class MyDrawer extends StatelessWidget {
           CustomListileDrawer(
             onTap: () {},
             title: 'Setting',
+            imageUrl: "assets/images/icon-settings.png",
+          ),
+          CustomListileDrawer(
+            onTap: () {
+              CashHelper.shared.clear();
+              navigateAndRemove(context: context, widget: LoginScreen());
+            },
+            title: 'Logout',
             imageUrl: "assets/images/icon-settings.png",
           ),
         ],

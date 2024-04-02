@@ -1,17 +1,15 @@
-import 'package:bloc/bloc.dart';
 import 'package:doc_talk/app/utils/cach_helper.dart';
 import 'package:doc_talk/app/utils/consts.dart';
 import 'package:doc_talk/app/utils/dio_helper.dart';
 import 'package:doc_talk/features/auth_feature/data/model/user_model.dart';
 import 'package:doc_talk/features/auth_feature/presentation/screens/login_screen.dart';
 import 'package:doc_talk/features/auth_feature/presentation/screens/reset_password_screen.dart';
-import 'package:doc_talk/features/home_feature/presentation/screens/home_screen.dart';
+import 'package:doc_talk/features/home_feature/presentation/screens/bottom_nav_bar.dart';
+
 import 'package:doc_talk/features/loading_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 
-import '../../../questionair_feature/presentation/screens/q1_screen.dart';
 import '../screens/otp_screen.dart';
 
 part 'auth_state.dart';
@@ -19,7 +17,7 @@ part 'auth_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
 
-  static AuthCubit get(context) =>  BlocProvider.of(context);
+  static AuthCubit get(context) => BlocProvider.of(context);
   TextEditingController nameCon = TextEditingController();
   TextEditingController signupEmailCon = TextEditingController();
   TextEditingController ageCon = TextEditingController();
@@ -30,7 +28,7 @@ class AuthCubit extends Cubit<AuthState> {
   TextEditingController loginEmailCon = TextEditingController();
   TextEditingController loginPasswordCon = TextEditingController();
 
-
+  GlobalKey<FormState> formstate = GlobalKey<FormState>();
 
   TextEditingController resetPassEmailCon = TextEditingController();
   TextEditingController otpCon = TextEditingController();
@@ -38,17 +36,17 @@ class AuthCubit extends Cubit<AuthState> {
   TextEditingController newPassCon = TextEditingController();
   TextEditingController confirmNewPassCon = TextEditingController();
 
-
-  UserModel ? userModel;
+  UserModel? userModel;
   bool isVisiable = true;
   bool isConfirm = true;
 
-  void changePass(){
-    isVisiable = ! isVisiable;
+  void changePass() {
+    isVisiable = !isVisiable;
     emit(AuthInitial());
   }
-  void changeIsConfirm(){
-    isConfirm = ! isConfirm;
+
+  void changeIsConfirm() {
+    isConfirm = !isConfirm;
     emit(AuthInitial());
   }
 
@@ -58,101 +56,90 @@ class AuthCubit extends Cubit<AuthState> {
     required String image,
     required String gender,
     required int age,
-  }){
+  }) {
     emit(AuthLoading());
     DioHelper.postData(
-        url: "signup",
-        data: {
-          "name": name,
-          "email": signupEmailCon.text,
-          "age":age,
-          "phone":"+2${phoneCon.text}",
-          "gender":gender,
-          "password": passwordCon.text,
-          "image":image
-        },
+      url: "http://130.61.130.252/api/auth/signup",
+      data: {
+        "name": name,
+        "email": signupEmailCon.text,
+        "age": age,
+        "phone": "+2${phoneCon.text}",
+        "gender": gender,
+        "password": passwordCon.text,
+        "image": image
+      },
     ).then((value) {
       print(value.data);
       print("from Success");
-      navigateTo(context: context, widget: LoadingScreen ());
+      navigateTo(context: context, widget: LoadingScreen());
       emit(AuthInitial());
-    }).catchError((e){
+    }).catchError((e) {
       print(e);
       emit(AuthInitial());
     });
-
   }
 
-  void login(BuildContext context){
-    emit(AuthLoading());
-    DioHelper.postData(
-        url: "login",
+  login(BuildContext context) async {
+    if (formstate.currentState!.validate()) {
+      emit(AuthLoading());
+      await DioHelper.postData(
+        url: "http://130.61.130.252/api/auth/login",
         data: {
           "email": loginEmailCon.text,
           "password": loginPasswordCon.text,
         },
-    ).then((value) async {
-      userModel = UserModel.fromJson(value.data);
-      await CashHelper.setString(key: "token", value: userModel?.token);
-      navigateAndRemove(context: context, widget: HomeScreen());
-      emit(AuthInitial());
-    }).catchError((e){
-      print(e.toString());
-      emit(AuthInitial());
-    });
-
+      ).then((value) async {
+        userModel = UserModel.fromJson(value.data);
+          await CashHelper.setString(key: "token", value: userModel?.token);
+        navigateAndRemove(context: context, widget: BottomNavBar());
+        emit(AuthSuccess());
+      }).catchError((e) {
+        print(e.toString());
+        emit(AuthError());
+      });
+    }
   }
 
-  void resetPassEmail(BuildContext context){
+  void resetPassEmail(BuildContext context) {
     emit(AuthLoading());
     DioHelper.postData(
-        url: "request-reset-token",
-        data: {
-          "email": resetPassEmailCon.text
-        },
+      url: "http://130.61.130.252/api/auth/request-reset-token",
+      data: {"email": resetPassEmailCon.text},
     ).then((value) {
-     print(value.data);
-     navigateTo(context: context, widget: const OtpScreen());
-    }).catchError((e){
+      print(value.data);
+      navigateTo(context: context, widget: const OtpScreen());
+    }).catchError((e) {
       print(e.toString());
       emit(AuthInitial());
     });
-
   }
 
-  void verifyOtp(BuildContext context){
+  void verifyOtp(BuildContext context) {
     emit(AuthLoading());
     DioHelper.postData(
-        url: "verify-reset-token",
-        data: {
-          "email": resetPassEmailCon.text,
-          "token": otpCon.text
-        },
+      url: "http://130.61.130.252/api/auth/verify-reset-token",
+      data: {"email": resetPassEmailCon.text, "token": otpCon.text},
     ).then((value) {
-     print(value.data);
-     navigateTo(context: context, widget: const ResetPasswordScreen());
-    }).catchError((e){
+      print(value.data);
+      navigateTo(context: context, widget: const ResetPasswordScreen());
+    }).catchError((e) {
       print(e.toString());
       emit(AuthInitial());
     });
-
   }
 
-  void resetPassword(BuildContext context){
+  void resetPassword(BuildContext context) {
     emit(AuthLoading());
     DioHelper.patchData(
-        url: "reset-password",
-        data: {
-          "email": resetPassEmailCon.text,
-          "password": newPassCon.text
-        },
+      url: "http://130.61.130.252/api/auth/reset-password",
+      data: {"email": resetPassEmailCon.text, "password": newPassCon.text},
     ).then((value) {
-     print(value.data);
-     navigateAndRemove(context: context, widget: const LoginScreen());
-    }).catchError((e){
+      print(value.data);
+      navigateAndRemove(context: context, widget: const LoginScreen());
+    }).catchError((e) {
       print(e.toString());
       emit(AuthInitial());
     });
-
   }
 }

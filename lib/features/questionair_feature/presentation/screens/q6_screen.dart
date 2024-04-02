@@ -2,18 +2,24 @@ import 'package:doc_talk/app/utils/app_assets.dart';
 import 'package:doc_talk/app/utils/app_colors.dart';
 import 'package:doc_talk/app/utils/consts.dart';
 import 'package:doc_talk/app/widgets/button_widget.dart';
+import 'package:doc_talk/app/widgets/flutter_toast.dart';
 import 'package:doc_talk/app/widgets/text_widget.dart';
+import 'package:doc_talk/features/questionair_feature/cubit/states_survey.dart';
+import 'package:doc_talk/features/questionair_feature/cubit/survey_cubit.dart';
+import 'package:doc_talk/features/questionair_feature/data/model/survey_model.dart';
 import 'package:doc_talk/features/questionair_feature/presentation/screens/q7_screen.dart';
 import 'package:doc_talk/features/questionair_feature/presentation/widgets/custom_answer_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../app/widgets/default_app_bar_widget.dart';
 
 class Q6Screen extends StatelessWidget {
-  const Q6Screen({super.key});
-
+ Q6Screen({Key? key, required this.surveyModel, required this.answerIds}) : super(key: key);
+  final SurveyModel surveyModel;
+  final List<int> answerIds;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +34,9 @@ class Q6Screen extends StatelessWidget {
         ),
 
       ),
-      body: Column(
+      body:BlocBuilder<SurveyCubit, SurveyStates>(builder: (context, state) {
+      
+       return Column(
         children: [
           Padding(
             padding:  EdgeInsets.symmetric(horizontal: 24.w),
@@ -94,31 +102,48 @@ class Q6Screen extends StatelessWidget {
                     titleColor: AppColors.black,
                     titleMaxLines: 15,
                   ),
-                  16.verticalSpace,
-                  const CustomAnswerItem(
-                      text: "Very Often",
-                    isCorrect: true,
-                  ),
-                  16.verticalSpace,
-                  const CustomAnswerItem(
-                    text: "Often",
-                  ),
-                  16.verticalSpace,
-                  const CustomAnswerItem(
-                    text: "Sometimes",
-                  ),
-                  16.verticalSpace,
-                  const CustomAnswerItem(
-                    text: "Rarely",
-                  ),
-                  16.verticalSpace,
-                  const CustomAnswerItem(
-                    text: "Never",
-                  ),
-                  40.verticalSpace,
+              
+                16.verticalSpace,
+                   ...List.generate(surveyModel.surveyAnswers!.length, (index) {
+                    if (index >= 4 && index <= 7) {
+                      return Column(
+                        children: [
+                        InkWell(
+                                onTap: () {
+                                  SurveyCubit.get(context).chooseAnswerSurvey(
+                                      surveyModel.surveyAnswers![index].id!);
+                                },
+                                child: CustomAnswerItem(
+                                  text:
+                                      surveyModel.surveyAnswers![index].answer!,
+                                  isActive: SurveyCubit.get(context).answerId ==
+                                          surveyModel.surveyAnswers![index].id!
+                                      ? true
+                                      : false,
+                                ),
+                              ),
+                          16.verticalSpace
+                        ],
+                      );
+                    } else {
+                      return const SizedBox(); // Return an empty widget for indices greater than 2
+                    }
+                  }),
+                  24.verticalSpace,
                   ButtonWidget(
                     onPressed: () {
-                      navigateTo(context: context, widget: Q7Screen());
+                       if (SurveyCubit.get(context).answerId == null) {
+                          return showToast(msg: "please choose an answer");
+                        }else {
+                          navigateTo(
+                          context: context,
+                          widget: Q7Screen(
+                              answerIds: SurveyCubit.get(context).answerIds,
+                            surveyModel: surveyModel,
+                          ));
+                          SurveyCubit.get(context).answerId = null;
+                          print("answerId: ${SurveyCubit.get(context).answerId}");
+                        }
                     },
                     text: "Next",
                     height: 50.h,
@@ -128,13 +153,13 @@ class Q6Screen extends StatelessWidget {
                       size: 20.sp,
                       color: Colors.white,
                     ),
-                  )
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
-    );
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
+          );
+  }));
   }
 }
