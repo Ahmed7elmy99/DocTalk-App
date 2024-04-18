@@ -17,6 +17,7 @@ class AppColors{
   static const hint = Color(0xFF828282);
   static const red = Color(0xffD80000);
   static const geryFFE6 = Color(0xFFE6E6E6);
+  static const quizButtonColor = Color(0xFFF19336);
 
 
 
