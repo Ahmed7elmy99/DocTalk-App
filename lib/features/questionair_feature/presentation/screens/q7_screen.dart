@@ -57,8 +57,9 @@ class Q7Screen extends StatelessWidget {
                       gradient: LinearGradient(
                         colors: [
                           AppColors.mainColor,
-                          AppColors.mainColor.withOpacity(0.2),
-                          AppColors.mainColor.withOpacity(0.2),
+                          AppColors.mainColor,
+                          AppColors.mainColor,
+                          AppColors.mainColor,
                           AppColors.mainColor.withOpacity(0.2),
                           AppColors.mainColor.withOpacity(0.2),
                           AppColors.mainColor.withOpacity(0.2),
