@@ -96,7 +96,7 @@ class Q1Screen extends StatelessWidget {
                       16.verticalSpace,
                       ...List.generate(surveyModel.surveyAnswers!.length,
                           (index) {
-                        if (index <= 3) {
+                        if (index <= 4) {
                           return Column(
                             children: [
                               InkWell(

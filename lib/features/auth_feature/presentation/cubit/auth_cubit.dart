@@ -79,7 +79,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthInitial());
     });
   }
-
+   late  String token ;
   login(BuildContext context) async {
     if (formstate.currentState!.validate()) {
       emit(AuthLoading());
@@ -91,7 +91,8 @@ class AuthCubit extends Cubit<AuthState> {
         },
       ).then((value) async {
         userModel = UserModel.fromJson(value.data);
-          await CashHelper.setString(key: "token", value: userModel?.token);
+            await CashHelper.setString(key: "token", value: userModel?.token);
+            print(userModel?.token);
         navigateAndRemove(context: context, widget: BottomNavBar());
         emit(AuthSuccess());
       }).catchError((e) {

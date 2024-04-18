@@ -96,14 +96,14 @@ class Q5Screen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 15.w,vertical: 40.h),
                 children: [
                   TextWidget(
-                    title:'Does your child use fewer words than other children his or her age?',
+                    title: surveyModel.surveyQuestions![4].question!,
                     titleSize: 16.sp,
                     titleColor: AppColors.black,
                     titleMaxLines: 15,
                   ),
                   16.verticalSpace,
                    ...List.generate(surveyModel.surveyAnswers!.length, (index) {
-                    if (index >= 4 && index <= 7) {
+                    if (index >= 20 && index <= 24) {
                       return Column(
                         children: [
                          InkWell(

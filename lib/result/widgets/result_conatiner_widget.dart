@@ -4,9 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ResultContainer extends StatefulWidget {
   const ResultContainer({
-    super.key, required this.patientSurveyResults,
+    super.key, required this.surveyResultModel,
   });
- final PatientSurveyResults patientSurveyResults;
+ final SurveyResultModel surveyResultModel;
 
   @override
   State<ResultContainer> createState() => _ResultContainerState();
@@ -32,12 +32,12 @@ class _ResultContainerState extends State<ResultContainer> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'You get ${widget.patientSurveyResults.surveyResult} points from 48 ',
+                'You get ${widget.surveyResultModel.lpdRate} points from 48 ',
                 style: TextStyle(fontSize: 28.sp, color: Colors.white),
               ),
               SizedBox(height: 20.h),
-              Text(
-                'we will recommend some excercise  for your child to help improve his ability in talking',
+              Text(widget.surveyResultModel.diagnoses!
+                ,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 20.sp,

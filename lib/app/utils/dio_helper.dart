@@ -1,17 +1,19 @@
 import 'package:dio/dio.dart';
+import 'package:doc_talk/app/utils/cach_helper.dart';
 
 class DioHelper {
   static late Dio dio;
   static init() {
     dio = Dio(BaseOptions(
-        baseUrl: "",
-        receiveDataWhenStatusError: true));
+      baseUrl: "",
+      receiveDataWhenStatusError: true,
+    ));
   }
 
 //130.61.130.252/api/auth/
   static Future<Response> getData(
       {required String url,
-       Map<String, dynamic>?   queryParameters,
+      Map<String, dynamic>? queryParameters,
       Map<String, dynamic>? data}) async {
     return await dio.get(url, queryParameters: queryParameters, data: data);
   }
@@ -19,11 +21,15 @@ class DioHelper {
   static Future<Response> postData(
       {required String url,
       Map<String, dynamic>? queryParameters,
+      Map<String, dynamic>? headers,
       required Map<String, dynamic> data}) async {
-  dynamic   response = await dio.post(
+    dynamic response = await dio.post(
       url,
       queryParameters: queryParameters,
       data: data,
+       options: Options(
+        headers: headers
+      )
     );
     return response;
   }

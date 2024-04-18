@@ -100,14 +100,14 @@ class Q4Screen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 15.w,vertical: 40.h),
                 children: [
                   TextWidget(
-                    title:'Does your child say "stuff" or "things" instead of using specific words, even if they’re referring to a common object?',
+                    title: surveyModel.surveyQuestions![3].question!,
                     titleSize: 16.sp,
                     titleColor: AppColors.black,
                     titleMaxLines: 15,
                   ),
                    16.verticalSpace,
                    ...List.generate(surveyModel.surveyAnswers!.length, (index) {
-                    if (index >= 4 && index <= 7) {
+                    if (index >= 15 && index <= 19) {
                       return Column(
                         children: [
                         InkWell(

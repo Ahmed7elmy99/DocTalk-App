@@ -90,14 +90,14 @@ class Q11Screen extends StatelessWidget {
                 children: [
                   TextWidget(
                     title:
-                        'Does your child seem disinterested when other people are talking, rarely asking questions or making follow-up comments?',
+                         surveyModel.surveyQuestions![10].question!,
                     titleSize: 16.sp,
                     titleColor: AppColors.black,
                     titleMaxLines: 15,
                   ),
                   16.verticalSpace,
                   ...List.generate(surveyModel.surveyAnswers!.length, (index) {
-                    if (index >= 4 && index <= 7) {
+                    if (index >= 50 && index <= 54) {
                       return Column(
                         children: [
                         InkWell(

@@ -17,9 +17,9 @@ class _LoadingScreenState extends State<LoadingScreen>
   @override
   void initState() {
     controller = GifController(vsync: this);
-    Future.delayed(const Duration(seconds: 3), () {
+   /* Future.delayed(const Duration(seconds: 3), () {
       navigateTo(context: context, widget: LoginScreen());
-    });
+    } */;
     super.initState();
   }
 

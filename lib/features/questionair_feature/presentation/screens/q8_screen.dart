@@ -98,14 +98,14 @@ class Q8Screen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 15.w,vertical: 40.h),
                 children: [
                   TextWidget(
-                      title: 'Does your child seem to ignore directions he or she is given or skip one or more steps?',
+                      title:  surveyModel.surveyQuestions![7].question!,
                       titleSize: 16.sp,
                     titleColor: AppColors.black,
                     titleMaxLines: 15,
                   ),
                    16.verticalSpace,
                    ...List.generate(surveyModel.surveyAnswers!.length, (index) {
-                    if (index >= 4 && index <= 7) {
+                    if (index >= 35 && index <= 39) {
                       return Column(
                         children: [
                         InkWell(

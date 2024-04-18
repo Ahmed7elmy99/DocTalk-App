@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:doc_talk/app/utils/cach_helper.dart';
 import 'package:doc_talk/app/utils/consts.dart';
 
 import 'package:doc_talk/app/utils/dio_helper.dart';
@@ -17,14 +18,23 @@ class SurveyCubit extends Cubit<SurveyStates> {
   late SurveyModel surveyModel;
   int? answerId;
   List<int> answerIds = [];
-  late PatientSurveyResults patientSurveyResults;
+ // late PatientSurveyResults patientSurveyResults;
 
   chooseAnswerSurvey(int val) {
     answerId = val;
+    // answerIds.clear();
+    if (!answerIds.contains(val)) {
+      answerIds.add(val);
+    }
+    emit(AnswerIdStates());
+    print(val);
+    print(answerIds);
+
+   /* answerId = val;
+    emit(AnswerIdStates());
     print(val);
     answerIds.add(val);
-    print(answerIds);
-    emit(AnswerIdStates());
+    print(answerIds);*/
   }
 
   getSurveyData({
@@ -73,7 +83,7 @@ class SurveyCubit extends Cubit<SurveyStates> {
     ).then((value) {
       print(value.data);
       print("sucesssssssss");
-      patientSurveyResults = PatientSurveyResults.fromJson(value.data);
+    //  patientSurveyResults = PatientSurveyResults.fromJson(value.data);
 
       emit((SurveyResultSuccessStates()));
     }).catchError((e) {
@@ -97,6 +107,7 @@ class SurveyCubit extends Cubit<SurveyStates> {
     });
   }
 
+  late SurveyResultModel surveyResultModel;
   createPatientSurvey({
     required BuildContext context,
   }) async {
@@ -106,14 +117,20 @@ class SurveyCubit extends Cubit<SurveyStates> {
       data: {
         "patientSurveyAnswersIds": SurveyCubit.get(context).answerIds,
       },
+       headers:{
+       // "Accept": "application/json",
+       // "Content-Type": "application/json",
+       "Authorization": "Bearer ${ CashHelper.getString(key: "token") }",
+       }
     ).then((value) {
+      surveyResultModel= SurveyResultModel.fromJson(value.data);
       print(value.data);
       print("sucesssssssss");
-      // getPatientSurveyResults(context: context);
+      // await getPatientSurveyResults(context: context);
       navigateTo(
           context: context,
           widget: ResultView(
-            patientSurveyResults: patientSurveyResults,
+            surveyResultModel: surveyResultModel,
           ));
       emit((CreatePatientSurveySuccessStates()));
     }).catchError((e) {

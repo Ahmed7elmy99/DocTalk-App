@@ -97,7 +97,7 @@ class Q6Screen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 15.w,vertical: 40.h),
                 children: [
                   TextWidget(
-                      title: 'Does your child ask you to repeat yourself?',
+                      title:  surveyModel.surveyQuestions![5].question!,
                       titleSize: 16.sp,
                     titleColor: AppColors.black,
                     titleMaxLines: 15,
@@ -105,7 +105,7 @@ class Q6Screen extends StatelessWidget {
               
                 16.verticalSpace,
                    ...List.generate(surveyModel.surveyAnswers!.length, (index) {
-                    if (index >= 4 && index <= 7) {
+                    if (index >= 25 && index <= 29) {
                       return Column(
                         children: [
                         InkWell(

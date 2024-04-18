@@ -103,7 +103,7 @@ class Q12Screen extends StatelessWidget {
                         EdgeInsets.symmetric(horizontal: 15.w, vertical: 40.h),
                     children: [
                       TextWidget(
-                        title: 'Was your child a "late talker"?',
+                        title:  surveyModel.surveyQuestions![11].question!,
                         titleSize: 16.sp,
                         titleColor: AppColors.black,
                         titleMaxLines: 15,
@@ -111,7 +111,7 @@ class Q12Screen extends StatelessWidget {
                       16.verticalSpace,
                       ...List.generate(surveyModel.surveyAnswers!.length,
                           (index) {
-                        if (index >= 4 && index <= 7) {
+                        if (index >= 55 && index <= 59) {
                           return Column(
                             children: [
                               InkWell(
