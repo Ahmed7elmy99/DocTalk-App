@@ -1,10 +1,13 @@
 
+import 'dart:io';
+
 import 'package:doc_talk/app/utils/colors.dart';
 import 'package:doc_talk/app/utils/size.dart';
 import 'package:doc_talk/features/parents_and_child_info_feature/presntation/screens/third.dart';
 import 'package:doc_talk/features/parents_and_child_info_feature/widgets/custom_button.dart';
 import 'package:doc_talk/features/parents_and_child_info_feature/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 
 class BottomSheetWidget extends StatefulWidget {
@@ -22,14 +25,14 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
   int selectedAvatarIndex = -1;
   String avatarImagePath="";
   List avatars = [
-    'assets/images/gallery.png',
     'assets/images/Avatars.png',
     'assets/images/Avatars2.png',
     'assets/images/Avatars3.png',
     'assets/images/Avatars4.png',
     'assets/images/Avatars5.png',
   ];
-  TextEditingController? controller = TextEditingController();
+  List <String> images = [];
+  TextEditingController controller = TextEditingController();
   final formKey = GlobalKey<FormState>();
   String imagePath = '';
   Future<void> pickImageFromGallery() async {
@@ -39,6 +42,9 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
 
       if (pickedFile != null) {
         imagePath = pickedFile.path;
+        images.add(pickedFile.path);
+        print(imagePath);
+        setState(() {});
       } else {}
     } catch (e) {
       debugPrint(e.toString());
@@ -68,41 +74,61 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
             SizedBox(
               height: mQHeight(context) / 9,
               width: mQWidth(context),
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: avatars.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
+              child: Row(
+                children: [
+                  GestureDetector(
                     onTap: () {
-                      if (index == 0) {
+
                         pickImageFromGallery();
-                      } else {
-                        setState(() {
-                          selectedAvatarIndex = index;
-                       avatarImagePath = avatars[index];
-                        });
-                      }
+                      // else {
+                        // setState(() {
+                        //   selectedAvatarIndex = index;
+                        //   avatarImagePath = avatars[index];
+                        // });
+                      //}
                     },
-                    child: Container(
-                      margin: const EdgeInsets.all(8),
-                      padding: const EdgeInsets.all(0),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: selectedAvatarIndex == index
-                              ? AppColors.greenColor
-                              : Colors.transparent,
-                          width: 2,
-                        ),
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: Image.asset(
-                        avatars[index],
-                        fit: BoxFit.cover,
-                      ),
+                    child: Image.asset(
+                      "assets/images/gallery.png",
+                      fit: BoxFit.cover,
                     ),
-                  );
-                },
+                  ),
+                  16.horizontalSpace,
+                  Expanded(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: images.isEmpty?avatars.length:images.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                          margin: const EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(0),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: selectedAvatarIndex == index
+                                  ? AppColors.greenColor
+                                  : Colors.transparent,
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: images.isEmpty?
+                          Image.asset(
+                            avatars[index],
+                            fit: BoxFit.cover,
+                          )
+                              :
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(16),
+                            child: Image.file(
+                              File(images[index]),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 5),
@@ -143,13 +169,16 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
               label: 'Add my child',
               onTap: () {
                 if (formKey.currentState!.validate()) {
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => Third(
                           avatarImagePath: avatarImagePath,
                               imagePath: imagePath,
-                              childName: controller!.text.toString(),
+                              childName: controller.text,
+                              age: age,
+                          gender: isBoySelected?"FEMALE":"MALE",
                             )),
                   );
                 }
@@ -213,10 +242,10 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
       alignment: Alignment.center,
       child: IconButton(
         onPressed: () {
-          age++;
-          setState(
-            () {},
-          );
+          setState(() {
+            age++;
+            print(age);
+          },);
         },
         icon: const Icon(Icons.add),
       ),
@@ -241,8 +270,8 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
       child: IconButton(
         onPressed: () {
           if (age > 0) {
-            age--;
-            setState(() {});
+
+            setState(() { age--;});
           }
         },
         icon: const Icon(Icons.minimize),

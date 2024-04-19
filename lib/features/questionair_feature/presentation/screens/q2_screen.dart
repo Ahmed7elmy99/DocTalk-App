@@ -1,49 +1,55 @@
 import 'package:doc_talk/app/utils/app_assets.dart';
 import 'package:doc_talk/app/utils/app_colors.dart';
 import 'package:doc_talk/app/widgets/button_widget.dart';
+import 'package:doc_talk/app/widgets/flutter_toast.dart';
 import 'package:doc_talk/app/widgets/text_widget.dart';
+import 'package:doc_talk/features/questionair_feature/cubit/states_survey.dart';
+import 'package:doc_talk/features/questionair_feature/cubit/survey_cubit.dart';
+import 'package:doc_talk/features/questionair_feature/data/model/survey_model.dart';
 import 'package:doc_talk/features/questionair_feature/presentation/screens/q3_screen.dart';
 import 'package:doc_talk/features/questionair_feature/presentation/widgets/custom_answer_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../app/utils/consts.dart';
 import '../../../../app/widgets/default_app_bar_widget.dart';
 
 class Q2Screen extends StatelessWidget {
-  const Q2Screen({super.key});
+  Q2Screen({Key? key, required this.surveyModel, required this.answerIds}) : super(key: key);
+  final SurveyModel surveyModel;
+  final List<int> answerIds;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor:const  Color(0xffeae8db),
-      appBar:const DefaultAppBarWidget(
+      backgroundColor: const Color(0xffeae8db),
+      appBar: const DefaultAppBarWidget(
         backColor: Color(0xffeae8db),
-        systemUiOverlayStyle:  SystemUiOverlayStyle(
+        systemUiOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
             statusBarBrightness: Brightness.dark,
-            statusBarIconBrightness: Brightness.dark
-        ),
-
+            statusBarIconBrightness: Brightness.dark),
       ),
-      body: Column(
+      body:BlocBuilder<SurveyCubit, SurveyStates>(builder: (context, state) {
+      
+    return
+       Column(
         children: [
           Expanded(
             child: Container(
               width: double.infinity,
               alignment: Alignment.topCenter,
-              decoration:const BoxDecoration(
+              decoration: const BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.cover,
                       image: AssetImage(
                         AppImages.q2,
-                      )
-                  )
-              ),
-              child:  Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 24.w),
+                      ))),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
                 child: Row(
                   children: [
                     TextWidget(
@@ -58,18 +64,15 @@ class Q2Screen extends StatelessWidget {
                         height: 7.h,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            gradient: LinearGradient(
-                                colors: [
-                                  AppColors.mainColor,
-                                  AppColors.mainColor,
-                                  AppColors.mainColor.withOpacity(0.2),
-                                  AppColors.mainColor.withOpacity(0.2),
-                                  AppColors.mainColor.withOpacity(0.2),
-                                  AppColors.mainColor.withOpacity(0.2),
-                                  AppColors.mainColor.withOpacity(0.2),
-                                ]
-                            )
-                        ),
+                            gradient: LinearGradient(colors: [
+                              AppColors.mainColor,
+                              AppColors.mainColor,
+                              AppColors.mainColor.withOpacity(0.2),
+                              AppColors.mainColor.withOpacity(0.2),
+                              AppColors.mainColor.withOpacity(0.2),
+                              AppColors.mainColor.withOpacity(0.2),
+                              AppColors.mainColor.withOpacity(0.2),
+                            ])),
                       ),
                     )
                   ],
@@ -78,49 +81,66 @@ class Q2Screen extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex:2,
+            flex: 2,
             child: Container(
               decoration: BoxDecoration(
                   color: AppColors.white,
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(40.r),
                     topLeft: Radius.circular(40.r),
-                  )
-              ),
+                  )),
               child: ListView(
-                padding: EdgeInsets.symmetric(horizontal: 15.w,vertical: 40.h),
+                padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 40.h),
                 children: [
                   TextWidget(
-                    title: "Does your child get frustrated when speaking or complain that no one understands what they’re trying to say?",
+                    title: surveyModel.surveyQuestions![1].question!,
                     titleSize: 16.sp,
                     titleColor: AppColors.black,
                     titleMaxLines: 15,
                   ),
                   16.verticalSpace,
-                  const CustomAnswerItem(
-                    text: "Very Often",
-                    isCorrect: true,
-                  ),
-                  16.verticalSpace,
-                  const CustomAnswerItem(
-                    text: "Often",
-                  ),
-                  16.verticalSpace,
-                  const CustomAnswerItem(
-                    text: "Sometimes",
-                  ),
-                  16.verticalSpace,
-                  const CustomAnswerItem(
-                    text: "Rarely",
-                  ),
-                  16.verticalSpace,
-                  const CustomAnswerItem(
-                    text: "Never",
-                  ),
-                  40.verticalSpace,
+                  ...List.generate(surveyModel.surveyAnswers!.length, (index) {
+                    if (index >= 5 && index <= 9) {
+                      return Column(
+                        children: [
+                        InkWell(
+                                onTap: () {
+                                  SurveyCubit.get(context).chooseAnswerSurvey(
+                                      surveyModel.surveyAnswers![index].id!);
+                                },
+                                child: CustomAnswerItem(
+                                  text:
+                                      surveyModel.surveyAnswers![index].answer!,
+                                  isActive: SurveyCubit.get(context).answerId ==
+                                          surveyModel.surveyAnswers![index].id!
+                                      ? true
+                                      : false,
+                                ),
+                              ),
+                          16.verticalSpace
+                        ],
+                      );
+                    } else {
+                      return const SizedBox(); // Return an empty widget for indices greater than 2
+                    }
+                  }),
+                  24.verticalSpace,
                   ButtonWidget(
                     onPressed: () {
-                      navigateTo(context: context, widget: Q3Screen());
+                        if (SurveyCubit.get(context).answerId == null) {
+                          return showToast(msg: "please choose an answer");
+                        }else {
+                          SurveyCubit.get(context).saveAnswerSurvey();
+                          navigateTo(
+                          context: context,
+                          widget: Q3Screen(
+                              answerIds: SurveyCubit.get(context).answerIds,
+                            surveyModel: surveyModel,
+                          ));
+                          SurveyCubit.get(context).answerId = null;
+                          print("answerId: ${SurveyCubit.get(context).answerId}");
+                        }
+                    
                     },
                     text: "Next",
                     height: 50.h,
@@ -129,14 +149,14 @@ class Q2Screen extends StatelessWidget {
                       Icons.arrow_forward,
                       size: 20.sp,
                       color: Colors.white,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
-    );
+                     ),
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
+          );
+  }));
   }
 }
