@@ -1,5 +1,7 @@
+
+
 import 'package:dio/dio.dart';
-import 'package:doc_talk/app/utils/cach_helper.dart';
+
 import 'package:doc_talk/app/utils/consts.dart';
 
 import 'package:doc_talk/app/utils/dio_helper.dart';
@@ -23,18 +25,24 @@ class SurveyCubit extends Cubit<SurveyStates> {
   chooseAnswerSurvey(int val) {
     answerId = val;
     // answerIds.clear();
-    if (!answerIds.contains(val)) {
+   /* if (!answerIds.contains(val)) {
       answerIds.add(val);
-    }
+    }*/
     emit(AnswerIdStates());
     print(val);
-    print(answerIds);
+   // print(answerIds);
 
    /* answerId = val;
     emit(AnswerIdStates());
     print(val);
     answerIds.add(val);
     print(answerIds);*/
+  }
+
+  saveAnswerSurvey() {
+    answerIds.add(answerId!);
+    
+    print(answerIds);
   }
 
   getSurveyData({
@@ -112,16 +120,16 @@ class SurveyCubit extends Cubit<SurveyStates> {
     required BuildContext context,
   }) async {
     emit((CreatePatientSurveyLoadingStates()));
-    await DioHelper.postData(
+     DioHelper.postData(
       url: "http://130.61.130.252/api/patient/survey",
       data: {
-        "patientSurveyAnswersIds": SurveyCubit.get(context).answerIds,
+        "patientSurveyAnswersIds": answerIds,
       },
-       headers:{
+    /*   headers:{
        // "Accept": "application/json",
        // "Content-Type": "application/json",
-       "Authorization": "Bearer ${ CashHelper.getString(key: "token") }",
-       }
+       "Authorization":  CashHelper.getString(key: "token") ,
+       }*/
     ).then((value) {
       surveyResultModel= SurveyResultModel.fromJson(value.data);
       print(value.data);

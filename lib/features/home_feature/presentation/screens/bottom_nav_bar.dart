@@ -3,13 +3,15 @@ import 'package:doc_talk/features/drawer_feature/presentation/screens/drawer.dar
 import 'package:doc_talk/features/home_feature/presentation/screens/home_screen.dart';
 import 'package:doc_talk/features/home_feature/presentation/screens/settings_view.dart';
 import 'package:doc_talk/features/home_feature/presentation/widgets/custom_button_bottom_app_bar.dart';
-import 'package:doc_talk/features/loading_screen.dart';
+
 import 'package:doc_talk/features/questionair_feature/cubit/states_survey.dart';
 import 'package:doc_talk/features/questionair_feature/cubit/survey_cubit.dart';
 import 'package:doc_talk/features/questionair_feature/presentation/screens/q1_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
@@ -40,8 +42,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
       extendBody: true,
       endDrawer: const MyDrawer(),
       floatingActionButton: SizedBox(
-        width: 72,
-        height: 72,
+        width: 80.w,
+        height: 150.h,
         child:
             BlocConsumer<SurveyCubit, SurveyStates>(listener: (context, state) {
           if (state is SurveyLoadingStates) {

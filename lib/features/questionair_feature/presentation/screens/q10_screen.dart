@@ -136,6 +136,7 @@ class Q10Screen extends StatelessWidget {
                        if (SurveyCubit.get(context).answerId == null) {
                           return showToast(msg: "please choose an answer");
                         }else {
+                          SurveyCubit.get(context).saveAnswerSurvey();
                           navigateTo(
                           context: context,
                           widget: Q11Screen(
