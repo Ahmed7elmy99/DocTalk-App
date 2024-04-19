@@ -1,3 +1,5 @@
+import 'package:doc_talk/app/utils/consts.dart';
+import 'package:doc_talk/features/questionair_feature/presentation/screens/last_screens/speek_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:video_player/video_player.dart';
@@ -93,7 +95,7 @@ class _FamilyScreenState extends State<FamilyScreen> {
                 ),
                 MaterialButton(
                   onPressed: () {
-                    // Handle speak button click
+                    navigateTo(context: context, widget:const SpeecScreen());
                   },
                   child: Row(
                     children: [

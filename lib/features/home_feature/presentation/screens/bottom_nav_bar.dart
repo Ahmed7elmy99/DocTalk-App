@@ -45,12 +45,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
         child:
             BlocConsumer<SurveyCubit, SurveyStates>(listener: (context, state) {
           if (state is SurveyLoadingStates) {
-                showDialog(
+            showDialog(
               context: context,
               builder: (context) =>
                   const Center(child: CircularProgressIndicator()),
             );
-          
           } else if (state is SurveySuccessStates) {
             navigateTo(
                 context: context,
