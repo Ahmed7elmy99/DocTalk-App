@@ -165,10 +165,10 @@ packages:
     dependency: "direct main"
     description:
       name: dio
-      sha256: "797e1e341c3dd2f69f2dad42564a6feff3bfb87187d05abb93b9609e6f1645c3"
+      sha256: "11e40df547d418cc0c4900a9318b26304e665da6fa4755399a9ff9efd09034b5"
       url: "https://pub.dev"
     source: hosted
-    version: "5.4.0"
+    version: "5.4.3+1"
   dots_indicator:
     dependency: "direct main"
     description:
@@ -380,8 +380,7 @@ packages:
       sha256: e6017ce7fdeaf218dc51a100344d8cb70134b80e28b760f8bb23c242437bafd7
       url: "https://pub.dev"
     source: hosted
-<<<<<<< HEAD
-    version: "7.6.4"
+    version: "7.6.7"
   gif:
     dependency: "direct main"
     description:
@@ -390,9 +389,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.0"
-=======
-    version: "7.6.7"
->>>>>>> 7d9c82efd987489dc90d8f1d00a4357e87a6fde1
   google_fonts:
     dependency: "direct main"
     description:
