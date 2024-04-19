@@ -3,10 +3,12 @@ import 'package:doc_talk/app/utils/cach_helper.dart';
 import 'package:doc_talk/app/utils/dio_helper.dart';
 import 'package:doc_talk/features/auth_feature/presentation/cubit/auth_cubit.dart';
 import 'package:doc_talk/features/home_feature/presentation/screens/bottom_nav_bar.dart';
+import 'package:doc_talk/features/levels/levels.dart';
 
 
 import 'package:doc_talk/features/questionair_feature/cubit/survey_cubit.dart';
 import 'package:doc_talk/features/splash_and_onboarding_feature/presentation/screens/splash_screen.dart';
+import 'package:doc_talk/result/views/result_view.dart';
 
 
 import 'package:flutter/material.dart';
@@ -64,6 +66,8 @@ class MyApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         home:
+        
+        
           CashHelper.getString(key: "token") == null
             ? const SplashScreen()
             : const BottomNavBar(),
