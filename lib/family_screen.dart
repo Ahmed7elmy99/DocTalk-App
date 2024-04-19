@@ -46,8 +46,8 @@ class _FamilyScreenState extends State<FamilyScreen> {
         return Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(40.w),
-              topRight: Radius.circular(40.w),
+              topLeft: Radius.circular(30.w),
+              topRight: Radius.circular(30.w),
             ),
             image: const DecorationImage(
               image: AssetImage('assets/images/family_bottom_sheet.png'),
