@@ -65,7 +65,7 @@ class Q12Screen extends StatelessWidget {
                         height: 7.h,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            gradient: LinearGradient(colors: [
+                            gradient:const LinearGradient(colors: [
                               AppColors.mainColor,
                               AppColors.mainColor,
                               AppColors.mainColor,
@@ -141,6 +141,7 @@ class Q12Screen extends StatelessWidget {
                           if (SurveyCubit.get(context).answerId == null) {
                             return showToast(msg: "please choose an answer");
                           } else  {
+                            SurveyCubit.get(context).saveAnswerSurvey();
                       await      SurveyCubit.get(context)
                                 .createPatientSurvey(context: context);
                             //  navigateTo(context: context, widget: ResultView());
