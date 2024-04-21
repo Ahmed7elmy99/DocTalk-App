@@ -4,12 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:video_player/video_player.dart';
 
-import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
-
-import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
-
 class FamilyScreen extends StatefulWidget {
   const FamilyScreen({Key? key}) : super(key: key);
 
@@ -52,8 +46,8 @@ class _FamilyScreenState extends State<FamilyScreen> {
         return Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30.w),
-              topRight: Radius.circular(30.w),
+              topLeft: Radius.circular(40.w),
+              topRight: Radius.circular(40.w),
             ),
             image: const DecorationImage(
               image: AssetImage('assets/images/family_bottom_sheet.png'),
@@ -131,7 +125,7 @@ class _FamilyScreenState extends State<FamilyScreen> {
                     children: [
                       Image.asset(
                         "assets/images/save_icon.png",
-height: 40.h,
+                        height: 40.h,
                         width: 40.w,
                       ),
                       Text(

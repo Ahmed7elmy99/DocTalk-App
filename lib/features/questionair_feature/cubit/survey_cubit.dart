@@ -1,4 +1,8 @@
+
+
 import 'package:dio/dio.dart';
+import 'package:doc_talk/app/utils/cach_helper.dart';
+
 import 'package:doc_talk/app/utils/consts.dart';
 
 import 'package:doc_talk/app/utils/dio_helper.dart';
@@ -17,14 +21,29 @@ class SurveyCubit extends Cubit<SurveyStates> {
   late SurveyModel surveyModel;
   int? answerId;
   List<int> answerIds = [];
-  late PatientSurveyResults patientSurveyResults;
+ // late PatientSurveyResults patientSurveyResults;
 
   chooseAnswerSurvey(int val) {
     answerId = val;
+    // answerIds.clear();
+   /* if (!answerIds.contains(val)) {
+      answerIds.add(val);
+    }*/
+    emit(AnswerIdStates());
+    print(val);
+   // print(answerIds);
+
+   /* answerId = val;
+    emit(AnswerIdStates());
     print(val);
     answerIds.add(val);
+    print(answerIds);*/
+  }
+
+  saveAnswerSurvey() {
+    answerIds.add(answerId!);
+    
     print(answerIds);
-    emit(AnswerIdStates());
   }
 
   getSurveyData({
@@ -73,7 +92,7 @@ class SurveyCubit extends Cubit<SurveyStates> {
     ).then((value) {
       print(value.data);
       print("sucesssssssss");
-      patientSurveyResults = PatientSurveyResults.fromJson(value.data);
+    //  patientSurveyResults = PatientSurveyResults.fromJson(value.data);
 
       emit((SurveyResultSuccessStates()));
     }).catchError((e) {
@@ -97,26 +116,40 @@ class SurveyCubit extends Cubit<SurveyStates> {
     });
   }
 
+  late SurveyResultModel surveyResultModel;
   createPatientSurvey({
     required BuildContext context,
   }) async {
     emit((CreatePatientSurveyLoadingStates()));
-    await DioHelper.postData(
+       print(CashHelper.getString(key: "token"));
+     DioHelper.postData(
       url: "http://130.61.130.252/api/patient/survey",
       data: {
-        "patientSurveyAnswersIds": SurveyCubit.get(context).answerIds,
+        "patientSurveyAnswersIds": answerIds,
       },
+      
+       headers:{
+       // "Accept": "application/json",
+       // "Content-Type": "application/json",
+       "Authorization":"Bearer ${ CashHelper.getString(key: "token")}" ,
+       
+     // "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNzEzNjUxNzgwLCJleHAiOjE3MTM2ODc3ODB9.qul-xatlJKXwAOVyzgwd3If7iIrrxgaeXBRTKXXFL4o"
+       }
+       
     ).then((value) {
+   
+      surveyResultModel= SurveyResultModel.fromJson(value.data);
       print(value.data);
       print("sucesssssssss");
-      // getPatientSurveyResults(context: context);
+      // await getPatientSurveyResults(context: context);
       navigateTo(
           context: context,
           widget: ResultView(
-            patientSurveyResults: patientSurveyResults,
+            surveyResultModel: surveyResultModel,
           ));
       emit((CreatePatientSurveySuccessStates()));
     }).catchError((e) {
+      //print(e)
       if (e is DioError) {
         // Handle DioError
         if (e.response != null) {

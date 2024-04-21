@@ -99,14 +99,14 @@ class Q10Screen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 15.w,vertical: 40.h),
                 children: [
                   TextWidget(
-                      title:'Does your child ever mix up common question words like "How," "Why," and "Where?" For example, if you ask what they are doing, do they respond with "Fine?',
+                      title: surveyModel.surveyQuestions![9].question!,
                       titleSize: 16.sp,
                     titleColor: AppColors.black,
                     titleMaxLines: 15,
                   ),
                   16.verticalSpace,
                    ...List.generate(surveyModel.surveyAnswers!.length, (index) {
-                    if (index >= 4 && index <= 7) {
+                    if (index >= 45 && index <= 49) {
                       return Column(
                         children: [
                         InkWell(
@@ -136,6 +136,7 @@ class Q10Screen extends StatelessWidget {
                        if (SurveyCubit.get(context).answerId == null) {
                           return showToast(msg: "please choose an answer");
                         }else {
+                          SurveyCubit.get(context).saveAnswerSurvey();
                           navigateTo(
                           context: context,
                           widget: Q11Screen(

@@ -1,5 +1,19 @@
+import 'package:doc_talk/app/utils/consts.dart';
 import 'package:flutter/material.dart';
 import 'package:gif/gif.dart';
+
+import 'done_view.dart';
+
+
+
+
+
+
+
+
+
+
+
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({Key? key}) : super(key: key);
@@ -14,10 +28,9 @@ class _LoadingScreenState extends State<LoadingScreen>
   @override
   void initState() {
     controller = GifController(vsync: this);
-    /* Future.delayed(const Duration(seconds: 3), () {
-      navigateTo(context: context, widget: LoginScreen());
-    } */
-    ;
+    Future.delayed(const Duration(seconds: 3), () {
+      navigateTo(context: context, widget: DoneView());
+    } );
     super.initState();
   }
 
@@ -30,7 +43,7 @@ class _LoadingScreenState extends State<LoadingScreen>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Gif(
-              image: const AssetImage("assets/images/loading.gif"),
+              image: AssetImage("assets/images/loading.gif"),
               controller:
                   controller, // if duration and fps is null, original gif fps will be used.s
               autostart: Autostart.loop,
@@ -43,5 +56,40 @@ class _LoadingScreenState extends State<LoadingScreen>
         ),
       ),
     );
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class LoadingView extends StatelessWidget {
+  const LoadingView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Future.delayed(const Duration(seconds: 4), () {
+      // Navigate to the next screen
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const DoneView()),
+      );
+    });
+    return Scaffold(
+        backgroundColor: const Color(0xffE9E9EB),
+        body: Center(
+            child: Image.asset(
+                'assets/images/d220b28ec97e9c4d0ea33e3dd45b1d70 1.png')));
   }
 }

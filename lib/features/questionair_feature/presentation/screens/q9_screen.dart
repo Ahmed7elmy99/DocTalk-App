@@ -92,7 +92,7 @@ class Q9Screen extends StatelessWidget {
                     children: [
                       TextWidget(
                         title:
-                            'Does your child seem disinterested when other people are talking, rarely asking questions or making follow-up comments?',
+                             surveyModel.surveyQuestions![8].question!,
                         titleSize: 16.sp,
                         titleColor: AppColors.black,
                         titleMaxLines: 15,
@@ -100,7 +100,7 @@ class Q9Screen extends StatelessWidget {
                       16.verticalSpace,
                       ...List.generate(surveyModel.surveyAnswers!.length,
                           (index) {
-                        if (index >= 4 && index <= 7) {
+                        if (index >= 40 && index <= 44) {
                           return Column(
                             children: [
                               InkWell(
@@ -130,6 +130,7 @@ class Q9Screen extends StatelessWidget {
                           if (SurveyCubit.get(context).answerId == null) {
                             return showToast(msg: "please choose an answer");
                           } else {
+                            SurveyCubit.get(context).saveAnswerSurvey();
                             navigateTo(
                                 context: context,
                                 widget: Q10Screen(

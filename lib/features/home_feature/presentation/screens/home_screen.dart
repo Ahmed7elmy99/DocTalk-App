@@ -1,10 +1,13 @@
 import 'package:doc_talk/app/utils/app_assets.dart';
 import 'package:doc_talk/app/utils/app_colors.dart';
+import 'package:doc_talk/app/utils/cach_helper.dart';
+import 'package:doc_talk/app/utils/consts.dart';
 
 import 'package:doc_talk/app/widgets/default_app_bar_widget.dart';
 import 'package:doc_talk/app/widgets/image_widget.dart';
 import 'package:doc_talk/app/widgets/text_button_widget.dart';
 import 'package:doc_talk/app/widgets/text_widget.dart';
+import 'package:doc_talk/family_screen.dart';
 import 'package:doc_talk/features/drawer_feature/presentation/screens/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -44,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               DefaultAppBarWidget(
-                title: "Hi, Rahma!",
+                title: "Hi, ${CashHelper.getString(key: "name")}",
                 canBack: false,
                 leadingWidth: 0,
                 backColor: Colors.transparent,
@@ -56,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     color: AppColors.black,
                     onPressed: () {
-                       Scaffold.of(context).openEndDrawer();
+                 Scaffold.of(context).openEndDrawer();
                       
                     },
                   )
@@ -69,35 +72,40 @@ class HomeScreen extends StatelessWidget {
                   itemCount: 10,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    return Container(
-                      width: 100.w,
-                      height: 146.h,
-                      margin: EdgeInsets.only(left: 16.w),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Column(
-                        children: [
-                          const Expanded(
-                            child: ClipRRect(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  topRight: Radius.circular(20),
-                                ),
-                                child: ImageWidget(
-                                  imageUrl: AppImages.homeList,
-                                  fit: BoxFit.cover,
-                                )),
-                          ),
-                          10.verticalSpace,
-                          TextWidget(
-                            title: "Family",
-                            titleSize: 16.sp,
-                            titleColor: AppColors.black,
-                            titleFontWeight: FontWeight.w400,
-                          ),
-                          10.verticalSpace
-                        ],
+                    return InkWell(
+                      onTap: () {
+                        navigateTo(context: context, widget: const FamilyScreen());
+                      },
+                      child: Container(
+                        width: 100.w,
+                        height: 146.h,
+                        margin: EdgeInsets.only(left: 16.w),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Column(
+                          children: [
+                            const Expanded(
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(20),
+                                    topRight: Radius.circular(20),
+                                  ),
+                                  child: ImageWidget(
+                                    imageUrl: AppImages.homeList,
+                                    fit: BoxFit.cover,
+                                  )),
+                            ),
+                            10.verticalSpace,
+                            TextWidget(
+                              title: "Family",
+                              titleSize: 16.sp,
+                              titleColor: AppColors.black,
+                              titleFontWeight: FontWeight.w400,
+                            ),
+                            10.verticalSpace
+                          ],
+                        ),
                       ),
                     );
                   },

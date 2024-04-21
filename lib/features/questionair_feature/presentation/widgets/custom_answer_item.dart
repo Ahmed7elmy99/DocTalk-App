@@ -1,6 +1,6 @@
 import 'package:doc_talk/app/utils/app_colors.dart';
 import 'package:doc_talk/app/widgets/text_widget.dart';
-import 'package:doc_talk/features/questionair_feature/cubit/survey_cubit.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,19 +9,17 @@ class CustomAnswerItem extends StatefulWidget {
   const CustomAnswerItem({
     Key? key,
     required this.text,
-    this.isActive=false,
+    this.isActive = false,
   }) : super(key: key);
 
   final String text;
-  final bool isActive ;
+  final bool isActive;
 
   @override
   State<CustomAnswerItem> createState() => _CustomAnswerItemState();
 }
 
 class _CustomAnswerItemState extends State<CustomAnswerItem> {
-
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,8 +27,9 @@ class _CustomAnswerItemState extends State<CustomAnswerItem> {
       margin: EdgeInsets.symmetric(horizontal: 25.w),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
-          color:
-              widget.isActive ? const Color(0xffFDEDA2) : const Color(0xffEEEEEE)),
+          color: widget.isActive
+              ? const Color(0xffFDEDA2)
+              : const Color(0xffEEEEEE)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -40,7 +39,9 @@ class _CustomAnswerItemState extends State<CustomAnswerItem> {
             titleColor: AppColors.black,
           ),
           Icon(
-            widget.isActive ? Icons.check_circle_outline : Icons.circle_outlined,
+            widget.isActive
+                ? Icons.check_circle_outline
+                : Icons.circle_outlined,
             size: 23.sp,
             color: Colors.black,
           )
