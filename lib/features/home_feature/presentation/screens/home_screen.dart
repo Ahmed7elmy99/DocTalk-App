@@ -1,5 +1,6 @@
 import 'package:doc_talk/app/utils/app_assets.dart';
 import 'package:doc_talk/app/utils/app_colors.dart';
+import 'package:doc_talk/app/utils/cach_helper.dart';
 import 'package:doc_talk/app/utils/consts.dart';
 
 import 'package:doc_talk/app/widgets/default_app_bar_widget.dart';
@@ -46,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               DefaultAppBarWidget(
-                title: "Hi, Rahma!",
+                title: "Hi, ${CashHelper.getString(key: "name")}",
                 canBack: false,
                 leadingWidth: 0,
                 backColor: Colors.transparent,

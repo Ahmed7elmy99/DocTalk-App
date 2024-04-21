@@ -24,15 +24,15 @@ class DioHelper {
       Map<String, dynamic>? queryParameters,
       Map<String, dynamic>? headers,
       required Map<String, dynamic> data}) async {
-         dio.options.headers = { 'Authorization':"Bearer ${ CashHelper.getString(key: "token")}" };
+       //  dio.options.headers = { 'Authorization':"Bearer ${ CashHelper.getString(key: "token")}" };
     dynamic response = await dio.post(
       url,
       queryParameters: queryParameters,
       data: data,
        
-      /* options: Options(
+       options: Options(
         headers: headers
-      )*/
+      ),
     );
     return response;
   }

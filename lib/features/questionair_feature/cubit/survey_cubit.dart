@@ -1,6 +1,7 @@
 
 
 import 'package:dio/dio.dart';
+import 'package:doc_talk/app/utils/cach_helper.dart';
 
 import 'package:doc_talk/app/utils/consts.dart';
 
@@ -120,17 +121,23 @@ class SurveyCubit extends Cubit<SurveyStates> {
     required BuildContext context,
   }) async {
     emit((CreatePatientSurveyLoadingStates()));
+       print(CashHelper.getString(key: "token"));
      DioHelper.postData(
       url: "http://130.61.130.252/api/patient/survey",
       data: {
         "patientSurveyAnswersIds": answerIds,
       },
-    /*   headers:{
+      
+       headers:{
        // "Accept": "application/json",
        // "Content-Type": "application/json",
-       "Authorization":  CashHelper.getString(key: "token") ,
-       }*/
+       "Authorization":"Bearer ${ CashHelper.getString(key: "token")}" ,
+       
+     // "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNzEzNjUxNzgwLCJleHAiOjE3MTM2ODc3ODB9.qul-xatlJKXwAOVyzgwd3If7iIrrxgaeXBRTKXXFL4o"
+       }
+       
     ).then((value) {
+   
       surveyResultModel= SurveyResultModel.fromJson(value.data);
       print(value.data);
       print("sucesssssssss");
@@ -142,6 +149,7 @@ class SurveyCubit extends Cubit<SurveyStates> {
           ));
       emit((CreatePatientSurveySuccessStates()));
     }).catchError((e) {
+      //print(e)
       if (e is DioError) {
         // Handle DioError
         if (e.response != null) {
