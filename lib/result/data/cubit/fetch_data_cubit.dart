@@ -1,0 +1,49 @@
+import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
+import 'package:doc_talk/app/utils/dio_helper.dart';
+import 'package:doc_talk/result/data/models/level_model.dart';
+import 'package:meta/meta.dart';
+
+import '../models/categories_model.dart';
+
+part 'fetch_data_state.dart';
+
+class FetchDataCubit extends Cubit<FetchDataState> {
+  FetchDataCubit() : super(FetchDataInitial());
+  late CategoriesModel categoriesModel;
+
+  void fetchCategoriesData() async {
+    emit(FetchCategoriesDataLoading());
+   
+  
+      try {
+         final Response response = await DioHelper.getData(
+        url: 'http://doctalkapi.runasp.net/api/Category/GetCategory');
+          if (response.statusCode == 200) {
+      final categories = response.data.map<LevelModel>((item) {
+        return LevelModel.fromJson(item);
+      }).toList();
+      emit(FetchCategoriesDataLoaded(categories));}
+      } catch (e) {
+        // Handle any errors that occur during data fetching or parsing
+        emit(FetchCategoriesDataFailure(errMessage: e.toString()));
+      }
+    }
+
+  fetchLevelsData() async {
+    emit(FetchLevelsDataLoading());
+    try {
+      final response = await DioHelper.getData(
+          url: 'http://doctalkapi.runasp.net/api/Level/GetLevel');
+      if (response.statusCode == 200) {
+        final levels = response.data.map<LevelModel>((item) {
+          return LevelModel.fromJson(item);
+        }).toList();
+
+        emit(FetchLevelsDataLoaded(levels));
+      }
+    } catch (e) {
+      emit(FetchLevelsDataFailure(errMessage: e.toString()));
+    }
+  }
+}
