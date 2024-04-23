@@ -65,12 +65,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
           return FloatingActionButton(
             backgroundColor: Color(0xFF2A7473),
             onPressed: () async {
-              if(CashHelper.getString(key: "surveyResult")!=null){
-                return navigateTo(context: context, widget: const SurveyResults());
-              }else{
-                  await cubit.getSurveyData(context: context, id: 1);
-              }
-            
+             if (await CashHelper.getString(key:"surveyResult") == null) {
+             await cubit.getSurveyData(context: context, id: 1);
+   
+  } else  {
+     navigateTo(context: context, widget: const SurveyResults());
+  }
+            //  await cubit.getSurveyData(context: context, id: 1);
               // navigateTo(context: context, widget: Q1Screen());
             },
             child: Column(

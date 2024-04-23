@@ -147,6 +147,8 @@ class SurveyCubit extends Cubit<SurveyStates> {
           widget: ResultView(
             surveyResultModel: surveyResultModel,
           ));
+         //     CashHelper.setString(key: "lpdRate", value: surveyResultModel.lpdRate.toString());
+          //      CashHelper.setString(key: "diagnoses", value: surveyResultModel.diagnoses.toString());
       emit((CreatePatientSurveySuccessStates()));
     }).catchError((e) {
       //print(e)
