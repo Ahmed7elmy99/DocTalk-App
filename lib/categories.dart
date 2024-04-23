@@ -9,8 +9,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({Key? key}) : super(key: key);
+class StarterCategoriesScreen extends StatelessWidget {
+  const StarterCategoriesScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,6 @@ class CategoriesScreen extends StatelessWidget {
       ),
       body: Container(
         decoration: const BoxDecoration(
-     
           image: DecorationImage(
             image: AssetImage('assets/images/backgroundCategoriesScreen.png'),
             fit: BoxFit.cover,

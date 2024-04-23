@@ -1,4 +1,5 @@
 import 'package:doc_talk/app/utils/consts.dart';
+import 'package:doc_talk/categories.dart';
 
 import 'package:doc_talk/features/levels_and_categories/data/models/levels_model.dart';
 import 'package:doc_talk/features/levels_and_categories/presentation/cubit/levels_and-categories_cubit.dart';
@@ -10,8 +11,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LevelsScreen extends StatelessWidget {
-  const LevelsScreen({super.key, required this.levelsModel});
+  LevelsScreen({Key? key, required this.levelsModel}) : super(key: key);
   final List<LevelsModel> levelsModel;
+
+  final List<Color> colors = [
+    Color(0xFFE3672B),
+    Color(0xFF5B358C),
+    Color(0xFF6D6A99),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -134,11 +142,7 @@ class LevelsScreen extends StatelessWidget {
                   padding: EdgeInsets.zero,
                   onPressed: () {
                     navigateTo(
-                        context: context,
-                        widget: CategoriesScreen(
-                          categoriesModel:
-                              LevelsCubit.get(context).categoryiesModel,
-                        ));
+                        context: context, widget: StarterCategoriesScreen());
                   },
                   child: Row(
                     children: [
@@ -207,9 +211,9 @@ class LevelsScreen extends StatelessWidget {
                           Expanded(
                             flex: 1,
                             child: Container(
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                 //  shape: BoxShape.circle,
-                                color: Color(0xFFE3672B),
+                                color: colors[index],
                               ),
                               child: Image.asset("assets/images/lock.png"),
                             ),
