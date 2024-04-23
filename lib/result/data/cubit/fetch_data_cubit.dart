@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:doc_talk/app/utils/dio_helper.dart';
 import 'package:doc_talk/result/data/models/level_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 
 import '../models/categories_model.dart';
@@ -14,21 +15,22 @@ class FetchDataCubit extends Cubit<FetchDataState> {
 
   void fetchCategoriesData() async {
     emit(FetchCategoriesDataLoading());
-   
-  
-      try {
-         final Response response = await DioHelper.getData(
-        url: 'http://doctalkapi.runasp.net/api/Category/GetCategory');
-          if (response.statusCode == 200) {
-      final categories = response.data.map<LevelModel>((item) {
-        return LevelModel.fromJson(item);
-      }).toList();
-      emit(FetchCategoriesDataLoaded(categories));}
-      } catch (e) {
-        // Handle any errors that occur during data fetching or parsing
-        emit(FetchCategoriesDataFailure(errMessage: e.toString()));
+
+    try {
+      final Response response = await DioHelper.getData(
+          url: 'http://doctalkapi.runasp.net/api/Category/GetCategory');
+      if (response.statusCode == 200) {
+        final categories = response.data.map<CategoriesModel>((item) {
+          return CategoriesModel.fromJson(item);
+        }).toList();
+        debugPrint('Success');
+        emit(FetchCategoriesDataLoaded(categories));
       }
+    } catch (e) {
+      // Handle any errors that occur during data fetching or parsing
+      emit(FetchCategoriesDataFailure(errMessage: e.toString()));
     }
+  }
 
   fetchLevelsData() async {
     emit(FetchLevelsDataLoading());

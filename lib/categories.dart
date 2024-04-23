@@ -21,6 +21,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   void initState() {
     super.initState();
     BlocProvider.of<FetchDataCubit>(context).fetchCategoriesData();
+    print('init');
   }
 
   @override
