@@ -3,6 +3,7 @@ import 'package:doc_talk/app/utils/consts.dart';
 import 'package:doc_talk/app/widgets/image_widget.dart';
 import 'package:doc_talk/app/widgets/text_widget.dart';
 import 'package:doc_talk/family_screen.dart';
+import 'package:doc_talk/levels.dart';
 import 'package:doc_talk/result/data/cubit/fetch_data_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   void initState() {
     super.initState();
     BlocProvider.of<FetchDataCubit>(context).fetchCategoriesData();
-    print('init');
+    debugPrint('init');
   }
 
   @override
@@ -34,7 +35,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         elevation: 0,
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const LevelsScreen()),
+            );
           },
           icon: Icon(
             CupertinoIcons.back,
@@ -110,6 +114,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     ),
                   );
                 },
+              );
+            } else if (state is FetchCategoriesDataFailure) {
+              return Center(
+                child: Text(state.errMessage),
               );
             } else {
               return const Center(

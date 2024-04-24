@@ -123,141 +123,98 @@ class _LevelsScreenState extends State<LevelsScreen> {
         child: BlocBuilder<FetchDataCubit, FetchDataState>(
           builder: (context, state) {
             if (state is FetchLevelsDataLoading) {
-              return const CircularProgressIndicator();
+              return const Center(child: CircularProgressIndicator());
             } else if (state is FetchLevelsDataLoaded) {
               return Column(children: [
-                Expanded(
-                  flex: 1,
-                  child: MaterialButton(
-                    padding: EdgeInsets.zero,
-                    onPressed: () {
-                      navigateTo(
-                          context: context, widget: const CategoriesScreen());
-                    },
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Container(
+                GestureDetector(
+                  onTap: () {
+                    navigateTo(
+                        context: context, widget: const CategoriesScreen());
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(32.h),
                             decoration: const BoxDecoration(
-                              // shape: BoxShape.circle,
                               color: Color(0xFF78C8E3),
                             ),
                             child: Image.asset("assets/images/startericon.png"),
                           ),
-                        ),
-                        Expanded(
-                          flex: 4,
-                          child: Container(
-                            decoration: const BoxDecoration(
-                                // shape: BoxShape.circle,
-                                // color: Colors.orange,
-                                ),
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 24.w, right: 8.w),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Starter ',
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                      color: const Color(0xFF1E1E1E),
-                                      fontSize: 20.sp,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
-                                      height: 0,
-                                    ),
-                                  ),
-                                  Image.asset("assets/images/chevron-down.png")
-                                ],
-                              ),
+                          SizedBox(width: 20.w),
+                          Text(
+                            'Starter ',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              color: const Color(0xFF1E1E1E),
+                              fontSize: 20.sp,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w500,
+                              height: 0,
                             ),
                           ),
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(16.0.h),
+                        child: Image.asset("assets/images/chevron-down.png"),
+                      ),
+                    ],
                   ),
                 ),
                 Expanded(
-                    flex: 1,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              //   shape: BoxShape.circle,
-                              color: Color(0xFFF3C637),
-                            ),
-                            child: state.levelsList[0].passed!
-                                ? Image.asset("assets/images/startericon.png")
-                                : Image.asset("assets/images/lock.png"),
-                          ),
-                        ),
-                        Expanded(
-                          child: ListView.builder(
-                            itemCount: state.levelsList.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              final level = state.levelsList[index];
-                              return Expanded(
-                                flex: 1,
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 1,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            color: level.passed!
-                                                ? AppColors.green2
-                                                : const Color(0xFFE3672B)),
-                                        child: level.passed!
-                                            ? Image.asset(
-                                                "assets/images/startericon.png")
-                                            : Image.asset(
-                                                "assets/images/lock.png"),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 4,
-                                      child: Container(
-                                        decoration: const BoxDecoration(),
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 24.w, right: 8.w),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                level.title!,
-                                                textAlign: TextAlign.start,
-                                                style: TextStyle(
-                                                  color:
-                                                      const Color(0xFF1E1E1E),
-                                                  fontSize: 20.sp,
-                                                  fontFamily: 'Poppins',
-                                                  fontWeight: FontWeight.w500,
-                                                  height: 0,
-                                                ),
-                                              ),
-                                              Image.asset(
-                                                  "assets/images/chevron-down.png")
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                  child: ListView.builder(
+                    padding: EdgeInsets.zero,
+                    itemCount: state.levelsList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final level = state.levelsList[index];
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.all(35.h),
+                                decoration: BoxDecoration(
+                                    color: level.passed!
+                                        ? AppColors.green2
+                                        : const Color(0xFFE3672B)),
+                                child: level.passed!
+                                    ? Image.asset(
+                                        "assets/images/startericon.png")
+                                    : Image.asset("assets/images/lock.png"),
+                              ),
+                              SizedBox(width: 20.w),
+                              Text(
+                                level.title!,
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  color: const Color(0xFF1E1E1E),
+                                  fontSize: 20.sp,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
+                                  height: 0,
                                 ),
-                              );
-                            },
+                              ),
+                            ],
                           ),
-                        )
-                      ],
-                    ))
+                          Padding(
+                            padding: EdgeInsets.all(16.0.h),
+                            child:
+                                Image.asset("assets/images/chevron-down.png"),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                )
               ]);
+            } else if (state is FetchCategoriesDataFailure) {
+              return Center(
+                child: Text(state.errMessage),
+              );
             } else {
               return const Center(
                 child: Text('No data available'),

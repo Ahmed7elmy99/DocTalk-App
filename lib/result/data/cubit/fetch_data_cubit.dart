@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:doc_talk/app/utils/dio_helper.dart';
 import 'package:doc_talk/result/data/models/level_model.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:meta/meta.dart';
 
 import '../models/categories_model.dart';
 
@@ -27,7 +26,7 @@ class FetchDataCubit extends Cubit<FetchDataState> {
         emit(FetchCategoriesDataLoaded(categories));
       }
     } catch (e) {
-      // Handle any errors that occur during data fetching or parsing
+      debugPrint(e.toString());
       emit(FetchCategoriesDataFailure(errMessage: e.toString()));
     }
   }
@@ -45,6 +44,7 @@ class FetchDataCubit extends Cubit<FetchDataState> {
         emit(FetchLevelsDataLoaded(levels));
       }
     } catch (e) {
+      debugPrint(e.toString());
       emit(FetchLevelsDataFailure(errMessage: e.toString()));
     }
   }
