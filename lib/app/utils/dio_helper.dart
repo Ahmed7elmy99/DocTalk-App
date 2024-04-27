@@ -13,10 +13,13 @@ class DioHelper {
 //130.61.130.252/api/auth/
   static Future<Response> getData(
       {required String url,
+       Map<String, dynamic>? headers,
       Map<String, dynamic>? queryParameters,
       Map<String, dynamic>? data}) async {
-          dio.options.headers = { 'Authorization':  CashHelper.getString(key: "token")  };
-    return await dio.get(url, queryParameters: queryParameters, data: data);
+        //  dio.options.headers = { 'Authorization':  CashHelper.getString(key: "token")  };
+    return await dio.get(url, queryParameters: queryParameters, data: data,    options: Options(
+        headers: headers
+      ),);
   }
 
   static Future<Response> postData(

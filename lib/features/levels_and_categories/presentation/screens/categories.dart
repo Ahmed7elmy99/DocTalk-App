@@ -5,13 +5,15 @@ import 'package:doc_talk/app/utils/consts.dart';
 import 'package:doc_talk/app/widgets/image_widget.dart';
 import 'package:doc_talk/app/widgets/text_widget.dart';
 import 'package:doc_talk/family_screen.dart';
+import 'package:doc_talk/features/levels_and_categories/data/models/categories_Model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:path/path.dart';
 
-class StarterCategoriesScreen extends StatelessWidget {
-  const StarterCategoriesScreen({Key? key}) : super(key: key);
-
+class CategoriesScreen extends StatelessWidget {
+  const CategoriesScreen({super.key, required this.categoriesModel});
+  final List<CategoryiesModel> categoriesModel;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +46,7 @@ class StarterCategoriesScreen extends StatelessWidget {
             mainAxisSpacing: ScreenUtil().setWidth(10),
             childAspectRatio: 0.7,
           ),
-          itemCount: 12, // Total number of items
+          itemCount: categoriesModel.length, // Total number of items
           itemBuilder: (BuildContext context, int index) {
             return Padding(
               padding: EdgeInsets.all(10.w),
@@ -68,15 +70,15 @@ class StarterCategoriesScreen extends StatelessWidget {
                             topRight:
                                 Radius.circular(ScreenUtil().setWidth(20)),
                           ),
-                          child: const ImageWidget(
-                            imageUrl: AppImages.homeList,
+                          child: Image.network(
+                            "${categoriesModel[index].image}",
                             fit: BoxFit.cover,
                           ),
                         ),
                       ),
                       SizedBox(height: ScreenUtil().setHeight(10)),
                       TextWidget(
-                        title: "Family",
+                        title: "${categoriesModel[index].title}",
                         titleSize: 16.sp,
                         titleColor: AppColors.black,
                         titleFontWeight: FontWeight.w400,

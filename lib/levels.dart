@@ -112,7 +112,8 @@ class LevelsScreen extends StatelessWidget {
               child: MaterialButton(
                 padding: EdgeInsets.zero,
                 onPressed: () {
-                  navigateTo(context: context, widget: CategoriesScreen());
+                  navigateTo(
+                      context: context, widget: StarterCategoriesScreen());
                 },
                 child: Row(
                   children: [
