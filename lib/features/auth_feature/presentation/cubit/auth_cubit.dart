@@ -80,7 +80,7 @@ class AuthCubit extends Cubit<AuthState> {
     });
   }
    late  String token ;
-  login(BuildContext context) async {
+  Future<void> login(BuildContext context) async {
     if (formstate.currentState!.validate()) {
       emit(AuthLoading());
       await DioHelper.postData(

@@ -3,6 +3,7 @@ import 'package:doc_talk/app/utils/cach_helper.dart';
 import 'package:doc_talk/app/utils/dio_helper.dart';
 import 'package:doc_talk/features/auth_feature/presentation/cubit/auth_cubit.dart';
 import 'package:doc_talk/features/home_feature/presentation/screens/bottom_nav_bar.dart';
+
 import 'package:doc_talk/features/levels_and_categories/presentation/cubit/levels_and-categories_cubit.dart';
 
 import 'package:doc_talk/features/questionair_feature/cubit/survey_cubit.dart';
@@ -31,8 +32,9 @@ void main() async {
         BlocProvider(
           create: (BuildContext context) => SurveyCubit(),
         ),
-          BlocProvider(
-          create: (BuildContext context) => LevelsCubit(),
+        BlocProvider(
+          create: (BuildContext context) => LevelsCubit()
+            ..getCategoriesHomeData(context: context, levelId: 1),
         )
       ],
       child: const MyApp(),

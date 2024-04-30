@@ -9,3 +9,7 @@ class LevelError extends LevelState {}
 class CategoryLoading extends LevelState {}
 class CategorySuccess extends LevelState {}
 class CategoryError extends LevelState {}
+class CategoryHomeLoading extends LevelState {}
+class CategoryHomeSuccess extends LevelState {}
+class CategoryHomeError extends LevelState {}
+
