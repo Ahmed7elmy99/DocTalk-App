@@ -1,5 +1,6 @@
 import 'package:doc_talk/app/utils/app_assets.dart';
 import 'package:doc_talk/app/utils/app_colors.dart';
+
 import 'package:doc_talk/app/utils/cach_helper.dart';
 import 'package:doc_talk/app/utils/consts.dart';
 
@@ -34,6 +35,7 @@ class HomeScreen extends StatelessWidget {
                     const Center(child: CircularProgressIndicator()),
               );
             } else if (state is LevelSuccess) {
+              Navigator.pop(context);
               navigateTo(
                   context: context,
                   widget: LevelsScreen(
@@ -62,7 +64,7 @@ class HomeScreen extends StatelessWidget {
                         child: Icon(
                           Icons.arrow_back_ios_new_outlined,
                           size: 20.sp,
-                          color: Colors.black,
+                          color: Colors.transparent,
                         ),
                       ),
                     ),

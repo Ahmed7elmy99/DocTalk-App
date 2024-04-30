@@ -31,7 +31,7 @@ void main() async {
         BlocProvider(
           create: (BuildContext context) => SurveyCubit(),
         ),
-          BlocProvider(
+        BlocProvider(
           create: (BuildContext context) => LevelsCubit(),
         )
       ],

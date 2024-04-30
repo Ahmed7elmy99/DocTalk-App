@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+
 import 'package:doc_talk/app/utils/cach_helper.dart';
 import 'package:doc_talk/app/utils/dio_helper.dart';
 import 'package:doc_talk/features/levels_and_categories/data/models/categories_Model.dart';
@@ -14,7 +15,7 @@ class LevelsCubit extends Cubit<LevelState> {
 
   List<LevelsModel> levelModel = [];
 
-  getLevelsData({
+  Future<void> getLevelsData({
     required BuildContext context,
   }) async {
     emit(LevelLoading());
@@ -57,7 +58,7 @@ class LevelsCubit extends Cubit<LevelState> {
 
   List<CategoryiesModel> categoryiesModel = [];
 
-  getCategoriesData({
+  Future<void> getCategoriesData({
     required BuildContext context,
     required int levelId,
   }) async {
@@ -69,7 +70,7 @@ class LevelsCubit extends Cubit<LevelState> {
         headers: {
           "Authorization": "${CashHelper.getString(key: "token")}",
         },
-        queryParameters: {"levelId": levelId },
+        queryParameters: {"levelId": levelId},
       );
 
       if (response.data is List) {

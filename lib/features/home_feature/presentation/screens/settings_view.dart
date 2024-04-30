@@ -1,4 +1,5 @@
-import 'package:doc_talk/app/utils/cach_helper.dart';
+import 'package:doc_talk/app/utils/app_assets.dart';
+
 import 'package:doc_talk/app/utils/colors.dart';
 
 import 'package:doc_talk/features/home_feature/presentation/widgets/child_details.dart';
@@ -29,10 +30,9 @@ class SettingsView extends StatelessWidget {
         ),
       ),
       body: Container(
-        decoration:  BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
-              image:NetworkImage("${CashHelper.getString(key: 'image')}"),
-              fit: BoxFit.cover),
+              image: AssetImage(AppImages.back), fit: BoxFit.cover),
         ),
         alignment: Alignment.center,
         child: Padding(

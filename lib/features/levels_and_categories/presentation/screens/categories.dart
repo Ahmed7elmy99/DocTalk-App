@@ -1,15 +1,15 @@
-import 'package:doc_talk/app/utils/app_assets.dart';
+
 import 'package:doc_talk/app/utils/app_colors.dart';
 import 'package:doc_talk/app/utils/consts.dart';
 
-import 'package:doc_talk/app/widgets/image_widget.dart';
+
 import 'package:doc_talk/app/widgets/text_widget.dart';
 import 'package:doc_talk/family_screen.dart';
 import 'package:doc_talk/features/levels_and_categories/data/models/categories_Model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:path/path.dart';
+
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key, required this.categoriesModel});
