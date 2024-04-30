@@ -100,4 +100,48 @@ class LevelsCubit extends Cubit<LevelState> {
       emit(CategoryError());
     }
   }
+    List<CategoryiesModel> categoryiesModel2 = [];
+
+  Future<void> getCategoriesHomeData({
+    required BuildContext context,
+    required int levelId,
+  }) async {
+    emit(CategoryHomeLoading());
+
+    try {
+      final response = await DioHelper.getData(
+        url: "http://doctalkapi.runasp.net/api/Category/GetCategoryByLevelId",
+        headers: {
+          "Authorization": "${CashHelper.getString(key: "token")}",
+        },
+        queryParameters: {"levelId": levelId},
+      );
+
+      if (response.data is List) {
+        categoryiesModel2 = List<CategoryiesModel>.from(
+          response.data.map((item) => CategoryiesModel.fromJson(item)),
+        );
+      } else {
+        throw Exception("Invalid response format");
+      }
+
+      print(response.data);
+      print("Success");
+
+      emit(CategoryHomeSuccess());
+    } catch (e) {
+      if (e is DioError) {
+        if (e.response != null) {
+          print(
+              "DioError [${e.response?.statusCode}] ${e.response?.statusMessage}");
+        } else {
+          print("DioError: ${e.message}");
+        }
+      } else {
+        print("Error: $e");
+      }
+
+      emit(CategoryHomeError());
+    }
+  }
 }

@@ -5,7 +5,7 @@ import 'package:doc_talk/app/utils/cach_helper.dart';
 import 'package:doc_talk/app/utils/consts.dart';
 
 import 'package:doc_talk/app/widgets/default_app_bar_widget.dart';
-import 'package:doc_talk/app/widgets/image_widget.dart';
+
 import 'package:doc_talk/app/widgets/text_button_widget.dart';
 import 'package:doc_talk/app/widgets/text_widget.dart';
 
@@ -14,6 +14,7 @@ import 'package:doc_talk/features/drawer_feature/presentation/screens/drawer.dar
 import 'package:doc_talk/features/levels_and_categories/presentation/cubit/levels_and-categories_cubit.dart';
 import 'package:doc_talk/features/levels_and_categories/presentation/cubit/levels_and-categories_states.dart';
 import 'package:doc_talk/features/levels_and_categories/presentation/screens/levels.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,6 +29,14 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.green,
         body: BlocConsumer<LevelsCubit, LevelState>(
           listener: (context, state) {
+            if (state is CategoryHomeLoading) {
+              showDialog(
+                context: context,
+                builder: (context) =>
+                    const Center(child: CircularProgressIndicator()),
+              );
+            }
+            ;
             if (state is LevelLoading) {
               showDialog(
                 context: context,
@@ -90,7 +99,8 @@ class HomeScreen extends StatelessWidget {
                     SizedBox(
                       height: 150.h,
                       child: ListView.builder(
-                        itemCount: 10,
+                        itemCount:
+                            LevelsCubit.get(context).categoryiesModel2.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           return InkWell(
@@ -108,20 +118,22 @@ class HomeScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(20)),
                               child: Column(
                                 children: [
-                                  const Expanded(
+                                  Expanded(
                                     child: ClipRRect(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(20),
-                                          topRight: Radius.circular(20),
-                                        ),
-                                        child: ImageWidget(
-                                          imageUrl: AppImages.homeList,
-                                          fit: BoxFit.cover,
-                                        )),
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(20),
+                                        topRight: Radius.circular(20),
+                                      ),
+                                      child: Image.network(
+                                        "${LevelsCubit.get(context).categoryiesModel2[index].image}",
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
                                   ),
                                   10.verticalSpace,
                                   TextWidget(
-                                    title: "Family",
+                                    title:
+                                        "${LevelsCubit.get(context).categoryiesModel2[index].title}",
                                     titleSize: 16.sp,
                                     titleColor: AppColors.black,
                                     titleFontWeight: FontWeight.w400,
