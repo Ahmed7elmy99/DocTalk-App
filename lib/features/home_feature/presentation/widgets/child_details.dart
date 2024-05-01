@@ -31,7 +31,7 @@ class ChildDetails extends StatelessWidget {
                   ),
                   SizedBox(width: 5.w),
                   Text(
-                    "${CashHelper.getString(key: "name")}",
+                    "${CacheHelper.getString(key: "name")}",
                     style:
                         TextStyle(fontSize: 25.sp, fontWeight: FontWeight.w500),
                   ),

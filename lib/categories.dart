@@ -51,11 +51,7 @@ class StarterCategoriesScreen extends StatelessWidget {
               child: MaterialButton(
                 padding: EdgeInsets.zero,
                 onPressed: () {
-                  navigateTo(
-                      context: context,
-                      widget: const FamilyScreen(
-                        storiesModel: [],
-                      ));
+                  navigateTo(context: context, widget: const FamilyScreen());
                 },
                 child: Container(
                   decoration: BoxDecoration(

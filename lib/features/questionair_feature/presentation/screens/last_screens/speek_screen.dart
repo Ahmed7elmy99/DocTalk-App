@@ -2,15 +2,14 @@ import 'package:doc_talk/app/utils/consts.dart';
 import 'package:doc_talk/app/widgets/button_widget.dart';
 import 'package:doc_talk/app/widgets/image_widget.dart';
 import 'package:doc_talk/app/widgets/text_widget.dart';
-
 import 'package:doc_talk/features/questionair_feature/presentation/screens/last_screens/go_to_quiz_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../home_feature/presentation/screens/alert.dart';
 
-class SpeecScreen extends StatelessWidget {
-  const SpeecScreen({super.key});
+class SpeakScreen extends StatelessWidget {
+  const SpeakScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +33,8 @@ class SpeecScreen extends StatelessWidget {
                         context: context,
                         okButtonText: "Next", onOk: () {
                       Navigator.pop(context);
-                      navigateTo(context: context, widget: GoToQuizScreen());
+                      navigateTo(
+                          context: context, widget: const GoToQuizScreen());
                     }, canCancel: false);
                   },
                   outlined: false,
@@ -43,7 +43,7 @@ class SpeecScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   text: "Speak this word",
                   textColor: const Color(0xff707070),
-                  border: Border.all(color: Color(0xff707070)),
+                  border: Border.all(color: const Color(0xff707070)),
                 ),
                 24.verticalSpace,
                 TextWidget(

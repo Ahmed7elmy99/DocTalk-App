@@ -23,7 +23,7 @@ class LevelsCubit extends Cubit<LevelState> {
       final response = await DioHelper.getData(
         url: "http://doctalkapi.runasp.net/api/Level/GetLevel",
         headers: {
-          "Authorization": "${CashHelper.getString(key: "token")}",
+          "Authorization": "${CacheHelper.getString(key: "token")}",
         },
       );
 
@@ -67,7 +67,7 @@ class LevelsCubit extends Cubit<LevelState> {
       final response = await DioHelper.getData(
         url: "http://doctalkapi.runasp.net/api/Category/GetCategoryByLevelId",
         headers: {
-          "Authorization": "${CashHelper.getString(key: "token")}",
+          "Authorization": "${CacheHelper.getString(key: "token")}",
         },
         queryParameters: {"levelId": levelId},
       );

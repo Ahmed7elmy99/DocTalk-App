@@ -194,7 +194,6 @@ class LevelsScreen extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: levelsModel.length,
                 itemBuilder: (BuildContext context, int index) {
-              
                   return Expanded(
                     flex: 1,
                     child: MaterialButton(

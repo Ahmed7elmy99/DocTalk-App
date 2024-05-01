@@ -23,11 +23,7 @@ class CategoriesScreen extends StatelessWidget {
                 const Center(child: CircularProgressIndicator()),
           );
         } else if (state is StoryLoaded) {
-          navigateTo(
-              context: context,
-              widget: FamilyScreen(
-                storiesModel: context.read<StoryCubit>().storiesModel,
-              ));
+          navigateTo(context: context, widget: FamilyScreen());
         } else if (state is StoryFailure) {
           Navigator.pop(context);
           ScaffoldMessenger.of(context).showSnackBar(

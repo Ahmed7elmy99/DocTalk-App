@@ -1,6 +1,5 @@
 import 'package:doc_talk/app/utils/app_assets.dart';
 import 'package:doc_talk/app/utils/cach_helper.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -22,14 +21,14 @@ class SurveyResults extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Survey Results:  ${CashHelper.getString(key: "surveyResult")}",
+              "Survey Results:  ${CacheHelper.getString(key: "surveyResult")}",
               style: TextStyle(fontSize: 25.sp),
             ),
             SizedBox(
               height: 20.h,
             ),
             Text(
-              "Diagnoses:  ${CashHelper.getString(key: "diagnosis")}",
+              "Diagnoses:  ${CacheHelper.getString(key: "diagnosis")}",
               style: TextStyle(fontSize: 25.sp),
             ),
           ],

@@ -2,12 +2,10 @@ import 'package:doc_talk/app/utils/app_assets.dart';
 import 'package:doc_talk/app/utils/app_colors.dart';
 import 'package:doc_talk/app/utils/cach_helper.dart';
 import 'package:doc_talk/app/utils/consts.dart';
-
 import 'package:doc_talk/app/widgets/default_app_bar_widget.dart';
 import 'package:doc_talk/app/widgets/image_widget.dart';
 import 'package:doc_talk/app/widgets/text_button_widget.dart';
 import 'package:doc_talk/app/widgets/text_widget.dart';
-
 import 'package:doc_talk/features/drawer_feature/presentation/screens/drawer.dart';
 import 'package:doc_talk/features/levels_and_categories/presentation/cubit/levels_and-categories_cubit.dart';
 import 'package:doc_talk/features/levels_and_categories/presentation/cubit/levels_and-categories_states.dart';
@@ -24,7 +22,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        endDrawer: MyDrawer(),
+        endDrawer: const MyDrawer(),
         backgroundColor: Colors.green,
         body: BlocConsumer<LevelsCubit, LevelState>(
           listener: (context, state) {
@@ -68,7 +66,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     DefaultAppBarWidget(
-                      title: "Hi, ${CashHelper.getString(key: "name")}",
+                      title: "Hi, ${CacheHelper.getString(key: "name")}",
                       canBack: false,
                       leadingWidth: 0,
                       backColor: Colors.transparent,
@@ -96,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                             onTap: () {
                               navigateTo(
                                   context: context,
-                                  widget: const FamilyScreen(storiesModel: [],));
+                                  widget: const FamilyScreen());
                             },
                             child: Container(
                               width: 100.w,
@@ -162,7 +160,7 @@ class HomeScreen extends StatelessWidget {
                               titleFontWeight: FontWeight.w400,
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           CustomTextButton(
                             title: "See All",
                             titleSize: 14.sp,

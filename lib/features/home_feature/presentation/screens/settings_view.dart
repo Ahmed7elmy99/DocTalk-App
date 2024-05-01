@@ -1,8 +1,6 @@
 import 'package:doc_talk/app/utils/cach_helper.dart';
 import 'package:doc_talk/app/utils/colors.dart';
-
 import 'package:doc_talk/features/home_feature/presentation/widgets/child_details.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,7 +29,7 @@ class SettingsView extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: NetworkImage("${CashHelper.getString(key: 'image')}"),
+              image: NetworkImage("${CacheHelper.getString(key: 'image')}"),
               fit: BoxFit.cover),
         ),
         alignment: Alignment.center,

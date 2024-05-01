@@ -82,7 +82,7 @@ class MyDrawer extends StatelessWidget {
           ),
           CustomListileDrawer(
             onTap: () {
-              CashHelper.shared.clear();
+              CacheHelper.shared.clear();
               navigateAndRemove(context: context, widget: LoginScreen());
             },
             title: 'Logout',

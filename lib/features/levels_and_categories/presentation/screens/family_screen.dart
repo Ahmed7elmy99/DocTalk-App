@@ -9,8 +9,9 @@ import 'package:video_player/video_player.dart';
 import '../../data/models/story_model.dart';
 
 class FamilyScreen extends StatefulWidget {
-  const FamilyScreen({Key? key, required this.storiesModel}) : super(key: key);
-  final List<StoryModel> storiesModel;
+  const FamilyScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _FamilyScreenState createState() => _FamilyScreenState();
@@ -23,17 +24,16 @@ class _FamilyScreenState extends State<FamilyScreen> {
   @override
   void initState() {
     super.initState();
-    int categoryId = context.read<StoryCubit>().categoryId;
-    controller = controller = VideoPlayerController.networkUrl(Uri.parse(
-        widget.storiesModel[categoryId].video ??
-            "https://www.youtube.com/watch?v=Bo-cQPIXOfQ"));
+    List<StoryModel> storiesModel = context.read<StoryCubit>().storiesModel;
+    controller = controller =
+        VideoPlayerController.asset('assets/videos/family_video.mp4');
 
-    debugPrint(categoryId.toString());
+   
 
     controller.addListener(() {
       if (controller.value.position >= controller.value.duration) {
         if (!isBottomSheetOpen) {
-          _openBottomSheet(); // Open bottom sheet when video finishes
+          _openBottomSheet();
           setState(() {
             isVideoFinished = true;
             isBottomSheetOpen = true;
@@ -41,7 +41,6 @@ class _FamilyScreenState extends State<FamilyScreen> {
         }
       }
     });
-
     controller.initialize().then((_) {
       setState(() {
         controller.play();
@@ -106,7 +105,7 @@ class _FamilyScreenState extends State<FamilyScreen> {
                 ),
                 MaterialButton(
                   onPressed: () {
-                    navigateTo(context: context, widget: const SpeecScreen());
+                    navigateTo(context: context, widget: const SpeakScreen());
                   },
                   child: Row(
                     children: [

@@ -1,14 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:doc_talk/app/utils/cach_helper.dart';
-
 import 'package:doc_talk/app/utils/consts.dart';
-
 import 'package:doc_talk/app/utils/dio_helper.dart';
 import 'package:doc_talk/features/questionair_feature/cubit/states_survey.dart';
 import 'package:doc_talk/features/questionair_feature/data/model/survey_model.dart';
 import 'package:doc_talk/features/questionair_feature/data/model/survey_result_model.dart';
 import 'package:doc_talk/result/views/result_view.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -119,13 +116,13 @@ class SurveyCubit extends Cubit<SurveyStates> {
     required BuildContext context,
   }) async {
     emit((CreatePatientSurveyLoadingStates()));
-    print(CashHelper.getString(key: "token"));
+    print(CacheHelper.getString(key: "token"));
     DioHelper.postData(url: "http://130.61.130.252/api/patient/survey", data: {
       "patientSurveyAnswersIds": answerIds,
     }, headers: {
       // "Accept": "application/json",
       // "Content-Type": "application/json",
-      "Authorization": "Bearer ${CashHelper.getString(key: "token")}",
+      "Authorization": "Bearer ${CacheHelper.getString(key: "token")}",
 
       // "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNzEzNjUxNzgwLCJleHAiOjE3MTM2ODc3ODB9.qul-xatlJKXwAOVyzgwd3If7iIrrxgaeXBRTKXXFL4o"
     }).then((value) {

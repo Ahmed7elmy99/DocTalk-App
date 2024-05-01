@@ -19,7 +19,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
   Bloc.observer = MyBlocObserver();
-  await CashHelper.init();
+  await CacheHelper.init();
   runApp(
     MultiBlocProvider(
       providers: [
@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
               ),
         ),
         debugShowCheckedModeBanner: false,
-        home: CashHelper.getString(key: "token") == null
+        home: CacheHelper.getString(key: "token") == null
             ? const SplashScreen()
             : const BottomNavBar(),
       ),

@@ -13,13 +13,13 @@ class StoryCubit extends Cubit<StoryState> {
   late int categoryId;
 
   getStoryByCategoryId(int categoryId) async {
-    emit(StoryLoading()); 
+    emit(StoryLoading());
     try {
       final response = await DioHelper.getData(
         url: "http://doctalkapi.runasp.net/api/Story/GetStoryByCategoryId",
         queryParameters: {"categoryId": categoryId},
         headers: {
-          "Authorization": "${CashHelper.getString(key: "token")}",
+          "Authorization": "${CacheHelper.getString(key: "token")}",
         },
       );
       this.categoryId = categoryId;
@@ -28,11 +28,11 @@ class StoryCubit extends Cubit<StoryState> {
           .map((item) => StoryModel.fromJson(item))
           .toList();
 
-      debugPrint(response.statusCode.toString()); 
-      debugPrint(response.data.toString()); 
-      emit(StoryLoaded()); 
+      debugPrint(response.statusCode.toString());
+      debugPrint(response.data.toString());
+      emit(StoryLoaded());
     } catch (e) {
-      debugPrint(e.toString()); 
+      debugPrint(e.toString());
       emit(StoryFailure(errMessage: e.toString()));
     }
   }

@@ -5,7 +5,6 @@ import 'package:doc_talk/features/auth_feature/data/model/user_model.dart';
 import 'package:doc_talk/features/auth_feature/presentation/screens/login_screen.dart';
 import 'package:doc_talk/features/auth_feature/presentation/screens/reset_password_screen.dart';
 import 'package:doc_talk/features/home_feature/presentation/screens/bottom_nav_bar.dart';
-
 import 'package:doc_talk/features/loading_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -92,15 +91,15 @@ class AuthCubit extends Cubit<AuthState> {
         },
       ).then((value) async {
         userModel = UserModel.fromJson(value.data);
-        await CashHelper.setString(key: "token", value: userModel?.token);
-        CashHelper.setString(
+        await CacheHelper.setString(key: "token", value: userModel?.token);
+        CacheHelper.setString(
             key: "surveyResult",
             value: userModel?.patient?.surveyResult.toString());
-        CashHelper.setString(
+        CacheHelper.setString(
             key: "diagnosis", value: userModel?.patient?.diagnoses.toString());
-        CashHelper.setString(
+        CacheHelper.setString(
             key: "name", value: userModel?.patient?.name.toString());
-        CashHelper.setString(
+        CacheHelper.setString(
             key: "image", value: userModel?.patient?.image.toString());
 
         print(userModel?.token);
