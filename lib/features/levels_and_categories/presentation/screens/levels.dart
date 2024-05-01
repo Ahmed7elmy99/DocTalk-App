@@ -30,6 +30,7 @@ class LevelsScreen extends StatelessWidget {
                 const Center(child: CircularProgressIndicator()),
           );
         } else if (state is CategorySuccess) {
+              Navigator.pop(context);
           navigateTo(
               context: context,
               widget: CategoriesScreen(

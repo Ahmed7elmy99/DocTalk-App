@@ -1,4 +1,3 @@
-import 'package:doc_talk/app/widgets/otp_widget.dart';
 import 'package:doc_talk/features/auth_feature/presentation/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,15 +6,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../app/utils/app_assets.dart';
 import '../../../../app/utils/app_colors.dart';
-import '../../../../app/utils/consts.dart';
 import '../../../../app/widgets/button_widget.dart';
-
 import '../../../../app/widgets/custom_form_field.dart';
 import '../../../../app/widgets/default_app_bar_widget.dart';
 import '../../../../app/widgets/image_widget.dart';
 import '../../../../app/widgets/text_button_widget.dart';
 import '../../../../app/widgets/text_widget.dart';
-import 'login_screen.dart';
 
 class OtpScreen extends StatelessWidget {
   const OtpScreen({super.key});

@@ -1,5 +1,5 @@
 import 'package:doc_talk/features/auth_feature/presentation/cubit/auth_cubit.dart';
-import 'package:doc_talk/features/auth_feature/presentation/screens/otp_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../app/utils/app_assets.dart';
 import '../../../../app/utils/app_colors.dart';
-import '../../../../app/utils/consts.dart';
+
 import '../../../../app/widgets/button_widget.dart';
 import '../../../../app/widgets/custom_form_field.dart';
 import '../../../../app/widgets/default_app_bar_widget.dart';
