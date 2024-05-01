@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:doc_talk/app/utils/cach_helper.dart';
 
 class DioHelper {
   static late Dio dio;
@@ -13,13 +12,16 @@ class DioHelper {
 //130.61.130.252/api/auth/
   static Future<Response> getData(
       {required String url,
-       Map<String, dynamic>? headers,
+      Map<String, dynamic>? headers,
       Map<String, dynamic>? queryParameters,
       Map<String, dynamic>? data}) async {
-        //  dio.options.headers = { 'Authorization':  CashHelper.getString(key: "token")  };
-    return await dio.get(url, queryParameters: queryParameters, data: data,    options: Options(
-        headers: headers
-      ),);
+    //  dio.options.headers = { 'Authorization':  CashHelper.getString(key: "token")  };
+    return await dio.get(
+      url,
+      queryParameters: queryParameters,
+      data: data,
+      options: Options(headers: headers),
+    );
   }
 
   static Future<Response> postData(
@@ -27,15 +29,12 @@ class DioHelper {
       Map<String, dynamic>? queryParameters,
       Map<String, dynamic>? headers,
       required Map<String, dynamic> data}) async {
-       //  dio.options.headers = { 'Authorization':"Bearer ${ CashHelper.getString(key: "token")}" };
+    //  dio.options.headers = { 'Authorization':"Bearer ${ CashHelper.getString(key: "token")}" };
     dynamic response = await dio.post(
       url,
       queryParameters: queryParameters,
       data: data,
-       
-       options: Options(
-        headers: headers
-      ),
+      options: Options(headers: headers),
     );
     return response;
   }

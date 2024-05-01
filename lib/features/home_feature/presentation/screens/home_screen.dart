@@ -8,7 +8,6 @@ import 'package:doc_talk/app/widgets/image_widget.dart';
 import 'package:doc_talk/app/widgets/text_button_widget.dart';
 import 'package:doc_talk/app/widgets/text_widget.dart';
 
-import 'package:doc_talk/family_screen.dart';
 import 'package:doc_talk/features/drawer_feature/presentation/screens/drawer.dart';
 import 'package:doc_talk/features/levels_and_categories/presentation/cubit/levels_and-categories_cubit.dart';
 import 'package:doc_talk/features/levels_and_categories/presentation/cubit/levels_and-categories_states.dart';
@@ -16,6 +15,8 @@ import 'package:doc_talk/features/levels_and_categories/presentation/screens/lev
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../levels_and_categories/presentation/screens/family_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -95,7 +96,7 @@ class HomeScreen extends StatelessWidget {
                             onTap: () {
                               navigateTo(
                                   context: context,
-                                  widget: const FamilyScreen());
+                                  widget: const FamilyScreen(storiesModel: [],));
                             },
                             child: Container(
                               width: 100.w,
@@ -244,4 +245,5 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ));
-  }}
+  }
+}

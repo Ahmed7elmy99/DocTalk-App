@@ -6,7 +6,6 @@ import '../widgets/background_widget.dart';
 import '../widgets/custom_button.dart';
 import 'quiz_four.dart';
 
-
 class QuizThreeView extends StatefulWidget {
   const QuizThreeView({Key? key}) : super(key: key);
 

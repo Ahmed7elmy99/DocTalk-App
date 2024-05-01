@@ -19,7 +19,6 @@ import '../../../../app/widgets/image_widget.dart';
 import '../../../../app/widgets/text_button_widget.dart';
 import '../../../../app/widgets/text_widget.dart';
 
-
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
@@ -28,7 +27,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
- final formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,8 +37,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           systemUiOverlayStyle: SystemUiOverlayStyle(
               statusBarColor: Colors.transparent,
               statusBarBrightness: Brightness.dark,
-              statusBarIconBrightness: Brightness.dark
-          ),
+              statusBarIconBrightness: Brightness.dark),
           centerTitle: true,
           title: "Create account",
         ),
@@ -57,10 +55,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: 170.h,
                   ),
                   64.verticalSpace,
-                   CustomFormField(
+                  CustomFormField(
                     hint: "Enter email",
                     controller: cubit.signupEmailCon,
-                     keyboardType: TextInputType.emailAddress,
+                    keyboardType: TextInputType.emailAddress,
                   ),
                   16.verticalSpace,
                   CustomFormField(
@@ -77,9 +75,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       onPressed: () {
                         cubit.changePass();
                       },
-                      icon: Icon(
-                          cubit.isVisiable?Icons.visibility:Icons.visibility_off
-                      ),
+                      icon: Icon(cubit.isVisiable
+                          ? Icons.visibility
+                          : Icons.visibility_off),
                     ),
                   ),
                   16.verticalSpace,
@@ -91,20 +89,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       onPressed: () {
                         cubit.changeIsConfirm();
                       },
-                      icon: Icon(
-                          cubit.isConfirm?Icons.visibility:Icons.visibility_off
-                      ),
+                      icon: Icon(cubit.isConfirm
+                          ? Icons.visibility
+                          : Icons.visibility_off),
                     ),
                   ),
                   40.verticalSpace,
                   ButtonWidget(
                     onPressed: () {
-                     if(cubit.passwordCon.text == cubit.conFirmPasswordCon.text&&formKey.currentState!.validate()){
-                       navigateTo(context: context, widget:const Second());
-                     }else{
-                       showToast(msg: "Chek That password and Confirmed password are the Same");
-
-                     }
+                      if (cubit.passwordCon.text ==
+                              cubit.conFirmPasswordCon.text &&
+                          formKey.currentState!.validate()) {
+                        navigateTo(context: context, widget: const Second());
+                      } else {
+                        showToast(
+                            msg:
+                                "Chek That password and Confirmed password are the Same");
+                      }
                     },
                     loading: state is AuthLoading,
                     color: AppColors.mainColor,
@@ -134,17 +135,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         titleColor: AppColors.mainColor,
                         textDecoration: TextDecoration.underline,
                       ),
-
                     ],
                   ),
                   50.verticalSpace,
-
-
                 ],
               ),
             );
           },
-        )
-    );
+        ));
   }
 }

@@ -14,7 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
 
@@ -65,13 +64,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
           return FloatingActionButton(
             backgroundColor: Color(0xFF2A7473),
             onPressed: () async {
-             if (await CashHelper.getString(key:"surveyResult") == null) {
-             await cubit.getSurveyData(context: context, id: 1);
-   
-  } else  {
-     navigateTo(context: context, widget: const SurveyResults());
-  }
-            //  await cubit.getSurveyData(context: context, id: 1);
+              if (await CashHelper.getString(key: "surveyResult") == null) {
+                await cubit.getSurveyData(context: context, id: 1);
+              } else {
+                navigateTo(context: context, widget: const SurveyResults());
+              }
+              //  await cubit.getSurveyData(context: context, id: 1);
               // navigateTo(context: context, widget: Q1Screen());
             },
             child: Column(

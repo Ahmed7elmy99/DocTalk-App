@@ -18,14 +18,13 @@ class CustomListile extends StatelessWidget {
             fontFamily: 'Poppins',
             fontWeight: FontWeight.w400,
             height: 0.h,
-          ),),
-      
-      
+          ),
+        ),
         trailing: SizedBox(
           width: 20.0.w,
           height: 15.0.h,
           child: Switch(
-            activeColor:const Color(0xFF2A7473),
+            activeColor: const Color(0xFF2A7473),
             trackOutlineColor: MaterialStateProperty.all(Colors.green),
             activeTrackColor: Theme.of(context).canvasColor,
             value: true,

@@ -3,8 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
-
 class ThirdSettingsContainer extends StatelessWidget {
   const ThirdSettingsContainer({
     super.key,
@@ -21,7 +19,7 @@ class ThirdSettingsContainer extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           ListTile(
-                          leading: const Icon(
+            leading: const Icon(
               CupertinoIcons.question_circle_fill,
               color: AppColors.greenColor,
             ),
@@ -31,10 +29,12 @@ class ThirdSettingsContainer extends StatelessWidget {
               icon: const Icon(CupertinoIcons.right_chevron),
             ),
           ),
-          Divider(endIndent: 30.w,
-          indent: 30.w,),
-           ListTile(
-              leading: const Icon(
+          Divider(
+            endIndent: 30.w,
+            indent: 30.w,
+          ),
+          ListTile(
+            leading: const Icon(
               CupertinoIcons.info_circle_fill,
               color: AppColors.accountIcon,
             ),

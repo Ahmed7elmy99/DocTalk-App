@@ -42,7 +42,7 @@ class DefaultAppBarWidget extends StatelessWidget
     this.shapeBorder = false,
     this.titleFontWeight,
     this.titleSize,
-    this.appBarIconColor=  AppColors.black101010,
+    this.appBarIconColor = AppColors.black101010,
   }) : super(key: key);
 
   @override

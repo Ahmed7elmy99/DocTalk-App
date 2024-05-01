@@ -6,7 +6,6 @@ import '../../../app/utils/app_colors.dart';
 import '../widgets/background_widget.dart';
 import '../widgets/custom_button.dart';
 
-
 class QuizFourView extends StatefulWidget {
   const QuizFourView({Key? key}) : super(key: key);
 

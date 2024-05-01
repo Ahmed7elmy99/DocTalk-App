@@ -17,7 +17,6 @@ import '../../../../app/widgets/text_button_widget.dart';
 import '../../../../app/widgets/text_widget.dart';
 import 'login_screen.dart';
 
-
 class OtpScreen extends StatelessWidget {
   const OtpScreen({super.key});
 
@@ -30,8 +29,7 @@ class OtpScreen extends StatelessWidget {
           systemUiOverlayStyle: SystemUiOverlayStyle(
               statusBarColor: Colors.transparent,
               statusBarBrightness: Brightness.dark,
-              statusBarIconBrightness: Brightness.dark
-          ),
+              statusBarIconBrightness: Brightness.dark),
           centerTitle: true,
           title: "Forget Password!",
         ),
@@ -54,7 +52,8 @@ class OtpScreen extends StatelessWidget {
                 ),
                 10.verticalSpace,
                 TextWidget(
-                  title: "Please check your email and enter the code we sent to confirm your account",
+                  title:
+                      "Please check your email and enter the code we sent to confirm your account",
                   titleColor: AppColors.black,
                   titleSize: 16.sp,
                 ),
@@ -85,12 +84,9 @@ class OtpScreen extends StatelessWidget {
                   textColor: AppColors.white,
                 ),
                 16.verticalSpace,
-
-
               ],
             );
           },
-        )
-    );
+        ));
   }
 }

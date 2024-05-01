@@ -14,20 +14,18 @@ import '../../../../app/widgets/image_widget.dart';
 import '../../../../app/widgets/text_button_widget.dart';
 import '../../../../app/widgets/text_widget.dart';
 
-
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: true,
-        appBar:const DefaultAppBarWidget(
+        appBar: const DefaultAppBarWidget(
           backColor: Colors.transparent,
           canBack: false,
         ),
-        body:ListView(
+        body: ListView(
           padding: EdgeInsets.symmetric(horizontal: 24.w),
           children: [
             ImageWidget(
@@ -38,35 +36,26 @@ class WelcomeScreen extends StatelessWidget {
             80.verticalSpace,
             RichText(
               textAlign: TextAlign.center,
-                text: TextSpan(
+              text: TextSpan(
                   text: "Welcome to DOC",
-                  style: TextStyle(
-                    fontSize: 24.sp,
-                    color: AppColors.mainColor
-                  ),
+                  style: TextStyle(fontSize: 24.sp, color: AppColors.mainColor),
                   children: [
                     TextSpan(
                       text: "TALK",
                       style: TextStyle(
-                          fontSize: 24.sp,
-                          color:const Color(0xffFCB8B5)
-                      ),
+                          fontSize: 24.sp, color: const Color(0xffFCB8B5)),
                     ),
                     TextSpan(
                       text: "!",
                       style: TextStyle(
-                          fontSize: 24.sp,
-                          color: AppColors.mainColor
-                      ),
+                          fontSize: 24.sp, color: AppColors.mainColor),
                     )
-                  ]
-                ),
+                  ]),
             ),
-
             40.verticalSpace,
             ButtonWidget(
               onPressed: () {
-                navigateTo(context: context, widget:const RegisterScreen());
+                navigateTo(context: context, widget: const RegisterScreen());
               },
               color: AppColors.mainColor,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -94,14 +83,10 @@ class WelcomeScreen extends StatelessWidget {
                   titleColor: AppColors.mainColor,
                   textDecoration: TextDecoration.underline,
                 ),
-
               ],
             ),
             50.verticalSpace,
-
-
           ],
-        )
-    );
+        ));
   }
 }

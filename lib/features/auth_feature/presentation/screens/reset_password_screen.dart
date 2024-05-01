@@ -16,7 +16,6 @@ import '../../../../app/widgets/image_widget.dart';
 
 import '../../../../app/widgets/text_widget.dart';
 
-
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({super.key});
 
@@ -36,8 +35,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           systemUiOverlayStyle: SystemUiOverlayStyle(
               statusBarColor: Colors.transparent,
               statusBarBrightness: Brightness.dark,
-              statusBarIconBrightness: Brightness.dark
-          ),
+              statusBarIconBrightness: Brightness.dark),
           centerTitle: true,
           title: "Forget Password!",
         ),
@@ -69,9 +67,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       onPressed: () {
                         cubit.changePass();
                       },
-                      icon: Icon(
-                          cubit.isVisiable?Icons.visibility:Icons.visibility_off
-                      ),
+                      icon: Icon(cubit.isVisiable
+                          ? Icons.visibility
+                          : Icons.visibility_off),
                     ),
                   ),
                   16.verticalSpace,
@@ -83,21 +81,23 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       onPressed: () {
                         cubit.changeIsConfirm();
                       },
-                      icon: Icon(
-                          cubit.isConfirm?Icons.visibility:Icons.visibility_off
-                      ),
+                      icon: Icon(cubit.isConfirm
+                          ? Icons.visibility
+                          : Icons.visibility_off),
                     ),
                   ),
                   56.verticalSpace,
                   ButtonWidget(
                     onPressed: () {
-                      if(cubit.passwordCon.text == cubit.conFirmPasswordCon.text&&formKey.currentState!.validate()){
+                      if (cubit.passwordCon.text ==
+                              cubit.conFirmPasswordCon.text &&
+                          formKey.currentState!.validate()) {
                         cubit.resetPassword(context);
-                      }else{
-                        showToast(msg: "Chek That password and Confirmed password are the Same");
-
+                      } else {
+                        showToast(
+                            msg:
+                                "Chek That password and Confirmed password are the Same");
                       }
-
                     },
                     color: AppColors.mainColor,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -108,13 +108,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     textColor: AppColors.white,
                   ),
                   16.verticalSpace,
-
-
                 ],
               ),
             );
           },
-        )
-    );
+        ));
   }
 }

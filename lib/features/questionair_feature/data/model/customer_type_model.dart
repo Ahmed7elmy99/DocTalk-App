@@ -1,8 +1,9 @@
 class CustomerTypeModel {
   CustomerTypeModel({
-      this.id, 
-      this.name, 
-      this.image,});
+    this.id,
+    this.name,
+    this.image,
+  });
 
   CustomerTypeModel.fromJson(dynamic json) {
     id = json['id'];
@@ -12,5 +13,4 @@ class CustomerTypeModel {
   num? id;
   String? name;
   String? image;
-
 }

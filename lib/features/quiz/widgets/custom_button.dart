@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../app/utils/app_colors.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({Key? key, this.onTap, this.label,  this.color}) : super(key: key);
+  const CustomButton({Key? key, this.onTap, this.label, this.color})
+      : super(key: key);
   final void Function()? onTap;
   final String? label;
   final dynamic color;

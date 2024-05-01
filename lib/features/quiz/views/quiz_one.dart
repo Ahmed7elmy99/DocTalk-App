@@ -72,7 +72,6 @@ class _QuizOneViewState extends State<QuizOneView> {
                         isTrue = false;
                         setState(() {});
                         debugPrint('false');
-                      
                       }
                     },
                     child: Image.asset(questions[index]));

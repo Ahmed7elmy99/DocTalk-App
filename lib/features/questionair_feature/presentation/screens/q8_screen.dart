@@ -17,100 +17,94 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../app/widgets/default_app_bar_widget.dart';
 
 class Q8Screen extends StatelessWidget {
- Q8Screen({Key? key, required this.surveyModel, required this.answerIds}) : super(key: key);
+  Q8Screen({Key? key, required this.surveyModel, required this.answerIds})
+      : super(key: key);
   final SurveyModel surveyModel;
   final List<int> answerIds;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
-      backgroundColor:const  Color(0xfffef3d5),
-      appBar:const DefaultAppBarWidget(
-        backColor: Color(0xfffef3d5),
-        systemUiOverlayStyle:  SystemUiOverlayStyle(
-            statusBarColor: Colors.transparent,
-            statusBarBrightness: Brightness.dark,
-            statusBarIconBrightness: Brightness.dark
+        resizeToAvoidBottomInset: true,
+        backgroundColor: const Color(0xfffef3d5),
+        appBar: const DefaultAppBarWidget(
+          backColor: Color(0xfffef3d5),
+          systemUiOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: Colors.transparent,
+              statusBarBrightness: Brightness.dark,
+              statusBarIconBrightness: Brightness.dark),
         ),
-
-      ),
-      body:BlocBuilder<SurveyCubit, SurveyStates>(builder: (context, state) {
-      
-       return Column(
-        children: [
-          Padding(
-            padding:  EdgeInsets.symmetric(horizontal: 24.w),
-            child: Row(
-              children: [
-                TextWidget(
-                  title: "8 of 12",
-                  titleSize: 16.sp,
-                  titleColor: AppColors.mainColor,
-                  titleMaxLines: 15,
-                ),
-                9.horizontalSpace,
-                Expanded(
-                  child: Container(
-                    height: 7.h,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      gradient: LinearGradient(
-                        colors: [
-                          AppColors.mainColor,
-                          AppColors.mainColor,
-                          AppColors.mainColor,
-                          AppColors.mainColor,
-                          AppColors.mainColor,
-                          AppColors.mainColor.withOpacity(0.2),
-                          AppColors.mainColor.withOpacity(0.2),
-                          AppColors.mainColor.withOpacity(0.2),
-                        ]
-                      )
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-          Expanded(
-            child: Container(
-              width: double.infinity,
-              decoration:const BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage(
-                    AppImages.q8,
-                  )
-                )
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Container(
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(40.r),
-                  topLeft: Radius.circular(40.r),
-                )
-              ),
-              child: ListView(
-                padding: EdgeInsets.symmetric(horizontal: 15.w,vertical: 40.h),
-                children: [
-                  TextWidget(
-                      title:  surveyModel.surveyQuestions![7].question!,
+        body: BlocBuilder<SurveyCubit, SurveyStates>(builder: (context, state) {
+          return Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                child: Row(
+                  children: [
+                    TextWidget(
+                      title: "8 of 12",
                       titleSize: 16.sp,
-                    titleColor: AppColors.black,
-                    titleMaxLines: 15,
-                  ),
-                   16.verticalSpace,
-                   ...List.generate(surveyModel.surveyAnswers!.length, (index) {
-                    if (index >= 35 && index <= 39) {
-                      return Column(
-                        children: [
-                        InkWell(
+                      titleColor: AppColors.mainColor,
+                      titleMaxLines: 15,
+                    ),
+                    9.horizontalSpace,
+                    Expanded(
+                      child: Container(
+                        height: 7.h,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            gradient: LinearGradient(colors: [
+                              AppColors.mainColor,
+                              AppColors.mainColor,
+                              AppColors.mainColor,
+                              AppColors.mainColor,
+                              AppColors.mainColor,
+                              AppColors.mainColor.withOpacity(0.2),
+                              AppColors.mainColor.withOpacity(0.2),
+                              AppColors.mainColor.withOpacity(0.2),
+                            ])),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage(
+                            AppImages.q8,
+                          ))),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: AppColors.white,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(40.r),
+                        topLeft: Radius.circular(40.r),
+                      )),
+                  child: ListView(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 15.w, vertical: 40.h),
+                    children: [
+                      TextWidget(
+                        title: surveyModel.surveyQuestions![7].question!,
+                        titleSize: 16.sp,
+                        titleColor: AppColors.black,
+                        titleMaxLines: 15,
+                      ),
+                      16.verticalSpace,
+                      ...List.generate(surveyModel.surveyAnswers!.length,
+                          (index) {
+                        if (index >= 35 && index <= 39) {
+                          return Column(
+                            children: [
+                              InkWell(
                                 onTap: () {
                                   SurveyCubit.get(context).chooseAnswerSurvey(
                                       surveyModel.surveyAnswers![index].id!);
@@ -124,38 +118,39 @@ class Q8Screen extends StatelessWidget {
                                       : false,
                                 ),
                               ),
-                          16.verticalSpace
-                        ],
-                      );
-                    } else {
-                      return const SizedBox(); // Return an empty widget for indices greater than 2
-                    }
-                  }),
-                  24.verticalSpace,
-                  ButtonWidget(
-                    onPressed: () {
-                       if (SurveyCubit.get(context).answerId == null) {
-                          return showToast(msg: "please choose an answer");
-                        }else {
-                          SurveyCubit.get(context).saveAnswerSurvey();
-                          navigateTo(
-                          context: context,
-                          widget: Q9Screen(
-                              answerIds: SurveyCubit.get(context).answerIds,
-                            surveyModel: surveyModel,
-                          ));
-                          SurveyCubit.get(context).answerId = null;
-                          print("answerId: ${SurveyCubit.get(context).answerId}");
+                              16.verticalSpace
+                            ],
+                          );
+                        } else {
+                          return const SizedBox(); // Return an empty widget for indices greater than 2
                         }
-                    },
-                    text: "Next",
-                    height: 50.h,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    icon: Icon(
-                      Icons.arrow_forward,
-                      size: 20.sp,
-                      color: Colors.white,
-                   ),
+                      }),
+                      24.verticalSpace,
+                      ButtonWidget(
+                        onPressed: () {
+                          if (SurveyCubit.get(context).answerId == null) {
+                            return showToast(msg: "please choose an answer");
+                          } else {
+                            SurveyCubit.get(context).saveAnswerSurvey();
+                            navigateTo(
+                                context: context,
+                                widget: Q9Screen(
+                                  answerIds: SurveyCubit.get(context).answerIds,
+                                  surveyModel: surveyModel,
+                                ));
+                            SurveyCubit.get(context).answerId = null;
+                            print(
+                                "answerId: ${SurveyCubit.get(context).answerId}");
+                          }
+                        },
+                        text: "Next",
+                        height: 50.h,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        icon: Icon(
+                          Icons.arrow_forward,
+                          size: 20.sp,
+                          color: Colors.white,
+                        ),
                       )
                     ],
                   ),
@@ -163,7 +158,6 @@ class Q8Screen extends StatelessWidget {
               )
             ],
           );
-  }));
+        }));
   }
 }
-

@@ -19,12 +19,14 @@ class FirstSettingsContainer extends StatelessWidget {
         children: [
           ListTile(
             title: const Text('Daily Progress'),
-        trailing: SizedBox(
-                         width: 100.w,
-
+            trailing: SizedBox(
+              width: 100.w,
               child: Row(
                 children: [
-                  Image.asset("assets/images/Clyde – 02.png",width:40.w,),
+                  Image.asset(
+                    "assets/images/Clyde – 02.png",
+                    width: 40.w,
+                  ),
                   IconButton(
                     onPressed: () {},
                     icon: const Icon(CupertinoIcons.right_chevron),
@@ -43,7 +45,10 @@ class FirstSettingsContainer extends StatelessWidget {
               width: 100.w,
               child: Row(
                 children: [
-                  Image.asset("assets/images/Frame 2610679.png",width:40.w,),
+                  Image.asset(
+                    "assets/images/Frame 2610679.png",
+                    width: 40.w,
+                  ),
                   IconButton(
                     onPressed: () {},
                     icon: const Icon(CupertinoIcons.right_chevron),

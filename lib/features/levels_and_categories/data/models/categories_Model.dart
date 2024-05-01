@@ -38,5 +38,3 @@ class CategoryiesModel {
     return data;
   }
 }
-
-

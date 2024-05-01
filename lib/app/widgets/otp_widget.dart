@@ -8,16 +8,13 @@ class OtpWidget extends StatelessWidget {
   final void Function(String)? onCompleted;
   final int length;
   final TextEditingController? controller;
-  const OtpWidget({
-    this.onCompleted,
-    this.length =4,
-    this.controller,
-    super.key});
+  const OtpWidget(
+      {this.onCompleted, this.length = 4, this.controller, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  Pinput(
-      controller:controller ,
+    return Pinput(
+      controller: controller,
       length: length,
       onCompleted: onCompleted,
       defaultPinTheme: PinTheme(
@@ -46,7 +43,9 @@ class OtpWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: const Color(0xffF8F8F8),
           borderRadius: BorderRadius.circular(5),
-          border: Border.all(color: AppColors.mainColor,),
+          border: Border.all(
+            color: AppColors.mainColor,
+          ),
         ),
       ),
     );

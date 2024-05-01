@@ -1,11 +1,16 @@
 import 'package:doc_talk/app/utils/consts.dart';
+import 'package:doc_talk/features/levels_and_categories/presentation/cubit/story_cubit.dart';
 import 'package:doc_talk/features/questionair_feature/presentation/screens/last_screens/speek_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../data/models/story_model.dart';
+
 class FamilyScreen extends StatefulWidget {
-  const FamilyScreen({Key? key}) : super(key: key);
+  const FamilyScreen({Key? key, required this.storiesModel}) : super(key: key);
+  final List<StoryModel> storiesModel;
 
   @override
   _FamilyScreenState createState() => _FamilyScreenState();
@@ -15,11 +20,15 @@ class _FamilyScreenState extends State<FamilyScreen> {
   late VideoPlayerController controller;
   bool isVideoFinished = false;
   bool isBottomSheetOpen = false;
-
   @override
   void initState() {
     super.initState();
-    controller = VideoPlayerController.asset("assets/videos/family_video.mp4");
+    int categoryId = context.read<StoryCubit>().categoryId;
+    controller = controller = VideoPlayerController.networkUrl(Uri.parse(
+        widget.storiesModel[categoryId].video ??
+            "https://www.youtube.com/watch?v=Bo-cQPIXOfQ"));
+
+    debugPrint(categoryId.toString());
 
     controller.addListener(() {
       if (controller.value.position >= controller.value.duration) {
@@ -34,8 +43,9 @@ class _FamilyScreenState extends State<FamilyScreen> {
     });
 
     controller.initialize().then((_) {
-      setState(() {});
-      controller.play();
+      setState(() {
+        controller.play();
+      });
     });
   }
 
@@ -49,9 +59,10 @@ class _FamilyScreenState extends State<FamilyScreen> {
               topLeft: Radius.circular(40.w),
               topRight: Radius.circular(40.w),
             ),
+            color: Colors.transparent,
             image: const DecorationImage(
               image: AssetImage('assets/images/family_bottom_sheet.png'),
-              fit: BoxFit.cover,
+              fit: BoxFit.fitHeight,
             ),
           ),
           height: MediaQuery.of(context).size.height * 0.5,
@@ -95,7 +106,7 @@ class _FamilyScreenState extends State<FamilyScreen> {
                 ),
                 MaterialButton(
                   onPressed: () {
-                    navigateTo(context: context, widget:const SpeecScreen());
+                    navigateTo(context: context, widget: const SpeecScreen());
                   },
                   child: Row(
                     children: [

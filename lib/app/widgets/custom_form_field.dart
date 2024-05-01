@@ -58,8 +58,8 @@ class CustomFormField extends StatelessWidget {
     this.prefixIcon,
     this.prefixIconWidget,
     this.focusNode,
-    this.maxLines=1,
-    this.minLines=1,
+    this.maxLines = 1,
+    this.minLines = 1,
     this.iconPressed,
     this.color,
     this.onChange,
@@ -71,7 +71,13 @@ class CustomFormField extends StatelessWidget {
     this.borderRadiusValue,
     this.enabledBorder,
     this.focusedBorder,
-    this.errorBorder, this.disableBorder, this.filled, this.fillColor, this.prefixIconColor, this.onFieldSubmitted, this.validateText,
+    this.errorBorder,
+    this.disableBorder,
+    this.filled,
+    this.fillColor,
+    this.prefixIconColor,
+    this.onFieldSubmitted,
+    this.validateText,
   });
 
   @override
@@ -84,31 +90,31 @@ class CustomFormField extends StatelessWidget {
             : Text(
                 header ?? "",
                 style: TextStyle(
-                    fontWeight: FontWeight.normal,
-                    color: AppColors.black,
-                    fontSize: 16.sp,
+                  fontWeight: FontWeight.normal,
+                  color: AppColors.black,
+                  fontSize: 16.sp,
                 ),
               ),
         SizedBox(
           height: header == null ? 0 : 15.h,
         ),
         SizedBox(
-          height: height??70.h,
+          height: height ?? 70.h,
           child: InkWell(
             onTap: onPressed,
             child: TextFormField(
               cursorColor: AppColors.black,
-              onFieldSubmitted:onFieldSubmitted??(st){} ,
+              onFieldSubmitted: onFieldSubmitted ?? (st) {},
               validator: validator ??
                   (value) {
                     if (value!.isEmpty) {
-                      return validateText?? "Field Must not be Empty";
+                      return validateText ?? "Field Must not be Empty";
                     }
                     return null;
                   },
               textInputAction: textInputAction,
               controller: controller,
-              minLines: minLines ,
+              minLines: minLines,
               maxLines: maxLines,
               enabled: enabled,
               keyboardType: keyboardType,
@@ -123,45 +129,43 @@ class CustomFormField extends StatelessWidget {
               ),
               cursorHeight: 20.h,
               decoration: InputDecoration(
-                fillColor: fillColor??Colors.white,
-                filled:filled??false ,
+                fillColor: fillColor ?? Colors.white,
+                filled: filled ?? false,
                 isDense: true,
                 contentPadding: contentPadding ??
-                    const EdgeInsets.symmetric(
-                      vertical: 16,
-                      horizontal: 20
-                    ),
+                    const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                 errorStyle: TextStyle(
                   fontSize: 14.sp,
                   height: 2.h,
                 ),
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(borderRadiusValue ?? 25),
+                    borderRadius:
+                        BorderRadius.circular(borderRadiusValue ?? 25),
                     borderSide: const BorderSide(
                       color: AppColors.black,
-                    )
-                ),
-                enabledBorder: enabledBorder ?? OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(borderRadiusValue ?? 25),
-                        borderSide: const BorderSide(
-                          color: AppColors.black,
-                        )
-                ),
-                disabledBorder:disableBorder?? OutlineInputBorder(
-                    borderRadius:
-                    BorderRadius.circular(borderRadiusValue ?? 25),
-                    borderSide: const BorderSide(color: AppColors.black)
-                ),
-                errorBorder: errorBorder ?? OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.circular(borderRadiusValue ?? 25),
-                      borderSide: const BorderSide(color: AppColors.red)
-                    ),
-                focusedBorder: focusedBorder ?? OutlineInputBorder(
+                    )),
+                enabledBorder: enabledBorder ??
+                    OutlineInputBorder(
                         borderRadius:
                             BorderRadius.circular(borderRadiusValue ?? 25),
-                        borderSide:
-                        const BorderSide(
+                        borderSide: const BorderSide(
+                          color: AppColors.black,
+                        )),
+                disabledBorder: disableBorder ??
+                    OutlineInputBorder(
+                        borderRadius:
+                            BorderRadius.circular(borderRadiusValue ?? 25),
+                        borderSide: const BorderSide(color: AppColors.black)),
+                errorBorder: errorBorder ??
+                    OutlineInputBorder(
+                        borderRadius:
+                            BorderRadius.circular(borderRadiusValue ?? 25),
+                        borderSide: const BorderSide(color: AppColors.red)),
+                focusedBorder: focusedBorder ??
+                    OutlineInputBorder(
+                        borderRadius:
+                            BorderRadius.circular(borderRadiusValue ?? 25),
+                        borderSide: const BorderSide(
                           color: AppColors.black,
                         )),
                 hintText: hint ?? "",
@@ -198,7 +202,7 @@ class CustomFormField extends StatelessWidget {
                         : Icon(
                             prefixIcon,
                             size: 23.sp,
-                            color:prefixIconColor?? AppColors.field,
+                            color: prefixIconColor ?? AppColors.field,
                           ))
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.end,

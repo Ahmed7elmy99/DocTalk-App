@@ -4,11 +4,9 @@ import 'package:doc_talk/app/utils/dio_helper.dart';
 import 'package:doc_talk/features/auth_feature/presentation/cubit/auth_cubit.dart';
 import 'package:doc_talk/features/home_feature/presentation/screens/bottom_nav_bar.dart';
 import 'package:doc_talk/features/levels_and_categories/presentation/cubit/levels_and-categories_cubit.dart';
-
+import 'package:doc_talk/features/levels_and_categories/presentation/cubit/story_cubit.dart';
 import 'package:doc_talk/features/questionair_feature/cubit/survey_cubit.dart';
-
 import 'package:doc_talk/features/splash_and_onboarding_feature/presentation/screens/splash_screen.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,8 +29,11 @@ void main() async {
         BlocProvider(
           create: (BuildContext context) => SurveyCubit(),
         ),
-          BlocProvider(
+        BlocProvider(
           create: (BuildContext context) => LevelsCubit(),
+        ),
+        BlocProvider(
+          create: (BuildContext context) => StoryCubit(),
         )
       ],
       child: const MyApp(),
@@ -73,4 +74,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-//Shift + Alt + F 
+//Shift + Alt + F

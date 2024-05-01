@@ -91,8 +91,7 @@ class Q9Screen extends StatelessWidget {
                         EdgeInsets.symmetric(horizontal: 15.w, vertical: 40.h),
                     children: [
                       TextWidget(
-                        title:
-                             surveyModel.surveyQuestions![8].question!,
+                        title: surveyModel.surveyQuestions![8].question!,
                         titleSize: 16.sp,
                         titleColor: AppColors.black,
                         titleMaxLines: 15,

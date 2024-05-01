@@ -4,9 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ResultContainer extends StatefulWidget {
   const ResultContainer({
-    super.key, required this.surveyResultModel,
+    super.key,
+    required this.surveyResultModel,
   });
- final SurveyResultModel surveyResultModel;
+  final SurveyResultModel surveyResultModel;
 
   @override
   State<ResultContainer> createState() => _ResultContainerState();
@@ -36,8 +37,8 @@ class _ResultContainerState extends State<ResultContainer> {
                 style: TextStyle(fontSize: 28.sp, color: Colors.white),
               ),
               SizedBox(height: 20.h),
-              Text(widget.surveyResultModel.diagnoses!
-                ,
+              Text(
+                widget.surveyResultModel.diagnoses!,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 20.sp,

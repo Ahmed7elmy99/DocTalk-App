@@ -1,13 +1,13 @@
 import 'package:doc_talk/app/utils/app_assets.dart';
 import 'package:doc_talk/app/utils/app_colors.dart';
 import 'package:doc_talk/app/utils/consts.dart';
-
 import 'package:doc_talk/app/widgets/image_widget.dart';
 import 'package:doc_talk/app/widgets/text_widget.dart';
-import 'package:doc_talk/family_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'features/levels_and_categories/presentation/screens/family_screen.dart';
 
 class StarterCategoriesScreen extends StatelessWidget {
   const StarterCategoriesScreen({Key? key}) : super(key: key);
@@ -51,7 +51,11 @@ class StarterCategoriesScreen extends StatelessWidget {
               child: MaterialButton(
                 padding: EdgeInsets.zero,
                 onPressed: () {
-                  navigateTo(context: context, widget: FamilyScreen());
+                  navigateTo(
+                      context: context,
+                      widget: const FamilyScreen(
+                        storiesModel: [],
+                      ));
                 },
                 child: Container(
                   decoration: BoxDecoration(

@@ -15,7 +15,6 @@ import '../../../../app/widgets/image_widget.dart';
 
 import '../../../../app/widgets/text_widget.dart';
 
-
 class ForgetPasswordScreen extends StatelessWidget {
   const ForgetPasswordScreen({super.key});
 
@@ -28,8 +27,7 @@ class ForgetPasswordScreen extends StatelessWidget {
           systemUiOverlayStyle: SystemUiOverlayStyle(
               statusBarColor: Colors.transparent,
               statusBarBrightness: Brightness.dark,
-              statusBarIconBrightness: Brightness.dark
-          ),
+              statusBarIconBrightness: Brightness.dark),
           centerTitle: true,
           title: "Forget Password!",
         ),
@@ -52,20 +50,20 @@ class ForgetPasswordScreen extends StatelessWidget {
                 ),
                 10.verticalSpace,
                 TextWidget(
-                  title: "Type your email, click the link we send, make a new password. Easy!",
+                  title:
+                      "Type your email, click the link we send, make a new password. Easy!",
                   titleColor: AppColors.black,
                   titleSize: 16.sp,
                 ),
                 32.verticalSpace,
-                 CustomFormField(
+                CustomFormField(
                   hint: "Enter email",
-                   controller: cubit.resetPassEmailCon,
+                  controller: cubit.resetPassEmailCon,
                 ),
                 56.verticalSpace,
                 ButtonWidget(
                   onPressed: () {
                     cubit.resetPassEmail(context);
-
                   },
                   color: AppColors.mainColor,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -76,12 +74,9 @@ class ForgetPasswordScreen extends StatelessWidget {
                   textColor: AppColors.white,
                 ),
                 16.verticalSpace,
-
-
               ],
             );
           },
-        )
-    );
+        ));
   }
 }

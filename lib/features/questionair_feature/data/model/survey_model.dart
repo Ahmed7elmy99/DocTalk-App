@@ -70,4 +70,3 @@ class SurveyAnswers {
     return data;
   }
 }
-

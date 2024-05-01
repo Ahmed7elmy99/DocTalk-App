@@ -1,11 +1,13 @@
 class UserModel {
   UserModel({
-      this.token, 
-      this.customer,});
+    this.token,
+    this.customer,
+  });
 
   UserModel.fromJson(dynamic json) {
     token = json['token'];
-    customer = json['customer'] != null ? Customer.fromJson(json['customer']) : null;
+    customer =
+        json['customer'] != null ? Customer.fromJson(json['customer']) : null;
   }
   String? token;
   Customer? customer;
@@ -18,21 +20,23 @@ class UserModel {
     }
     return map;
   }
-
 }
 
 class Customer {
   Customer({
-      this.customerType, 
-      this.name, 
-      this.email, 
-      this.phone, 
-      this.phoneCountryCode, 
-      this.nationalId, 
-      this.licenseId,});
+    this.customerType,
+    this.name,
+    this.email,
+    this.phone,
+    this.phoneCountryCode,
+    this.nationalId,
+    this.licenseId,
+  });
 
   Customer.fromJson(dynamic json) {
-    customerType = json['customer_type'] != null ? CustomerType.fromJson(json['customer_type']) : null;
+    customerType = json['customer_type'] != null
+        ? CustomerType.fromJson(json['customer_type'])
+        : null;
     name = json['name'];
     email = json['email'];
     phone = json['phone'];
@@ -61,14 +65,14 @@ class Customer {
     map['license_id'] = licenseId;
     return map;
   }
-
 }
 
 class CustomerType {
   CustomerType({
-      this.id, 
-      this.name, 
-      this.image,});
+    this.id,
+    this.name,
+    this.image,
+  });
 
   CustomerType.fromJson(dynamic json) {
     id = json['id'];
@@ -86,5 +90,4 @@ class CustomerType {
     map['image'] = image;
     return map;
   }
-
 }

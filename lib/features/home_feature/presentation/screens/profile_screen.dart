@@ -115,7 +115,7 @@ class AccountScreen extends StatelessWidget {
                     5.verticalSpace,
                     TextWidget(
                       title:
-                      """we will not share anything on your Apple, Facebook or Google account without your permission. By tapping Continue or Sign In, you accept the privacy policy of DOCKTALK""",
+                          """we will not share anything on your Apple, Facebook or Google account without your permission. By tapping Continue or Sign In, you accept the privacy policy of DOCKTALK""",
                       titleSize: 14.sp,
                       titleFontWeight: FontWeight.w400,
                       titleMaxLines: 50,
@@ -160,24 +160,17 @@ class AccountScreen extends StatelessWidget {
                       "You are about to delete your account.\nDo you want to continue.?",
                       context: context,
                       cancelButtonText: "Cancel",
-                      okButtonText: "Continue ",
-                      onOk: () {
-                        Navigator.pop(context);
-                        globalAlertDialogue(
-                            "Your Account is deleted",
-                            context: context,
-                            okButtonText: "Make new account ",
-                            onOk: () {
-                              navigateAndRemove(context: context, widget:const WelcomeScreen());
-                            },
-                            canCancel: false
-                        );
-                      },
-                      onCancel: () {
-                        Navigator.pop(context);
-                      },
-                      canCancel: true
-                  );
+                      okButtonText: "Continue ", onOk: () {
+                    Navigator.pop(context);
+                    globalAlertDialogue("Your Account is deleted",
+                        context: context,
+                        okButtonText: "Make new account ", onOk: () {
+                      navigateAndRemove(
+                          context: context, widget: const WelcomeScreen());
+                    }, canCancel: false);
+                  }, onCancel: () {
+                    Navigator.pop(context);
+                  }, canCancel: true);
                 },
                 mainAxisAlignment: MainAxisAlignment.center,
                 color: Colors.transparent,
@@ -193,7 +186,6 @@ class AccountScreen extends StatelessWidget {
           ),
         ),
       ),
-
     );
   }
 }

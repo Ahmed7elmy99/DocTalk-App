@@ -14,31 +14,39 @@ class CustomDropDown extends StatefulWidget {
   String? selectedValue;
   final List<String> items;
   final Function(String value) onItemChanged;
-  CustomDropDown({Key? key,this.width,this.height,this.selectedValue,this.headLine="",
-    required this.dropDownHint,
-    this.dropDownHintTextStyle,
-    this.items=const [''],required  this.onItemChanged, this.color}) : super(key: key);
+  CustomDropDown(
+      {Key? key,
+      this.width,
+      this.height,
+      this.selectedValue,
+      this.headLine = "",
+      required this.dropDownHint,
+      this.dropDownHintTextStyle,
+      this.items = const [''],
+      required this.onItemChanged,
+      this.color})
+      : super(key: key);
 
   @override
   State<CustomDropDown> createState() => _CustomDropDownState();
 }
 
 class _CustomDropDownState extends State<CustomDropDown> {
-
   @override
   void initState() {
     super.initState();
     // selectedValue=widget.items.first;
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: widget.width??double.infinity,
+      width: widget.width ?? double.infinity,
       height: 75.h,
       padding: EdgeInsets.symmetric(vertical: 0.h),
       decoration: BoxDecoration(
         // border: Border.all(width: 1.5,color: AppColors.grey9CABBC),
-        color:Colors.transparent,
+        color: Colors.transparent,
         borderRadius: BorderRadius.circular(25),
       ),
       child: Column(
@@ -47,32 +55,33 @@ class _CustomDropDownState extends State<CustomDropDown> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                widget.headLine??"",
-                style:  TextStyle(
-                    fontSize:14.sp,
+                widget.headLine ?? "",
+                style: TextStyle(
+                    fontSize: 14.sp,
                     color: AppColors.gery455,
                     fontWeight: FontWeight.w400
-                  // fontFamily: "DIN-DEMI",
-                ),
+                    // fontFamily: "DIN-DEMI",
+                    ),
               ),
             ],
           ),
           8.verticalSpace,
           Expanded(
             child: Container(
-              color: widget.color??Colors.transparent,
+              color: widget.color ?? Colors.transparent,
               child: DropdownButtonHideUnderline(
                 child: DropdownButton2(
                   isExpanded: true,
                   hint: Row(
-                    children:  [
+                    children: [
                       Expanded(
                         child: Text(
                           widget.dropDownHint,
-                          style: widget.dropDownHintTextStyle??TextStyle(
-                            fontSize: 18.sp,
-                            color: AppColors.black101010,
-                          ),
+                          style: widget.dropDownHintTextStyle ??
+                              TextStyle(
+                                fontSize: 18.sp,
+                                color: AppColors.black101010,
+                              ),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
@@ -80,19 +89,21 @@ class _CustomDropDownState extends State<CustomDropDown> {
                   ),
                   items: widget.items
                       .map((item) => DropdownMenuItem<String>(
-                    value: item,
-                    child: Padding(
-                      padding: const EdgeInsets.all(1.0),
-                      child: Text(
-                        item,
-                        style: widget.dropDownHintTextStyle??TextStyle(
-                          fontSize: 16.sp,
-                          color: AppColors.black,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  )).toList(),
+                            value: item,
+                            child: Padding(
+                              padding: const EdgeInsets.all(1.0),
+                              child: Text(
+                                item,
+                                style: widget.dropDownHintTextStyle ??
+                                    TextStyle(
+                                      fontSize: 16.sp,
+                                      color: AppColors.black,
+                                    ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ))
+                      .toList(),
                   value: widget.selectedValue,
                   onChanged: (value) {
                     setState(() {
@@ -118,7 +129,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
                   itemHeight: 50,
                   itemPadding: const EdgeInsets.only(left: 14, right: 14),
                   dropdownMaxHeight: 200,
-                  dropdownWidth: MediaQuery.of(context).size.width-64,
+                  dropdownWidth: MediaQuery.of(context).size.width - 64,
                   dropdownPadding: const EdgeInsets.only(left: 14, right: 14),
                   dropdownDecoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),

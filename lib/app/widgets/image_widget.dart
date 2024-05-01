@@ -5,7 +5,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../utils/app_colors.dart';
 
 class ImageWidget extends StatelessWidget {
-
   const ImageWidget({
     required this.imageUrl,
     Key? key,
@@ -25,7 +24,7 @@ class ImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (imageUrl.contains('http') || imageUrl.contains('https')) {
-      if(imageUrl.contains(".svg")){
+      if (imageUrl.contains(".svg")) {
         return SvgPicture.network(
           imageUrl,
           semanticsLabel: 'Acme Logo',

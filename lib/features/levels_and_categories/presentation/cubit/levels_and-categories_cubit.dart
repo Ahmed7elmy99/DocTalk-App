@@ -69,7 +69,7 @@ class LevelsCubit extends Cubit<LevelState> {
         headers: {
           "Authorization": "${CashHelper.getString(key: "token")}",
         },
-        queryParameters: {"levelId": levelId },
+        queryParameters: {"levelId": levelId},
       );
 
       if (response.data is List) {

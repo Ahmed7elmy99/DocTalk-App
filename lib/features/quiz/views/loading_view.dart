@@ -4,17 +4,6 @@ import 'package:gif/gif.dart';
 
 import 'done_view.dart';
 
-
-
-
-
-
-
-
-
-
-
-
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({Key? key}) : super(key: key);
 
@@ -30,7 +19,7 @@ class _LoadingScreenState extends State<LoadingScreen>
     controller = GifController(vsync: this);
     Future.delayed(const Duration(seconds: 3), () {
       navigateTo(context: context, widget: DoneView());
-    } );
+    });
     super.initState();
   }
 
@@ -58,21 +47,6 @@ class _LoadingScreenState extends State<LoadingScreen>
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 class LoadingView extends StatelessWidget {
   const LoadingView({Key? key}) : super(key: key);

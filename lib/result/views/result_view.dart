@@ -8,8 +8,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ResultView extends StatelessWidget {
-  const ResultView({Key? key, required this.surveyResultModel}) : super(key: key);
- final SurveyResultModel surveyResultModel;
+  const ResultView({Key? key, required this.surveyResultModel})
+      : super(key: key);
+  final SurveyResultModel surveyResultModel;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +37,9 @@ class ResultView extends StatelessWidget {
               fit: BoxFit.cover),
         ),
         alignment: Alignment.center,
-        child:  ResultContainer(surveyResultModel:SurveyCubit.get(context).surveyResultModel,),
+        child: ResultContainer(
+          surveyResultModel: SurveyCubit.get(context).surveyResultModel,
+        ),
       ),
     );
   }

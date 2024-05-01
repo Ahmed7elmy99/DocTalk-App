@@ -1,5 +1,3 @@
-
-
 import 'package:dio/dio.dart';
 import 'package:doc_talk/app/utils/cach_helper.dart';
 
@@ -21,19 +19,19 @@ class SurveyCubit extends Cubit<SurveyStates> {
   late SurveyModel surveyModel;
   int? answerId;
   List<int> answerIds = [];
- // late PatientSurveyResults patientSurveyResults;
+  // late PatientSurveyResults patientSurveyResults;
 
   chooseAnswerSurvey(int val) {
     answerId = val;
     // answerIds.clear();
-   /* if (!answerIds.contains(val)) {
+    /* if (!answerIds.contains(val)) {
       answerIds.add(val);
     }*/
     emit(AnswerIdStates());
     print(val);
-   // print(answerIds);
+    // print(answerIds);
 
-   /* answerId = val;
+    /* answerId = val;
     emit(AnswerIdStates());
     print(val);
     answerIds.add(val);
@@ -42,7 +40,7 @@ class SurveyCubit extends Cubit<SurveyStates> {
 
   saveAnswerSurvey() {
     answerIds.add(answerId!);
-    
+
     print(answerIds);
   }
 
@@ -92,7 +90,7 @@ class SurveyCubit extends Cubit<SurveyStates> {
     ).then((value) {
       print(value.data);
       print("sucesssssssss");
-    //  patientSurveyResults = PatientSurveyResults.fromJson(value.data);
+      //  patientSurveyResults = PatientSurveyResults.fromJson(value.data);
 
       emit((SurveyResultSuccessStates()));
     }).catchError((e) {
@@ -121,24 +119,17 @@ class SurveyCubit extends Cubit<SurveyStates> {
     required BuildContext context,
   }) async {
     emit((CreatePatientSurveyLoadingStates()));
-       print(CashHelper.getString(key: "token"));
-     DioHelper.postData(
-      url: "http://130.61.130.252/api/patient/survey",
-      data: {
-        "patientSurveyAnswersIds": answerIds,
-      },
-      
-       headers:{
-       // "Accept": "application/json",
-       // "Content-Type": "application/json",
-       "Authorization":"Bearer ${ CashHelper.getString(key: "token")}" ,
-       
-     // "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNzEzNjUxNzgwLCJleHAiOjE3MTM2ODc3ODB9.qul-xatlJKXwAOVyzgwd3If7iIrrxgaeXBRTKXXFL4o"
-       }
-       
-    ).then((value) {
-   
-      surveyResultModel= SurveyResultModel.fromJson(value.data);
+    print(CashHelper.getString(key: "token"));
+    DioHelper.postData(url: "http://130.61.130.252/api/patient/survey", data: {
+      "patientSurveyAnswersIds": answerIds,
+    }, headers: {
+      // "Accept": "application/json",
+      // "Content-Type": "application/json",
+      "Authorization": "Bearer ${CashHelper.getString(key: "token")}",
+
+      // "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNzEzNjUxNzgwLCJleHAiOjE3MTM2ODc3ODB9.qul-xatlJKXwAOVyzgwd3If7iIrrxgaeXBRTKXXFL4o"
+    }).then((value) {
+      surveyResultModel = SurveyResultModel.fromJson(value.data);
       print(value.data);
       print("sucesssssssss");
       // await getPatientSurveyResults(context: context);
@@ -147,8 +138,8 @@ class SurveyCubit extends Cubit<SurveyStates> {
           widget: ResultView(
             surveyResultModel: surveyResultModel,
           ));
-         //     CashHelper.setString(key: "lpdRate", value: surveyResultModel.lpdRate.toString());
-          //      CashHelper.setString(key: "diagnoses", value: surveyResultModel.diagnoses.toString());
+      //     CashHelper.setString(key: "lpdRate", value: surveyResultModel.lpdRate.toString());
+      //      CashHelper.setString(key: "diagnoses", value: surveyResultModel.diagnoses.toString());
       emit((CreatePatientSurveySuccessStates()));
     }).catchError((e) {
       //print(e)

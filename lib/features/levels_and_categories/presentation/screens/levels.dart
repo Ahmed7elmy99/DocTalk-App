@@ -1,13 +1,11 @@
 import 'package:doc_talk/app/utils/consts.dart';
 import 'package:doc_talk/categories.dart';
-
 import 'package:doc_talk/features/levels_and_categories/data/models/levels_model.dart';
 import 'package:doc_talk/features/levels_and_categories/presentation/cubit/levels_and-categories_cubit.dart';
 import 'package:doc_talk/features/levels_and_categories/presentation/cubit/levels_and-categories_states.dart';
 import 'package:doc_talk/features/levels_and_categories/presentation/screens/categories.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LevelsScreen extends StatelessWidget {
@@ -15,9 +13,9 @@ class LevelsScreen extends StatelessWidget {
   final List<LevelsModel> levelsModel;
 
   final List<Color> colors = [
-    Color(0xFFE3672B),
-    Color(0xFF5B358C),
-    Color(0xFF6D6A99),
+    const Color(0xFFE3672B),
+    const Color(0xFF5B358C),
+    const Color(0xFF6D6A99),
   ];
 
   @override
@@ -142,7 +140,8 @@ class LevelsScreen extends StatelessWidget {
                   padding: EdgeInsets.zero,
                   onPressed: () {
                     navigateTo(
-                        context: context, widget: StarterCategoriesScreen());
+                        context: context,
+                        widget: const StarterCategoriesScreen());
                   },
                   child: Row(
                     children: [
@@ -190,14 +189,12 @@ class LevelsScreen extends StatelessWidget {
                 ),
               ),
               ListView.builder(
+                padding: EdgeInsets.zero,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: levelsModel.length,
                 itemBuilder: (BuildContext context, int index) {
-                  OnTap() {
-                    //   await LevelsCubit.get(context)
-                    //    .getCategoriesData(context: context,levelId: levelsModel[index].id!);
-                  }
+              
                   return Expanded(
                     flex: 1,
                     child: MaterialButton(
@@ -209,7 +206,6 @@ class LevelsScreen extends StatelessWidget {
                       child: Row(
                         children: [
                           Expanded(
-                            flex: 1,
                             child: Container(
                               decoration: BoxDecoration(
                                 //  shape: BoxShape.circle,

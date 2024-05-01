@@ -1,10 +1,8 @@
-
 import 'package:doc_talk/features/parents_and_child_info_feature/widgets/bottom_sheet_widget.dart';
 import 'package:doc_talk/features/parents_and_child_info_feature/widgets/child_linear_progress.dart';
 import 'package:doc_talk/features/parents_and_child_info_feature/widgets/custom_button.dart';
 import 'package:doc_talk/features/parents_and_child_info_feature/widgets/parent_linear_progress.dart';
 import 'package:flutter/material.dart';
-
 
 class Second extends StatefulWidget {
   const Second({Key? key}) : super(key: key);
@@ -75,7 +73,6 @@ void _showModalBottomSheet(BuildContext context) {
     context: context,
     isScrollControlled: true,
     builder: (BuildContext context) {
-
       return const BottomSheetWidget();
     },
   );

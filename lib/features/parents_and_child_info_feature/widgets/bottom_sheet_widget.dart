@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:doc_talk/app/utils/colors.dart';
@@ -23,7 +22,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
   bool isBoySelected = false;
   int age = 0;
   int selectedAvatarIndex = -1;
-  String avatarImagePath="";
+  String avatarImagePath = "";
   List avatars = [
     'assets/images/Avatars.png',
     'assets/images/Avatars2.png',
@@ -31,7 +30,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
     'assets/images/Avatars4.png',
     'assets/images/Avatars5.png',
   ];
-  List <String> images = [];
+  List<String> images = [];
   TextEditingController controller = TextEditingController();
   final formKey = GlobalKey<FormState>();
   String imagePath = '';
@@ -78,13 +77,12 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                 children: [
                   GestureDetector(
                     onTap: () {
-
-                        pickImageFromGallery();
+                      pickImageFromGallery();
                       // else {
-                        // setState(() {
-                        //   selectedAvatarIndex = index;
-                        //   avatarImagePath = avatars[index];
-                        // });
+                      // setState(() {
+                      //   selectedAvatarIndex = index;
+                      //   avatarImagePath = avatars[index];
+                      // });
                       //}
                     },
                     child: Image.asset(
@@ -96,7 +94,8 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                   Expanded(
                     child: ListView.builder(
                       shrinkWrap: true,
-                      itemCount: images.isEmpty?avatars.length:images.length,
+                      itemCount:
+                          images.isEmpty ? avatars.length : images.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
@@ -111,19 +110,18 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                             ),
                             borderRadius: BorderRadius.circular(50),
                           ),
-                          child: images.isEmpty?
-                          Image.asset(
-                            avatars[index],
-                            fit: BoxFit.cover,
-                          )
-                              :
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
-                            child: Image.file(
-                              File(images[index]),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                          child: images.isEmpty
+                              ? Image.asset(
+                                  avatars[index],
+                                  fit: BoxFit.cover,
+                                )
+                              : ClipRRect(
+                                  borderRadius: BorderRadius.circular(16),
+                                  child: Image.file(
+                                    File(images[index]),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                         );
                       },
                     ),
@@ -169,16 +167,15 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
               label: 'Add my child',
               onTap: () {
                 if (formKey.currentState!.validate()) {
-
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => Third(
-                          avatarImagePath: avatarImagePath,
+                              avatarImagePath: avatarImagePath,
                               imagePath: imagePath,
                               childName: controller.text,
                               age: age,
-                          gender: isBoySelected?"FEMALE":"MALE",
+                              gender: isBoySelected ? "FEMALE" : "MALE",
                             )),
                   );
                 }
@@ -242,10 +239,12 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
       alignment: Alignment.center,
       child: IconButton(
         onPressed: () {
-          setState(() {
-            age++;
-            print(age);
-          },);
+          setState(
+            () {
+              age++;
+              print(age);
+            },
+          );
         },
         icon: const Icon(Icons.add),
       ),
@@ -270,8 +269,9 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
       child: IconButton(
         onPressed: () {
           if (age > 0) {
-
-            setState(() { age--;});
+            setState(() {
+              age--;
+            });
           }
         },
         icon: const Icon(Icons.minimize),

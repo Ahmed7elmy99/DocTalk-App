@@ -18,9 +18,14 @@ class ListTileWidget extends StatelessWidget {
   const ListTileWidget({
     super.key,
     required this.onTap,
-     this.icon,
+    this.icon,
     this.tralingColor,
-    this.arrowIcon = true, required this.title, this.textColor, this.iconColor, this.image= false,  this.imageUrl="",
+    this.arrowIcon = true,
+    required this.title,
+    this.textColor,
+    this.iconColor,
+    this.image = false,
+    this.imageUrl = "",
   });
 
   @override
@@ -34,34 +39,32 @@ class ListTileWidget extends StatelessWidget {
         ),
         onTap: onTap,
         minLeadingWidth: 8.w,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16,vertical: 0),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
         dense: true,
-        leading:image?
-            ImageWidget(
+        leading: image
+            ? ImageWidget(
                 imageUrl: imageUrl,
-              width: 21.w,
-              height: 21.h,
-              color: AppColors.mainColor,
-            )
-            :
-        Icon(
-          icon,
-          size: 26.sp,
-          color:iconColor?? AppColors.mainColor,
-        ),
+                width: 21.w,
+                height: 21.h,
+                color: AppColors.mainColor,
+              )
+            : Icon(
+                icon,
+                size: 26.sp,
+                color: iconColor ?? AppColors.mainColor,
+              ),
         title: TextWidget(
           title: title,
           titleSize: 15.sp,
           titleFontWeight: FontWeight.w500,
-          titleColor:textColor?? AppColors.black,
+          titleColor: textColor ?? AppColors.black,
           titleAlign: TextAlign.start,
         ),
         trailing: Icon(
           Icons.arrow_forward_ios,
-          color:tralingColor?? AppColors.black,
+          color: tralingColor ?? AppColors.black,
           size: 16.sp,
         ),
-
       ),
     );
   }

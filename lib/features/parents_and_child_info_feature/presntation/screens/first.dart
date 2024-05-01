@@ -1,5 +1,3 @@
-
-
 import 'package:doc_talk/app/utils/colors.dart';
 import 'package:doc_talk/features/parents_and_child_info_feature/widgets/child_linear_progress.dart';
 import 'package:doc_talk/features/parents_and_child_info_feature/widgets/custom_button.dart';
@@ -9,7 +7,6 @@ import 'package:doc_talk/features/parents_and_child_info_feature/widgets/parent_
 import 'package:flutter/material.dart';
 
 import 'second.dart';
-
 
 class First extends StatelessWidget {
   const First({Key? key}) : super(key: key);

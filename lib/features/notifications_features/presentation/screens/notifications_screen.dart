@@ -62,7 +62,6 @@ class NotificationsScreen extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.r),
                   )),
-
               padding: EdgeInsets.symmetric(horizontal: 12.w),
               child: Column(
                 //   mainAxisSize: MainAxisSize.min,
@@ -72,50 +71,67 @@ class NotificationsScreen extends StatelessWidget {
                     title: 'Push notifications',
                     onChanged: (val) {},
                   ),
-                  SizedBox(height: 15.h,),
+                  SizedBox(
+                    height: 15.h,
+                  ),
                   const CustomSubTitleListile(
                       subTitle:
                           'Receive push notifications reminding your child\nto practice'),
-                              SizedBox(height: 15.h,),
-                 
+                  SizedBox(
+                    height: 15.h,
+                  ),
                   CustomListile(
                     title: 'Announce emails',
                     onChanged: (val) {},
                   ),
-                      SizedBox(height: 15.h,),
+                  SizedBox(
+                    height: 15.h,
+                  ),
                   const CustomSubTitleListile(
                       subTitle:
                           'Receive emails with important announcements\nregarding our app'),
-                             SizedBox(height: 15.h,),
-                
+                  SizedBox(
+                    height: 15.h,
+                  ),
                   CustomListile(
                     title: 'Campaign emails',
                     onChanged: (val) {},
                   ),
-                      SizedBox(height: 15.h,),
+                  SizedBox(
+                    height: 15.h,
+                  ),
                   const CustomSubTitleListile(
-                      subTitle:   'Get the latest offers we provide with our campaigns'),
-                         SizedBox(height: 15.h,),
-                
+                      subTitle:
+                          'Get the latest offers we provide with our campaigns'),
+                  SizedBox(
+                    height: 15.h,
+                  ),
                   CustomListile(
                     title: 'Child report emails',
                     onChanged: (val) {},
                   ),
-                      SizedBox(height: 20.h,),
+                  SizedBox(
+                    height: 20.h,
+                  ),
                   const CustomSubTitleListile(
                       subTitle:
                           'Get emails of your child’s daily/weekly/monthly\nprogress reports depending on your selection'),
-                             SizedBox(height: 15.h,),
-                
+                  SizedBox(
+                    height: 15.h,
+                  ),
                   CustomListile(
                     title: 'Goal reminder',
                     onChanged: (val) {},
                   ),
-                      SizedBox(height: 15.h,),
+                  SizedBox(
+                    height: 15.h,
+                  ),
                   const CustomSubTitleListile(
                       subTitle:
                           'Get a push notification for your daily goal when you\nclose the app'),
-                             SizedBox(height: 15.h,),
+                  SizedBox(
+                    height: 15.h,
+                  ),
                 ],
               ),
             ),

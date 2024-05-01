@@ -1,7 +1,6 @@
 import 'package:doc_talk/app/utils/app_assets.dart';
 import 'package:doc_talk/app/utils/app_colors.dart';
 
-
 import 'package:doc_talk/app/widgets/button_widget.dart';
 import 'package:doc_talk/app/widgets/flutter_toast.dart';
 import 'package:doc_talk/app/widgets/text_widget.dart';
@@ -36,17 +35,16 @@ class Q12Screen extends StatelessWidget {
               statusBarBrightness: Brightness.dark,
               statusBarIconBrightness: Brightness.dark),
         ),
-        body: BlocConsumer<SurveyCubit, SurveyStates>(
-          listener: (context, state) {
-              if (state is CreatePatientSurveyLoadingStates) {
+        body:
+            BlocConsumer<SurveyCubit, SurveyStates>(listener: (context, state) {
+          if (state is CreatePatientSurveyLoadingStates) {
             showDialog(
               context: context,
               builder: (context) =>
                   const Center(child: CircularProgressIndicator()),
             );
           }
-          },
-          builder: (context, state) {
+        }, builder: (context, state) {
           return Column(
             children: [
               Padding(
@@ -65,7 +63,7 @@ class Q12Screen extends StatelessWidget {
                         height: 7.h,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            gradient:const LinearGradient(colors: [
+                            gradient: const LinearGradient(colors: [
                               AppColors.mainColor,
                               AppColors.mainColor,
                               AppColors.mainColor,
@@ -103,7 +101,7 @@ class Q12Screen extends StatelessWidget {
                         EdgeInsets.symmetric(horizontal: 15.w, vertical: 40.h),
                     children: [
                       TextWidget(
-                        title:  surveyModel.surveyQuestions![11].question!,
+                        title: surveyModel.surveyQuestions![11].question!,
                         titleSize: 16.sp,
                         titleColor: AppColors.black,
                         titleMaxLines: 15,
@@ -137,12 +135,12 @@ class Q12Screen extends StatelessWidget {
                       }),
                       24.verticalSpace,
                       ButtonWidget(
-                        onPressed: () async{
+                        onPressed: () async {
                           if (SurveyCubit.get(context).answerId == null) {
                             return showToast(msg: "please choose an answer");
-                          } else  {
+                          } else {
                             SurveyCubit.get(context).saveAnswerSurvey();
-                      await      SurveyCubit.get(context)
+                            await SurveyCubit.get(context)
                                 .createPatientSurvey(context: context);
                             //  navigateTo(context: context, widget: ResultView());
 

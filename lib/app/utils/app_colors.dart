@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-class AppColors{
+
+class AppColors {
   static const mainColor = Color(0xFF2A7473);
   static const scaffoldBackGround = Color(0xFFF1F1F3);
   static const black101010 = Color(0xFF101010);
@@ -19,11 +20,6 @@ class AppColors{
   static const geryFFE6 = Color(0xFFE6E6E6);
   static const quizButtonColor = Color(0xFFF19336);
 
-
-
-
-
-
   static const black = Color(0xff000000);
   static const black1A = Color(0xff1A1A1A);
   static const black191919 = Color(0xff191919);
@@ -34,12 +30,10 @@ class AppColors{
   static const blackbcbcbc = Color(0xffbcbcbc);
   static const black585858 = Color(0xff585858);
 
-
   static const blue394359 = Color(0xFF394359);
   static const blueD8E1F5 = Color(0xFFD8E1F5);
   static const blue7E8CAA = Color(0xFF7E8CAA);
   static const green = Color(0xFF009000);
-
 
   static const black1C1C1C = Color(0xff1C1C1C);
   static const black282828 = Color(0xff282828);
@@ -59,9 +53,9 @@ class AppColors{
 
   static const whiteE5E5E5 = Color(0xffE5E5E5);
   static const whiteEBEBEB = Color(0xffEBEBEB);
-  static const grey808080= Color(0xff808080);
-  static const grey242A37= Color(0xff242A37);
-  static const grey9CABBC= Color(0xff9CABBC);
+  static const grey808080 = Color(0xff808080);
+  static const grey242A37 = Color(0xff242A37);
+  static const grey9CABBC = Color(0xff9CABBC);
   static const greyB1B1B1 = Color(0xffB1B1B1);
   static const greyBABABA = Color(0xffBABABA);
   static const greyD8D8D8 = Color(0xffD8D8D8);
@@ -77,10 +71,3 @@ class AppColors{
   static const grey515151 = Color(0xff515151);
   static const greyE6EAEE = Color(0xffE6EAEE);
 }
-
-
-
-
-
-
-

@@ -1,10 +1,12 @@
 class UserModel {
   UserModel({
-      this.patient, 
-      this.token,});
+    this.patient,
+    this.token,
+  });
 
   UserModel.fromJson(dynamic json) {
-    patient = json['patient'] != null ? Patient.fromJson(json['patient']) : null;
+    patient =
+        json['patient'] != null ? Patient.fromJson(json['patient']) : null;
     token = json['token'];
   }
   Patient? patient;
@@ -18,20 +20,20 @@ class UserModel {
     map['token'] = token;
     return map;
   }
-
 }
 
 class Patient {
   Patient({
-      this.id, 
-      this.name, 
-      this.age, 
-      this.phone, 
-      this.image, 
-      this.surveyResult, 
-      this.diagnoses, 
-      this.userId, 
-      this.doctorId,});
+    this.id,
+    this.name,
+    this.age,
+    this.phone,
+    this.image,
+    this.surveyResult,
+    this.diagnoses,
+    this.userId,
+    this.doctorId,
+  });
 
   Patient.fromJson(dynamic json) {
     id = json['id'];
@@ -67,5 +69,4 @@ class Patient {
     map['doctorId'] = doctorId;
     return map;
   }
-
 }

@@ -29,9 +29,9 @@ class SettingsView extends StatelessWidget {
         ),
       ),
       body: Container(
-        decoration:  BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
-              image:NetworkImage("${CashHelper.getString(key: 'image')}"),
+              image: NetworkImage("${CashHelper.getString(key: 'image')}"),
               fit: BoxFit.cover),
         ),
         alignment: Alignment.center,
