@@ -111,7 +111,7 @@ class Q9Screen extends StatelessWidget {
                                 child: CustomAnswerItem(
                                   text:
                                       surveyModel.surveyAnswers![index].answer!,
-                                  isActive: SurveyCubit.get(context).answerId ==
+                                  isCorrect: SurveyCubit.get(context).answerId ==
                                           surveyModel.surveyAnswers![index].id!
                                       ? true
                                       : false,

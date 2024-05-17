@@ -5,6 +5,7 @@ import 'package:doc_talk/features/auth_feature/presentation/cubit/auth_cubit.dar
 import 'package:doc_talk/features/home_feature/presentation/screens/bottom_nav_bar.dart';
 
 import 'package:doc_talk/features/questionair_feature/cubit/survey_cubit.dart';
+import 'package:doc_talk/features/quiz/cubit/quiz_cubit.dart';
 import 'package:doc_talk/features/splash_and_onboarding_feature/presentation/screens/splash_screen.dart';
 
 import 'package:flutter/material.dart';
@@ -13,6 +14,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
+import 'features/quiz/views/quiz_one.dart';
+
 //new
 //nwe2
 void main() async {
@@ -20,6 +23,7 @@ void main() async {
   DioHelper.init();
   Bloc.observer = MyBlocObserver();
   await CashHelper.init();
+  print( CashHelper.getString(key: "token"));
   runApp(
     MultiBlocProvider(
       providers: [
@@ -28,6 +32,9 @@ void main() async {
         ),
         BlocProvider(
           create: (BuildContext context) => SurveyCubit(),
+        ),
+        BlocProvider(
+          create: (BuildContext context) => QuizCubit(),
         )
       ],
       child: const MyApp(),
@@ -63,7 +70,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: CashHelper.getString(key: "token") == null
             ? const SplashScreen()
-            : const BottomNavBar(),
+            : const QuizOneView(),
       ),
     );
   }

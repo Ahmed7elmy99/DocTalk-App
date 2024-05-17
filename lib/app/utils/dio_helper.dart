@@ -13,13 +13,23 @@ class DioHelper {
       {required String url,
        Map<String, dynamic>?   queryParameters,
       Map<String, dynamic>? data}) async {
-    return await dio.get(url, queryParameters: queryParameters, data: data);
+    dio.options.headers = {
+      "Content-Type": " application/json",
+      "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNzEzNDUzMTYxLCJleHAiOjE3MTM0ODkxNjF9.9Qfp_ZX3l0gJGk0RAdtda1nrhkjWCE_zqtSRu43KrPs",
+    };
+    return await dio.get(
+        url, queryParameters: queryParameters, data: data,
+    );
   }
 
   static Future<Response> postData(
       {required String url,
       Map<String, dynamic>? queryParameters,
       required Map<String, dynamic> data}) async {
+    dio.options.headers = {
+      "Content-Type": "application/json",
+      "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNzEzNDUzMTYxLCJleHAiOjE3MTM0ODkxNjF9.9Qfp_ZX3l0gJGk0RAdtda1nrhkjWCE_zqtSRu43KrPs",
+    };
   dynamic   response = await dio.post(
       url,
       queryParameters: queryParameters,
