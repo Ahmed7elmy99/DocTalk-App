@@ -14,6 +14,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
+import 'features/levels_and_categories/presentation/cubit/levels_and-categories_cubit.dart';
 import 'features/quiz/views/quiz_one.dart';
 
 //new
@@ -35,7 +36,10 @@ void main() async {
         ),
         BlocProvider(
           create: (BuildContext context) => QuizCubit(),
-        )
+        ),
+        BlocProvider(
+          create: (BuildContext context) => LevelsCubit(),
+        ),
       ],
       child: const MyApp(),
     ),
@@ -70,7 +74,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: CashHelper.getString(key: "token") == null
             ? const SplashScreen()
-            : const QuizOneView(),
+            : const BottomNavBar(),
       ),
     );
   }

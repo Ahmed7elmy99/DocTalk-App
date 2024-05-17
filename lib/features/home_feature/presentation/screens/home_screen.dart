@@ -36,7 +36,6 @@ class HomeScreen extends StatelessWidget {
                     const Center(child: CircularProgressIndicator()),
               );
             }
-            ;
             if (state is LevelLoading) {
               showDialog(
                 context: context,
