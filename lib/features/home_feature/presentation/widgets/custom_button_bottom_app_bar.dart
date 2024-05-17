@@ -17,17 +17,23 @@ class CustomButtonBottomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = active ? Color(0xFF6A9E9D) : Color(0xFFD4E3E3);
+    final imageColor = active && imageUrl == "assets/images/profile.png" ? null : color;
+
     return MaterialButton(
       onPressed: onPressed,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Image.asset(imageUrl,
-              color: active ? Color(0xFF6A9E9D) : Color(0xFFD4E3E3)),
+          Image.asset(
+            imageUrl,
+            color: imageColor,
+          ),
           Text(
             textButton,
             style: TextStyle(
-                color: active ? Color(0xFF6A9E9D) : Color(0xFFD4E3E3)),
+              color: color,
+            ),
           ),
         ],
       ),

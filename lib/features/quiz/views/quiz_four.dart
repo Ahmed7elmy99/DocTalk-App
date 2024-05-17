@@ -87,7 +87,7 @@ class _QuizFourViewState extends State<QuizFourView> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const LoadingView()),
+                        builder: (context) => const LoadingScreen()),
                   );
                 },
                 color: AppColors.quizButtonColor,

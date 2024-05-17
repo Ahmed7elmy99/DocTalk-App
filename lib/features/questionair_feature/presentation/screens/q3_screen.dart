@@ -95,14 +95,14 @@ class Q3Screen extends StatelessWidget {
                 children: [
                   TextWidget(
                     title:
-                        'Does your child use words incorrectly, seemingly without noticing?',
+                         surveyModel.surveyQuestions![2].question!,
                     titleSize: 16.sp,
                     titleColor: AppColors.black,
                     titleMaxLines: 15,
                   ),
                   16.verticalSpace,
                   ...List.generate(surveyModel.surveyAnswers!.length, (index) {
-                    if (index >= 4 && index <= 7) {
+                    if (index >= 10 && index <= 14) {
                       return Column(
                         children: [
                         InkWell(
@@ -132,6 +132,7 @@ class Q3Screen extends StatelessWidget {
                       if (SurveyCubit.get(context).answerId == null) {
                           return showToast(msg: "please choose an answer");
                         }else {
+                          SurveyCubit.get(context).saveAnswerSurvey();
                           navigateTo(
                           context: context,
                           widget: Q4Screen(

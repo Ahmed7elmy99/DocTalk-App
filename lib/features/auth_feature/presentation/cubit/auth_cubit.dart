@@ -79,8 +79,8 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthInitial());
     });
   }
-
-  login(BuildContext context) async {
+   late  String token ;
+  Future<void> login(BuildContext context) async {
     if (formstate.currentState!.validate()) {
       emit(AuthLoading());
       await DioHelper.postData(
@@ -91,7 +91,13 @@ class AuthCubit extends Cubit<AuthState> {
         },
       ).then((value) async {
         userModel = UserModel.fromJson(value.data);
-          await CashHelper.setString(key: "token", value: userModel?.token);
+            await CashHelper.setString(key: "token", value: userModel?.token);
+            CashHelper.setString(key:"surveyResult", value: userModel?.patient?.surveyResult.toString());
+           CashHelper.setString(key: "diagnosis", value: userModel?.patient?.diagnoses.toString());
+                 CashHelper.setString(key: "name", value: userModel?.patient?.name.toString());
+                     CashHelper.setString(key: "image", value: userModel?.patient?.image.toString());
+
+            print(userModel?.token);
         navigateAndRemove(context: context, widget: BottomNavBar());
         emit(AuthSuccess());
       }).catchError((e) {

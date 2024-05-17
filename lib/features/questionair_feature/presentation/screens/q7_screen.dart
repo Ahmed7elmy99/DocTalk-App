@@ -98,14 +98,14 @@ class Q7Screen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 15.w,vertical: 40.h),
                 children: [
                   TextWidget(
-                      title:'Does your child wait to start working until he or she sees what the children around them are doing?',
+                      title: surveyModel.surveyQuestions![6].question!,
                       titleSize: 16.sp,
                     titleColor: AppColors.black,
                     titleMaxLines: 15,
                   ),
                    16.verticalSpace,
                    ...List.generate(surveyModel.surveyAnswers!.length, (index) {
-                    if (index >= 4 && index <= 7) {
+                    if (index >= 30 && index <= 34) {
                       return Column(
                         children: [
                         InkWell(
@@ -135,6 +135,7 @@ class Q7Screen extends StatelessWidget {
                       if (SurveyCubit.get(context).answerId == null) {
                           return showToast(msg: "please choose an answer");
                         }else {
+                          SurveyCubit.get(context).saveAnswerSurvey();
                           navigateTo(
                           context: context,
                           widget: Q8Screen(
