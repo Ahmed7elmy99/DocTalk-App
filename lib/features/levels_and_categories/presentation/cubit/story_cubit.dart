@@ -10,8 +10,7 @@ part 'story_state.dart';
 class StoryCubit extends Cubit<StoryState> {
   StoryCubit() : super(StoryInitial());
   List<StoryModel> storiesModel = [];
-  late int categoryId;
-
+  int storyId = 1;
   getStoryByCategoryId(int categoryId) async {
     emit(StoryLoading());
     try {
@@ -22,12 +21,12 @@ class StoryCubit extends Cubit<StoryState> {
           "Authorization": "${CacheHelper.getString(key: "token")}",
         },
       );
-      this.categoryId = categoryId;
 
       storiesModel = (response.data as List)
           .map((item) => StoryModel.fromJson(item))
           .toList();
-
+      final story = StoryModel.fromJson(response.data);
+      storyId = story.id!;
       debugPrint(response.statusCode.toString());
       debugPrint(response.data.toString());
       emit(StoryLoaded());
