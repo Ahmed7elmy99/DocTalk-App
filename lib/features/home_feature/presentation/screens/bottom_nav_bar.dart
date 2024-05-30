@@ -52,7 +52,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   const Center(child: CircularProgressIndicator()),
             );
           } else if (state is SurveySuccessStates) {
-                Navigator.pop(context);
+            Navigator.pop(context);
             navigateTo(
                 context: context,
                 widget: Q1Screen(

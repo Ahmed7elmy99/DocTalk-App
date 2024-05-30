@@ -28,8 +28,6 @@ class _FamilyScreenState extends State<FamilyScreen> {
     controller = controller =
         VideoPlayerController.asset('assets/videos/family_video.mp4');
 
-   
-
     controller.addListener(() {
       if (controller.value.position >= controller.value.duration) {
         if (!isBottomSheetOpen) {

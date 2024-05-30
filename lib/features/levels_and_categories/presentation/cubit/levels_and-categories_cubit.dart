@@ -100,7 +100,8 @@ class LevelsCubit extends Cubit<LevelState> {
       emit(CategoryError());
     }
   }
-    List<CategoryiesModel> categoryiesModel2 = [];
+
+  List<CategoryiesModel> categoryiesModel2 = [];
 
   Future<void> getCategoriesHomeData({
     required BuildContext context,

@@ -99,6 +99,7 @@ class AuthCubit extends Cubit<AuthState> {
             key: "diagnosis", value: userModel?.patient?.diagnoses.toString());
         CacheHelper.setString(
             key: "name", value: userModel?.patient?.name.toString());
+        CacheHelper.setInt(key: "id", value: userModel?.patient?.id);
         CacheHelper.setString(
             key: "image", value: userModel?.patient?.image.toString());
 
