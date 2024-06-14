@@ -7,6 +7,8 @@ import 'package:doc_talk/features/home_feature/presentation/screens/bottom_nav_b
 import 'package:doc_talk/features/levels_and_categories/presentation/cubit/levels_and-categories_cubit.dart';
 
 import 'package:doc_talk/features/questionair_feature/cubit/survey_cubit.dart';
+import 'package:doc_talk/features/quiz/cubit/quiz_cubit.dart';
+import 'package:doc_talk/features/quiz/views/quiz_one.dart';
 
 import 'package:doc_talk/features/splash_and_onboarding_feature/presentation/screens/splash_screen.dart';
 
@@ -35,6 +37,9 @@ void main() async {
         BlocProvider(
           create: (BuildContext context) => LevelsCubit()
             ..getCategoriesHomeData(context: context, levelId: 1),
+        ),
+        BlocProvider(
+          create: (BuildContext context) => QuizCubit(),
         )
       ],
       child: const MyApp(),
@@ -68,9 +73,8 @@ class MyApp extends StatelessWidget {
               ),
         ),
         debugShowCheckedModeBanner: false,
-        home: CashHelper.getString(key: "token") == null
-            ? const SplashScreen()
-            : const BottomNavBar(),
+        home:
+        QuizOneView()
       ),
     );
   }
