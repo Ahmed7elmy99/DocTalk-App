@@ -74,7 +74,12 @@ dependencies:
   path: ^1.8.3
   audioplayers: ^5.2.1
   cached_network_image: ^3.3.1
+<<<<<<< HEAD
   flutter_tts:
+=======
+  flutter_tts: ^4.0.2
+
+>>>>>>> c4827c53ae93b65a9a1f680dbac2dfac087b5090
  
 
 dev_dependencies:

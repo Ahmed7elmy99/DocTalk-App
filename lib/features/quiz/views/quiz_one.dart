@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 import 'package:doc_talk/app/utils/consts.dart';
+=======
+>>>>>>> c4827c53ae93b65a9a1f680dbac2dfac087b5090
 import 'package:doc_talk/features/quiz/cubit/quiz_cubit.dart';
 import 'package:doc_talk/features/quiz/views/quiz_two.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +37,10 @@ class _QuizOneViewState extends State<QuizOneView> {
   FlutterTts flutterTts = FlutterTts();
   int? selectedIndex;
   bool? isTrue;
+<<<<<<< HEAD
+=======
+  FlutterTts flutterTts = FlutterTts();
+>>>>>>> c4827c53ae93b65a9a1f680dbac2dfac087b5090
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +48,11 @@ class _QuizOneViewState extends State<QuizOneView> {
       body: QuizBackGround(
         child: BlocBuilder<QuizCubit, QuizState>(
           builder: (context, state) {
+<<<<<<< HEAD
             var c = QuizCubit.getObject(context);
+=======
+            var cubit = QuizCubit.get(context);
+>>>>>>> c4827c53ae93b65a9a1f680dbac2dfac087b5090
             return Column(
               children: [
                 Padding(
@@ -63,8 +74,13 @@ class _QuizOneViewState extends State<QuizOneView> {
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
                       ),
                       IconButton(
+<<<<<<< HEAD
                         onPressed: () async {
                           await FlutterTts().speak("Where is mom?");
+=======
+                        onPressed: () async{
+                          await flutterTts.speak("Where is mom?");
+>>>>>>> c4827c53ae93b65a9a1f680dbac2dfac087b5090
                         },
                         icon: Icon(Icons.volume_down_alt, size: 30.sp),
                       ),
@@ -82,6 +98,7 @@ class _QuizOneViewState extends State<QuizOneView> {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                             onTap: () {
+<<<<<<< HEAD
                               index == 2 ?
                                   c.correct = 25
                                   :
@@ -89,6 +106,17 @@ class _QuizOneViewState extends State<QuizOneView> {
                               print(c.correct);
                               navigateTo(context: context, widget: QuizTwoView());
 
+=======
+                              if (index == 0) {
+                                isTrue = true;
+                                setState(() {});
+                                debugPrint('true');
+                              } else {
+                                isTrue = false;
+                                setState(() {});
+                                debugPrint('false');
+                              }
+>>>>>>> c4827c53ae93b65a9a1f680dbac2dfac087b5090
                             },
                             child: Image.asset(questions[index]));
                       },
