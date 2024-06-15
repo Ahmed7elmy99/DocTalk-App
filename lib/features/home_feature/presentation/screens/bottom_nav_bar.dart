@@ -80,8 +80,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
               children: [
                 Image.asset(
                   "assets/images/floatingActionButtonIcon.png",
-                  width: 24,
-                  height: 24,
+                  width: 24.w,
+                  height: 24.h,
                 ),
                 Text(
                   'Servey',
@@ -104,7 +104,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         children: [
           Image.asset(
             "assets/images/groundBottomNav.png",
-            height: 130,
+            height: 115.h,
             color: Colors.white,
             fit: BoxFit.cover,
           ),
