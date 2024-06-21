@@ -1,6 +1,6 @@
 import 'package:doc_talk/app/utils/app_colors.dart';
 import 'package:doc_talk/app/widgets/text_widget.dart';
-import 'package:doc_talk/features/questionair_feature/cubit/survey_cubit.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
