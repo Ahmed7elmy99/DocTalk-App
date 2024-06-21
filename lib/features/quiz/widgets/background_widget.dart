@@ -15,7 +15,7 @@ final Widget child;
       height: double.infinity,
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/image 13.png'), // Check image path
+          image: AssetImage("assets/images/image 13.png"), // Check image path
           fit: BoxFit.fill,
         ),
       ),

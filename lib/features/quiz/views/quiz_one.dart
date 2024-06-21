@@ -45,10 +45,10 @@ class _QuizOneViewState extends State<QuizOneView> {
             return Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 40.sp, right: 10.sp),
+                  padding: EdgeInsets.only(top: 40.sp, right: 10.sp,),
                   child: Text(
                     'Quiz 1',
-                    style: TextStyle(fontSize: 18.sp),
+                    style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.bold),
                   ),
                 ),
                 SizedBox(height: 20.h),
