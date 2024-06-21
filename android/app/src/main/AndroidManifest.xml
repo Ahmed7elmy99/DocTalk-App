@@ -1,8 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-<<<<<<< HEAD
-=======
     <uses-permission android:name="android.permission.INTERNET"/>
->>>>>>> 42a329ec5577489f2f2e38f8992ba511e2e565d7
 
     <application
         android:label="doc_talk"
