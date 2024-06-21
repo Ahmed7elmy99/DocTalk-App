@@ -40,7 +40,7 @@ class _QuizFourViewState extends State<QuizFourView> {
               padding: EdgeInsets.only(top: 40.sp, right: 10.sp),
               child: Text(
                 'Quiz 4',
-                style: TextStyle(fontSize: 18.sp),
+                style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.bold),
               ),
             ),
             SizedBox(height: 20.h),
