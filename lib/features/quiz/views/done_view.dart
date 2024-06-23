@@ -1,3 +1,4 @@
+import 'package:doc_talk/app/utils/cach_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,7 +18,7 @@ const DoneView({ Key? key }) : super(key: key);
             child: Image.asset('assets/images/Avatars1.png',width:150),
           ),
            SizedBox(height:50.h),
-          Text('Good jop,Rahma..',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20.sp),),
+          Text('Good jop,${CashHelper.getString(key: "name")}..',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20.sp),),
           Spacer(),
           Image.asset('assets/images/Frame 2610807.png',width: double.infinity,fit: BoxFit.cover,),
 

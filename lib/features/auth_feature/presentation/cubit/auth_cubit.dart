@@ -79,7 +79,8 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthInitial());
     });
   }
-   late  String token ;
+
+  late String token;
   Future<void> login(BuildContext context) async {
     if (formstate.currentState!.validate()) {
       emit(AuthLoading());
@@ -91,13 +92,21 @@ class AuthCubit extends Cubit<AuthState> {
         },
       ).then((value) async {
         userModel = UserModel.fromJson(value.data);
-            await CashHelper.setString(key: "token", value: userModel?.token);
-            CashHelper.setString(key:"surveyResult", value: userModel?.patient?.surveyResult.toString());
-           CashHelper.setString(key: "diagnosis", value: userModel?.patient?.diagnoses.toString());
-                 CashHelper.setString(key: "name", value: userModel?.patient?.name.toString());
-                     CashHelper.setString(key: "image", value: userModel?.patient?.image.toString());
+        await CashHelper.setString(key: "token", value: userModel?.token);
+        CashHelper.setString(
+            key: "surveyResult",
+            value: userModel?.patient?.surveyResult.toString());
+        CashHelper.setString(
+            key: "diagnosis", value: userModel?.patient?.diagnoses.toString());
+             CashHelper.setString(
+            key: "Email",
+            value:loginEmailCon.text);
+        CashHelper.setString(
+            key: "name", value: userModel?.patient?.name.toString());
+        CashHelper.setString(
+            key: "image", value: userModel?.patient?.image.toString());
 
-            print(userModel?.token);
+        print(userModel?.token);
         navigateAndRemove(context: context, widget: BottomNavBar());
         emit(AuthSuccess());
       }).catchError((e) {
@@ -108,44 +117,51 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void resetPassEmail(BuildContext context) {
-    emit(AuthLoading());
-    DioHelper.postData(
-      url: "http://130.61.130.252/api/auth/request-reset-token",
-      data: {"email": resetPassEmailCon.text},
-    ).then((value) {
-      print(value.data);
-      navigateTo(context: context, widget: const OtpScreen());
-    }).catchError((e) {
-      print(e.toString());
-      emit(AuthInitial());
-    });
+    
+      emit(AuthLoading());
+      DioHelper.postData(
+        url: "http://130.61.130.252/api/auth/request-reset-token",
+        data: {"email": resetPassEmailCon.text},
+      ).then((value) {
+        print(value.data);
+        navigateTo(context: context, widget: const OtpScreen());
+      }).catchError((e) {
+        print(e.toString());
+        emit(AuthInitial());
+      });
+    
   }
 
   void verifyOtp(BuildContext context) {
-    emit(AuthLoading());
-    DioHelper.postData(
-      url: "http://130.61.130.252/api/auth/verify-reset-token",
-      data: {"email": resetPassEmailCon.text, "token": otpCon.text},
-    ).then((value) {
-      print(value.data);
-      navigateTo(context: context, widget: const ResetPasswordScreen());
-    }).catchError((e) {
-      print(e.toString());
-      emit(AuthInitial());
-    });
+    
+      emit(AuthLoading());
+
+      DioHelper.postData(
+        url: "http://130.61.130.252/api/auth/verify-reset-token",
+        data: {"email": resetPassEmailCon.text, "token": otpCon.text},
+      ).then((value) {
+        print(value.data);
+        navigateTo(context: context, widget: const ResetPasswordScreen());
+      }).catchError((e) {
+        print(e.toString());
+        emit(AuthInitial());
+      });
+    
   }
 
   void resetPassword(BuildContext context) {
-    emit(AuthLoading());
-    DioHelper.patchData(
-      url: "http://130.61.130.252/api/auth/reset-password",
-      data: {"email": resetPassEmailCon.text, "password": newPassCon.text},
-    ).then((value) {
-      print(value.data);
-      navigateAndRemove(context: context, widget: const LoginScreen());
-    }).catchError((e) {
-      print(e.toString());
-      emit(AuthInitial());
-    });
-  }
+    
+      emit(AuthLoading());
+      DioHelper.patchData(
+        url: "http://130.61.130.252/api/auth/reset-password",
+        data: {"email": resetPassEmailCon.text, "password": newPassCon.text},
+      ).then((value) {
+        print(value.data);
+        navigateAndRemove(context: context, widget: const LoginScreen());
+      }).catchError((e) {
+        print(e.toString());
+        emit(AuthInitial());
+      });
+    }
+  
 }

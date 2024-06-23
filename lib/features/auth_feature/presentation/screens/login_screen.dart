@@ -1,6 +1,7 @@
 import 'package:doc_talk/features/auth_feature/presentation/cubit/auth_cubit.dart';
 import 'package:doc_talk/features/auth_feature/presentation/screens/forget_password_screen.dart';
 import 'package:doc_talk/features/auth_feature/presentation/screens/register_screen.dart';
+import 'package:doc_talk/features/quiz/views/loading_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,6 +37,7 @@ class LoginScreen extends StatelessWidget {
         body: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state is AuthLoading) {
+          
               showDialog(
                 context: context,
                 builder: (context) =>

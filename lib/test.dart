@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gif/gif.dart';
 
 
 class WhoIsThisScreen extends StatefulWidget {
@@ -86,3 +87,78 @@ class _WhoIsThisScreenState extends State<WhoIsThisScreen> {
     );
   }
 }
+
+
+class LoadingScreen extends StatefulWidget {
+  const LoadingScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LoadingScreen> createState() => _LoadingScreenState();
+}
+
+class _LoadingScreenState extends State<LoadingScreen> with TickerProviderStateMixin {
+  GifController? controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = GifController(vsync: this);
+
+    // Start the GIF animation immediately
+    controller!.repeat(min: 0, max: 29, period: const Duration(seconds: 1));
+
+    // Perform the API call asynchronously
+    _loadData();
+  }
+
+  Future<void> _loadData() async {
+    // Simulate a delay for the API call
+    await Future.delayed(const Duration(seconds: 3));
+    navigateTo(context: context, widget: DoneView());
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xffe9e9eb),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Gif(
+              image: AssetImage("assets/images/loading.gif"),
+              controller: controller,
+              autostart: Autostart.loop,
+              onFetchCompleted: () {
+                controller!.reset();
+                controller!.forward();
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+void navigateTo({required BuildContext context, required Widget widget}) {
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(builder: (context) => widget),
+  );
+}
+
+class DoneView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Done"),
+      ),
+      body: Center(
+        child: Text("Done!"),
+      ),
+    );
+  }
+}
+

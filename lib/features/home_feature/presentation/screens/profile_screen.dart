@@ -1,5 +1,6 @@
 import 'package:doc_talk/app/utils/app_assets.dart';
 import 'package:doc_talk/app/utils/app_colors.dart';
+import 'package:doc_talk/app/utils/cach_helper.dart';
 import 'package:doc_talk/app/utils/consts.dart';
 import 'package:doc_talk/app/widgets/button_widget.dart';
 import 'package:doc_talk/app/widgets/default_app_bar_widget.dart';
@@ -58,7 +59,7 @@ class AccountScreen extends StatelessWidget {
                             ),
                             5.verticalSpace,
                             TextWidget(
-                              title: "rahmaelmadawy@gmail.com",
+                              title: "${CashHelper.getString(key:"Email")}",
                               titleSize: 14.sp,
                               titleFontWeight: FontWeight.w400,
                               titleColor: AppColors.black.withOpacity(.4),
