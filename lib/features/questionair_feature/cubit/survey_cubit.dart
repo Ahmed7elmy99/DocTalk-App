@@ -85,9 +85,6 @@ class SurveyCubit extends Cubit<SurveyStates> {
     await DioHelper.getData(
       url: "http://130.61.130.252/api/patient/survey",
     ).then((value) {
-      print(value.data);
-      print("sucesssssssss");
-      //  patientSurveyResults = PatientSurveyResults.fromJson(value.data);
 
       emit((SurveyResultSuccessStates()));
     }).catchError((e) {
@@ -106,7 +103,6 @@ class SurveyCubit extends Cubit<SurveyStates> {
         print("Error: $e");
       }
 
-      print(e);
       emit((SurveyResultErrorStates()));
     });
   }
@@ -116,27 +112,19 @@ class SurveyCubit extends Cubit<SurveyStates> {
     required BuildContext context,
   }) async {
     emit((CreatePatientSurveyLoadingStates()));
-    print(CacheHelper.getString(key: "token"));
     DioHelper.postData(url: "http://130.61.130.252/api/patient/survey", data: {
       "patientSurveyAnswersIds": answerIds,
     }, headers: {
-      // "Accept": "application/json",
-      // "Content-Type": "application/json",
       "Authorization": "Bearer ${CacheHelper.getString(key: "token")}",
 
-      // "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNzEzNjUxNzgwLCJleHAiOjE3MTM2ODc3ODB9.qul-xatlJKXwAOVyzgwd3If7iIrrxgaeXBRTKXXFL4o"
     }).then((value) {
       surveyResultModel = SurveyResultModel.fromJson(value.data);
-      print(value.data);
-      print("sucesssssssss");
-      // await getPatientSurveyResults(context: context);
+
       navigateTo(
           context: context,
           widget: ResultView(
             surveyResultModel: surveyResultModel,
           ));
-      //     CashHelper.setString(key: "lpdRate", value: surveyResultModel.lpdRate.toString());
-      //      CashHelper.setString(key: "diagnoses", value: surveyResultModel.diagnoses.toString());
       emit((CreatePatientSurveySuccessStates()));
     }).catchError((e) {
       //print(e)

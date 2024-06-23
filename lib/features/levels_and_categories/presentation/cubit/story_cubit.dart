@@ -22,16 +22,18 @@ class StoryCubit extends Cubit<StoryState> {
         },
       );
 
-      storiesModel = (response.data as List)
-          .map((item) => StoryModel.fromJson(item))
-          .toList();
-      final story = StoryModel.fromJson(response.data);
-      storyId = story.id!;
-      debugPrint(response.statusCode.toString());
-      debugPrint(response.data.toString());
-      emit(StoryLoaded());
+      if (response.data is List) {
+        storiesModel = (response.data as List)
+            .map((item) => StoryModel.fromJson(item))
+            .toList();
+        debugPrint(response.statusCode.toString());
+        debugPrint(response.data.toString());
+        emit(StoryLoaded());
+      } else {
+        throw Exception("Expected a list but got something else");
+      }
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint(' The Error is  ${e.toString()}');
       emit(StoryFailure(errMessage: e.toString()));
     }
   }

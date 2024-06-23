@@ -5,6 +5,7 @@ import 'package:doc_talk/features/auth_feature/presentation/cubit/auth_cubit.dar
 import 'package:doc_talk/features/home_feature/presentation/screens/bottom_nav_bar.dart';
 import 'package:doc_talk/features/levels_and_categories/presentation/cubit/levels_and-categories_cubit.dart';
 import 'package:doc_talk/features/levels_and_categories/presentation/cubit/story_cubit.dart';
+import 'package:doc_talk/features/questionair_feature/cubit/quiz_cubit.dart';
 import 'package:doc_talk/features/questionair_feature/cubit/survey_cubit.dart';
 import 'package:doc_talk/features/splash_and_onboarding_feature/presentation/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,8 @@ void main() async {
         BlocProvider(
           create: (BuildContext context) => LevelsCubit()
             ..getCategoriesHomeData(context: context, levelId: 1),
-        )
+        ),
+        BlocProvider(create: (BuildContext context) => QuizCubit())
       ],
       child: const MyApp(),
     ),

@@ -23,7 +23,7 @@ class CategoriesScreen extends StatelessWidget {
                 const Center(child: CircularProgressIndicator()),
           );
         } else if (state is StoryLoaded) {
-          navigateTo(context: context, widget: FamilyScreen());
+          navigateTo(context: context, widget: const FamilyScreen());
         } else if (state is StoryFailure) {
           Navigator.pop(context);
           ScaffoldMessenger.of(context).showSnackBar(
@@ -48,7 +48,7 @@ class CategoriesScreen extends StatelessWidget {
             ),
           ),
           body: Container(
-            decoration: const BoxDecoration(
+            decoration: const BoxDecoration(  
               image: DecorationImage(
                 image:
                     AssetImage('assets/images/backgroundCategoriesScreen.png'),
