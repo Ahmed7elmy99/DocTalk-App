@@ -154,12 +154,12 @@ class HomeScreen extends StatelessWidget {
                       child: Row(
                         children: [
                           TextWidget(
-                            title: "Learning path",
+                            title: "Activities",
                             titleSize: 20.sp,
                             titleColor: AppColors.black,
                             titleFontWeight: FontWeight.w400,
                           ),
-                          18.horizontalSpace,
+                       /*   18.horizontalSpace,
                           Container(
                             width: 65.w,
                             padding: EdgeInsets.symmetric(
@@ -174,7 +174,7 @@ class HomeScreen extends StatelessWidget {
                               titleColor: const Color(0xff2A7473),
                               titleFontWeight: FontWeight.w400,
                             ),
-                          ),
+                          ),*/
                           Spacer(),
                           CustomTextButton(
                             title: "See All",

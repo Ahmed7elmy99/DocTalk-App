@@ -49,7 +49,7 @@ class CategoriesScreen extends StatelessWidget {
           itemCount: categoriesModel.length, // Total number of items
           itemBuilder: (BuildContext context, int index) {
             return Padding(
-              padding: EdgeInsets.all(10.w),
+              padding: EdgeInsets.all(10.sp),
               child: MaterialButton(
                 padding: EdgeInsets.zero,
                 onPressed: () {

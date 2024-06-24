@@ -7,6 +7,7 @@ import 'package:doc_talk/features/auth_feature/presentation/screens/reset_passwo
 import 'package:doc_talk/features/home_feature/presentation/screens/bottom_nav_bar.dart';
 
 import 'package:doc_talk/features/loading_screen.dart';
+import 'package:doc_talk/welcome_home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -107,7 +108,7 @@ class AuthCubit extends Cubit<AuthState> {
             key: "image", value: userModel?.patient?.image.toString());
 
         print(userModel?.token);
-        navigateAndRemove(context: context, widget: BottomNavBar());
+        navigateAndRemove(context: context, widget: WelcomeScreen());
         emit(AuthSuccess());
       }).catchError((e) {
         print(e.toString());

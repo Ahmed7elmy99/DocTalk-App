@@ -1,10 +1,12 @@
 import 'package:doc_talk/app/utils/app_assets.dart';
 import 'package:doc_talk/app/utils/app_colors.dart';
+import 'package:doc_talk/app/utils/consts.dart';
 
 
 import 'package:doc_talk/app/widgets/button_widget.dart';
 import 'package:doc_talk/app/widgets/flutter_toast.dart';
 import 'package:doc_talk/app/widgets/text_widget.dart';
+import 'package:doc_talk/features/home_feature/presentation/screens/bottom_nav_bar.dart';
 import 'package:doc_talk/features/questionair_feature/cubit/states_survey.dart';
 import 'package:doc_talk/features/questionair_feature/cubit/survey_cubit.dart';
 import 'package:doc_talk/features/questionair_feature/data/model/survey_model.dart';
@@ -29,7 +31,10 @@ class Q12Screen extends StatelessWidget {
     return Scaffold(
         resizeToAvoidBottomInset: true,
         backgroundColor: const Color(0xfffef3d5),
-        appBar: const DefaultAppBarWidget(
+        appBar:  DefaultAppBarWidget(
+            onPop: () {
+            navigateAndRemove(context: context, widget: BottomNavBar());
+          },
           backColor: Color(0xfffef3d5),
           systemUiOverlayStyle: SystemUiOverlayStyle(
               statusBarColor: Colors.transparent,

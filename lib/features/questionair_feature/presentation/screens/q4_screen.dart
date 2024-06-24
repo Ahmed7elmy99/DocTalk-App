@@ -4,6 +4,7 @@ import 'package:doc_talk/app/utils/consts.dart';
 import 'package:doc_talk/app/widgets/button_widget.dart';
 import 'package:doc_talk/app/widgets/flutter_toast.dart';
 import 'package:doc_talk/app/widgets/text_widget.dart';
+import 'package:doc_talk/features/home_feature/presentation/screens/bottom_nav_bar.dart';
 import 'package:doc_talk/features/questionair_feature/cubit/states_survey.dart';
 import 'package:doc_talk/features/questionair_feature/cubit/survey_cubit.dart';
 import 'package:doc_talk/features/questionair_feature/data/model/survey_model.dart';
@@ -26,7 +27,10 @@ class Q4Screen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor:const  Color(0xfffdfdfd),
-      appBar:const DefaultAppBarWidget(
+      appBar: DefaultAppBarWidget(
+          onPop: () {
+            navigateAndRemove(context: context, widget: BottomNavBar());
+          },
         backColor: Color(0xfffdfdfd),
         systemUiOverlayStyle:  SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
@@ -138,12 +142,19 @@ class Q4Screen extends StatelessWidget {
                           return showToast(msg: "please choose an answer");
                         }else {
                           SurveyCubit.get(context).saveAnswerSurvey();
-                          navigateTo(
+                            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => Q5Screen(
+                              answerIds: SurveyCubit.get(context).answerIds,
+                            surveyModel: surveyModel,
+                          ) ),
+            );
+                       /*   navigateTo(
                           context: context,
                           widget: Q5Screen(
                               answerIds: SurveyCubit.get(context).answerIds,
                             surveyModel: surveyModel,
-                          ));
+                          ));*/
                           SurveyCubit.get(context).answerId = null;
                           print("answerId: ${SurveyCubit.get(context).answerId}");
                         }

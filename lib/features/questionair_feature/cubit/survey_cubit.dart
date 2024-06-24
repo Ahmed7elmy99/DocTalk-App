@@ -142,11 +142,17 @@ class SurveyCubit extends Cubit<SurveyStates> {
       print(value.data);
       print("sucesssssssss");
       // await getPatientSurveyResults(context: context);
-      navigateTo(
+        Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => ResultView(
+            surveyResultModel: surveyResultModel,
+          ) ),
+            );
+     /* navigateTo(
           context: context,
           widget: ResultView(
             surveyResultModel: surveyResultModel,
-          ));
+          ));*/
          //     CashHelper.setString(key: "lpdRate", value: surveyResultModel.lpdRate.toString());
           //      CashHelper.setString(key: "diagnoses", value: surveyResultModel.diagnoses.toString());
       emit((CreatePatientSurveySuccessStates()));
