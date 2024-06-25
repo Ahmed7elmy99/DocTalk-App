@@ -1,3 +1,4 @@
+import 'package:doc_talk/features/home_feature/presentation/screens/alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -47,7 +48,9 @@ class _QuizTwoViewState extends State<QuizTwoView> {
           score += 100;
           matchCheck.clear();
         });
-        // Check if all cards are matched
+        if (gameImg.every((img) => img != hiddenCardPath)) {
+          _showGlobalAlertDialog(success: true);
+        }
       } else {
         Future.delayed(const Duration(milliseconds: 500), () {
           setState(() {
@@ -55,26 +58,44 @@ class _QuizTwoViewState extends State<QuizTwoView> {
             gameImg[matchCheck[1].keys.first] = hiddenCardPath;
             matchCheck.clear();
           });
+          if (tries >= 4) {
+            _showGlobalAlertDialog(success: false);
+          }
         });
       }
     }
   }
 
-  void _goToNextQuiz() {
-    if (gameImg.every((img) => img != hiddenCardPath)) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const QuizThreeView(),
-        ),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please complete the game before proceeding.'),
-        ),
-      );
-    }
+  void _showGlobalAlertDialog({required bool success}) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: success
+              ? Image.asset("assets/images/thank.gif")
+              : Text(
+                  "That's wrong",
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 24,
+                  ),
+                ),
+          backgroundColor: Colors.white,
+          actions: <Widget>[
+            CustomButton(
+              color: AppColors.quizButtonColor,
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => QuizThreeView()),
+                );
+              },
+            )
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -133,13 +154,6 @@ class _QuizTwoViewState extends State<QuizTwoView> {
                     ),
                   );
                 },
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 32.sp),
-              child: CustomButton(
-                onTap: _goToNextQuiz,
-                color: AppColors.quizButtonColor,
               ),
             ),
           ],
