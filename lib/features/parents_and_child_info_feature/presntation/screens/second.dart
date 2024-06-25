@@ -29,15 +29,9 @@ class _SecondState extends State<Second> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: <Widget>[
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ParentLinearProgress(label: 'Parent Info', value: 1),
-                ChildlinearProgressWidget(value: .5),
-              ],
-            ),
+            const ChildlinearProgressWidget(value: 0.5),
             const SizedBox(
-              height: 30,
+              height: 40,
             ),
             Image.asset(
               'assets/images/children.png',
@@ -53,7 +47,7 @@ class _SecondState extends State<Second> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(
-              height: 20,
+              height: 60,
             ),
             CustomButton(
               label: 'Add Child',

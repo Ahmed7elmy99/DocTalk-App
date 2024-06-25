@@ -7,6 +7,7 @@ import 'package:doc_talk/features/levels_and_categories/presentation/cubit/level
 import 'package:doc_talk/features/levels_and_categories/presentation/cubit/story_cubit.dart';
 import 'package:doc_talk/features/questionair_feature/cubit/quiz_cubit.dart';
 import 'package:doc_talk/features/questionair_feature/cubit/survey_cubit.dart';
+import 'package:doc_talk/features/quiz/views/quiz_two.dart';
 import 'package:doc_talk/features/splash_and_onboarding_feature/presentation/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -54,27 +55,26 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(428, 926),
-      // designSize: const Size(375, 812),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, child) {
-        return child!;
-      },
-      child: GetMaterialApp(
-        theme: ThemeData(
-          fontFamily: "Poppins",
-          //  scaffoldBackgroundColor: AppColors.scaffoldBackGround,
-          sliderTheme: const SliderThemeData(
-              //  thumbColor: Colors.transparent, // Set thumb color to transparent
-              ),
-        ),
-        debugShowCheckedModeBanner: false,
-        home: CacheHelper.getString(key: "token") == null
-            ? const SplashScreen()
-            : const BottomNavBar(),
-      ),
-    );
+        designSize: const Size(428, 926),
+        // designSize: const Size(375, 812),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) {
+          return child!;
+        },
+        child: GetMaterialApp(
+          theme: ThemeData(
+            fontFamily: "Poppins",
+            //  scaffoldBackgroundColor: AppColors.scaffoldBackGround,
+            sliderTheme: const SliderThemeData(
+                //  thumbColor: Colors.transparent, // Set thumb color to transparent
+                ),
+          ),
+          debugShowCheckedModeBanner: false,
+          home: CacheHelper.getString(key: "token") == null
+              ? const SplashScreen()
+              : const BottomNavBar(),
+        ));
   }
 }
 //Shift + Alt + F

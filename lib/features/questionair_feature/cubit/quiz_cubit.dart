@@ -27,7 +27,7 @@ class QuizCubit extends Cubit<QuizState> {
         data: {
           "sentence": "dad",
           "record": record,
-          "storyId": storyId,
+          "storyId": 1,
           "patientId": CacheHelper.getInt(key: 'id')
         },
         headers: {

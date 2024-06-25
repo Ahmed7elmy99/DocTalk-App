@@ -20,8 +20,8 @@ class BottomSheetWidget extends StatefulWidget {
 
 class _BottomSheetWidgetState extends State<BottomSheetWidget> {
   bool isBoySelected = false;
-  int age = 0;
-  int selectedAvatarIndex = -1;
+  int age = 3;
+  int selectedAvatarIndex = 0;
   String avatarImagePath = "";
   List avatars = [
     'assets/images/Avatars.png',
@@ -70,6 +70,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
               style: TextStyle(
                   fontSize: 14, color: AppColors.blackColor.withOpacity(.5)),
             ),
+            16.verticalSpace,
             SizedBox(
               height: mQHeight(context) / 9,
               width: mQWidth(context),
@@ -78,50 +79,72 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                   GestureDetector(
                     onTap: () {
                       pickImageFromGallery();
-                      // else {
-                      // setState(() {
-                      //   selectedAvatarIndex = index;
-                      //   avatarImagePath = avatars[index];
-                      // });
-                      //}
                     },
-                    child: Image.asset(
-                      "assets/images/gallery.png",
-                      fit: BoxFit.cover,
-                    ),
+                    child: images.isEmpty
+                        ? Container(
+                            width: 60.0, // Adjust the size as needed
+                            height: 60.0, // Adjust the size as needed
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: AppColors.primaryColor, // Border color
+                                width: 4.0, // Border width
+                              ),
+                            ),
+                            child: Image.asset(
+                              "assets/images/camra_icon.png",
+                            ),
+                          )
+                        : Container(
+                            width: 70.0, // Adjust the size as needed
+                            height: 70.0, //
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: ClipOval(
+                              child: Image.file(
+                                File(imagePath),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
                   ),
                   16.horizontalSpace,
                   Expanded(
                     child: ListView.builder(
                       shrinkWrap: true,
-                      itemCount:
-                          images.isEmpty ? avatars.length : images.length,
+                      itemCount: avatars.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          margin: const EdgeInsets.all(8),
-                          padding: const EdgeInsets.all(0),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: selectedAvatarIndex == index
-                                  ? AppColors.greenColor
-                                  : Colors.transparent,
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          child: images.isEmpty
-                              ? Image.asset(
-                                  avatars[index],
-                                  fit: BoxFit.cover,
-                                )
-                              : ClipRRect(
-                                  borderRadius: BorderRadius.circular(16),
-                                  child: Image.file(
-                                    File(images[index]),
-                                    fit: BoxFit.cover,
-                                  ),
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              if (images.isEmpty) {
+                                selectedAvatarIndex = index;
+                                avatarImagePath = avatars[index];
+                              } else {
+                                selectedAvatarIndex = -1;
+                                avatarImagePath = "";
+                              }
+                            });
+                          },
+                          child: Container(
+                              margin: const EdgeInsets.all(8),
+                              padding: const EdgeInsets.all(0),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: images.isEmpty &&
+                                          selectedAvatarIndex == index
+                                      ? AppColors.primaryColor
+                                      : Colors.transparent,
+                                  width: 4,
                                 ),
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              child: Image.asset(
+                                avatars[index],
+                                fit: BoxFit.cover,
+                              )),
                         );
                       },
                     ),
@@ -129,12 +152,13 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                 ],
               ),
             ),
-            const SizedBox(height: 5),
+            16.verticalSpace,
             const Text(
               'Is Your Child ..',
               style: TextStyle(fontSize: 14, color: AppColors.blackColor),
             ),
             isBoyOrGirlRadios(),
+            16.verticalSpace,
             const Text(
               'What is his/her name ?',
               style: TextStyle(fontSize: 16, color: AppColors.blackColor),
@@ -239,12 +263,14 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
       alignment: Alignment.center,
       child: IconButton(
         onPressed: () {
-          setState(
-            () {
-              age++;
-              print(age);
-            },
-          );
+          if (age <= 3 || age < 15) {
+            setState(
+              () {
+                age++;
+                print(age);
+              },
+            );
+          }
         },
         icon: const Icon(Icons.add),
       ),
@@ -268,7 +294,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
       alignment: Alignment.center,
       child: IconButton(
         onPressed: () {
-          if (age > 0) {
+          if (age > 3) {
             setState(() {
               age--;
             });

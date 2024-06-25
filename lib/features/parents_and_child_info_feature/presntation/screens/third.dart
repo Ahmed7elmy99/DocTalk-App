@@ -35,18 +35,12 @@ class Third extends StatelessWidget {
           icon: const Icon(Icons.arrow_back_ios),
         ),
       ),
-      body: Column(
-        children: <Widget>[
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ParentLinearProgress(label: 'Parent Info', value: 1),
-              ChildlinearProgressWidget(value: 1),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: <Widget>[
+            ChildlinearProgressWidget(value: 1),
+            Row(
               children: <Widget>[
                 CircleAvatar(
                   backgroundColor: Colors.transparent,
@@ -78,26 +72,26 @@ class Third extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-          const SizedBox(
-            height: 50,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CustomButton(
-              label: 'Add Child',
-              onTap: () {
-                AuthCubit.get(context).signup(
-                  context: context,
-                  name: childName,
-                  image: imagePath,
-                  gender: gender,
-                  age: age,
-                );
-              },
+            const SizedBox(
+              height: 113,
             ),
-          )
-        ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CustomButton(
+                label: 'Next',
+                onTap: () {
+                  AuthCubit.get(context).signup(
+                    context: context,
+                    name: childName,
+                    image: imagePath,
+                    gender: gender,
+                    age: age,
+                  );
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
