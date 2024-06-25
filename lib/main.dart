@@ -81,11 +81,11 @@ class MyApp extends StatelessWidget {
                 ),
           ),
           debugShowCheckedModeBanner: false,
-          home:WelcomeScreen()
+          home://WelcomeScreen()
           
-       /*   CashHelper.getString(key: "token") == null
+         CashHelper.getString(key: "token") == null
               ? const SplashScreen()
-              : const BottomNavBar(),*/
+              : const BottomNavBar(),
         ));
   }
 }

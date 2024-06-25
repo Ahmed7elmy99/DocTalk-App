@@ -51,7 +51,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthInitial());
   }
 
-  void signup({
+   void signup({
     required BuildContext context,
     required String name,
     required String image,
@@ -73,11 +73,11 @@ class AuthCubit extends Cubit<AuthState> {
     ).then((value) {
       print(value.data);
       print("from Success");
-      navigateTo(context: context, widget: LoadingScreen());
-      emit(AuthInitial());
+      navigateTo(context: context, widget: const LoadingScreen());
+      emit(AuthSuccess());
     }).catchError((e) {
       print(e);
-      emit(AuthInitial());
+      emit(AuthError());
     });
   }
 

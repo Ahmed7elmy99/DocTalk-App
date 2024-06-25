@@ -145,6 +145,7 @@ class _QuizThreeViewState extends State<QuizThreeView> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text(
           'Quiz 3',
