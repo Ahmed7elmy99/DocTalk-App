@@ -73,9 +73,9 @@ class LoginScreen extends StatelessWidget {
                     controller: cubit.loginEmailCon,
                     keyboardType: TextInputType.emailAddress,
                   ),
-                  16.verticalSpace,
+                  10.verticalSpace,
                   CustomFormField(
-                    hint: "Type password",
+                    hint: "Enter password",
                     controller: cubit.loginPasswordCon,
                     obscure: cubit.isConfirm,
                     suffixIconWidget: IconButton(
@@ -87,19 +87,22 @@ class LoginScreen extends StatelessWidget {
                           : Icons.visibility_off),
                     ),
                   ),
-                  8.verticalSpace,
-                  Align(
-                    alignment: AlignmentDirectional.centerEnd,
-                    child: CustomTextButton(
-                      title: "Forget password?",
-                      onPressed: () {
+                  // 8.verticalSpace,
+                  InkWell(
+                      onTap:() {
                         navigateTo(
                             context: context,
                             widget: const ForgetPasswordScreen());
                       },
-                      titleSize: 14.sp,
-                      textDecoration: TextDecoration.underline,
-                    ),
+                      child: Align(
+                        alignment: AlignmentDirectional.centerEnd,
+                        child: TextWidget(
+                          title: "Forget password?",
+                          titleColor: AppColors.black,
+                          titleSize:  18.sp,
+
+                        ),
+                      ),
                   ),
                   56.verticalSpace,
                   ButtonWidget(
@@ -114,7 +117,7 @@ class LoginScreen extends StatelessWidget {
                     textSize: 20.sp,
                     textColor: AppColors.white,
                   ),
-                  16.verticalSpace,
+                  5.verticalSpace,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

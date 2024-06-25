@@ -17,6 +17,9 @@ class CustomTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
         onPressed: onPressed ?? (){},
+        style: TextButton.styleFrom(
+          padding: EdgeInsets.zero
+        ),
         child:TextWidget(
           title:title?? "SkipNow".tr(),
           textDecoration: textDecoration,
