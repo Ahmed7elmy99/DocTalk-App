@@ -25,6 +25,7 @@ class Q1Screen extends StatelessWidget {
         resizeToAvoidBottomInset: true,
         backgroundColor: const Color(0xfffef3d5),
         appBar: const DefaultAppBarWidget(
+     
           backColor: Color(0xfffef3d5),
           systemUiOverlayStyle: SystemUiOverlayStyle(
               statusBarColor: Colors.transparent,
@@ -68,7 +69,7 @@ class Q1Screen extends StatelessWidget {
                   width: double.infinity,
                   decoration: const BoxDecoration(
                       image: DecorationImage(
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
                           image: AssetImage(
                             AppImages.q1,
                           ))),
@@ -127,12 +128,19 @@ class Q1Screen extends StatelessWidget {
                             return showToast(msg: "please choose an answer");
                           } else {
                             SurveyCubit.get(context).saveAnswerSurvey();
-                            navigateTo(
+                               Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) =>  Q2Screen(
+                                  answerIds: SurveyCubit.get(context).answerIds,
+                                  surveyModel: surveyModel,
+                                )),
+            );
+                           /* navigateTo(
                                 context: context,
                                 widget: Q2Screen(
                                   answerIds: SurveyCubit.get(context).answerIds,
                                   surveyModel: surveyModel,
-                                ));
+                                ));*/
                             SurveyCubit.get(context).answerId = null;
                             print(
                                 "answerId: ${SurveyCubit.get(context).answerId}");

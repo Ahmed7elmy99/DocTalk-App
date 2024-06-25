@@ -1,5 +1,8 @@
+
 import 'package:doc_talk/features/quiz/cubit/quiz_cubit.dart';
 import 'package:doc_talk/features/quiz/views/loading_view.dart';
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -30,6 +33,14 @@ class _QuizFourViewState extends State<QuizFourView> {
     "Brother",
   ];
   int select = 5;
+  bool isMom =false;
+  bool isBrother =false;
+  bool isSister =false;
+  bool isGrand =false;
+  bool isMom2 =false;
+  bool isBrother2 =false;
+  bool isSister2 =false;
+  bool isGrand2 =false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,16 +84,23 @@ class _QuizFourViewState extends State<QuizFourView> {
                         InkWell(
                           onTap:(){
                             setState(() {
-                              select = 0;
+                              isBrother = true;
                             });
                           },
                             child: Image.asset(questions[0])),
-                        Text(
-                          questions2[0],
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: select==2?Colors.green:Colors.black,
-                              fontSize: 20.sp),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              isMom2=true;
+                            });
+                          },
+                          child: Text(
+                            questions2[0],
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: (isMom&&isMom2)?Colors.green:Colors.black,
+                                fontSize: 20.sp),
+                          ),
                         )
                       ],
                     ),
@@ -94,16 +112,23 @@ class _QuizFourViewState extends State<QuizFourView> {
                         InkWell(
                             onTap:(){
                               setState(() {
-                                select = 1;
+                                isSister= true;
                               });
                             },
                             child: Image.asset(questions[1])),
-                        Text(
-                          questions2[1],
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: select==3?Colors.green:Colors.black,
-                              fontSize: 20.sp),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              isGrand2=true;
+                            });
+                          },
+                          child: Text(
+                            questions2[1],
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: isGrand && isGrand2 ?Colors.green:Colors.black,
+                                fontSize: 20.sp),
+                          ),
                         )
                       ],
                     ),
@@ -115,16 +140,23 @@ class _QuizFourViewState extends State<QuizFourView> {
                         InkWell(
                             onTap:(){
                               setState(() {
-                                select = 2;
+                                isMom=true;
                               });
                             },
                             child: Image.asset(questions[2])),
-                        Text(
-                          questions2[2],
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: select==1?Colors.green:Colors.black,
-                              fontSize: 20.sp),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                             isSister2 = true;
+                            });
+                          },
+                          child: Text(
+                            questions2[2],
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: (isSister && isSister2)?Colors.green:Colors.black,
+                                fontSize: 20.sp),
+                          ),
                         )
                       ],
                     ),
@@ -136,16 +168,23 @@ class _QuizFourViewState extends State<QuizFourView> {
                         InkWell(
                             onTap:(){
                               setState(() {
-                                select = 3;
+                                isGrand =true;
                               });
                             },
                             child: Image.asset(questions[3])),
-                        Text(
-                          questions2[3],
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: select==0?Colors.green:Colors.black,
-                              fontSize: 20.sp),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              isBrother2 =true;
+                            });
+                          },
+                          child: Text(
+                            questions2[3],
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: (isBrother && isBrother2)?Colors.green:Colors.black,
+                                fontSize: 20.sp),
+                          ),
                         )
                       ],
                     ),
@@ -157,12 +196,18 @@ class _QuizFourViewState extends State<QuizFourView> {
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 22.sp),
               child: CustomButton(
                 onTap: () {
-                  QuizCubit.getObject(context).correct= 50;
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const LoadingScreen()),
-                  );
+                  if((isBrother == true &&isBrother2 == true) &&
+                    (  isSister==true && isSister2==true )
+                      &&
+                      (isMom==true && isMom2==true)
+                      &&
+                      (isGrand==true && isGrand2==true)
+                  ){
+                    QuizCubit.getObject(context).correct= 50;
+                    _showGlobalAlertDialog(success: true);
+                  }else{
+                    _showGlobalAlertDialog(success: false);
+                  }
                 },
                 color: AppColors.quizButtonColor,
               ),
@@ -170,6 +215,37 @@ class _QuizFourViewState extends State<QuizFourView> {
           ],
         ),
       ),
+    );
+  }
+  void _showGlobalAlertDialog({required bool success}) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: success
+              ? Image.asset("assets/images/thank.gif")
+              : Text(
+            "That's wrong",
+            style: TextStyle(
+              color: Colors.red,
+              fontSize: 24,
+            ),
+          ),
+          backgroundColor: Colors.white,
+          actions: <Widget>[
+            CustomButton(
+              color: AppColors.quizButtonColor,
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoadingScreen()),
+                );
+              },
+            )
+          ],
+        );
+      },
     );
   }
 }

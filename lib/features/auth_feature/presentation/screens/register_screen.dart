@@ -62,13 +62,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   16.verticalSpace,
                   CustomFormField(
-                    hint: "Type Phone",
+                    hint: "Enter Phone",
                     controller: cubit.phoneCon,
                     keyboardType: TextInputType.phone,
                   ),
                   16.verticalSpace,
                   CustomFormField(
-                    hint: "Type password",
+                    hint: "Enter password",
                     controller: cubit.passwordCon,
                     obscure: cubit.isVisiable,
                     suffixIconWidget: IconButton(

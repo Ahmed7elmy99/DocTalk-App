@@ -1,6 +1,7 @@
-import 'package:doc_talk/app/utils/consts.dart';
+
 import 'package:doc_talk/features/quiz/cubit/quiz_cubit.dart';
 import 'package:doc_talk/features/quiz/views/quiz_two.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -87,13 +88,13 @@ class _QuizOneViewState extends State<QuizOneView> {
                                   :
                                   c.correct= 0;
                               print(c.correct);
-                              navigateTo(context: context, widget: QuizTwoView());
+                              _showGlobalAlertDialog(success: index == 2?true:false);
 
                             },
                             child: Image.asset(questions[index]));
                       },
                     )),
-                Padding(
+             /*   Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 32.sp),
                   child: CustomButton(
                     onTap: () {
@@ -105,12 +106,43 @@ class _QuizOneViewState extends State<QuizOneView> {
                     },
                     color: AppColors.quizButtonColor,
                   ),
-                )
+                )*/
               ],
             );
           },
         ),
       ),
+    );
+  }
+  void _showGlobalAlertDialog({required bool success}) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: success
+              ? Image.asset("assets/images/thank.gif")
+              : Text(
+            "That's wrong",
+            style: TextStyle(
+              color: Colors.red,
+              fontSize: 24,
+            ),
+          ),
+          backgroundColor: Colors.white,
+          actions: <Widget>[
+            CustomButton(
+              color: AppColors.quizButtonColor,
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => QuizTwoView()),
+                );
+              },
+            )
+          ],
+        );
+      },
     );
   }
 }

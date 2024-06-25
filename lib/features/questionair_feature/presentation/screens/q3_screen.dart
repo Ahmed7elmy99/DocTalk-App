@@ -3,6 +3,7 @@ import 'package:doc_talk/app/utils/app_colors.dart';
 import 'package:doc_talk/app/widgets/button_widget.dart';
 import 'package:doc_talk/app/widgets/flutter_toast.dart';
 import 'package:doc_talk/app/widgets/text_widget.dart';
+import 'package:doc_talk/features/home_feature/presentation/screens/bottom_nav_bar.dart';
 import 'package:doc_talk/features/questionair_feature/cubit/states_survey.dart';
 import 'package:doc_talk/features/questionair_feature/cubit/survey_cubit.dart';
 import 'package:doc_talk/features/questionair_feature/data/model/survey_model.dart';
@@ -27,7 +28,10 @@ class Q3Screen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: const Color(0xfffed2d3),
-      appBar: const DefaultAppBarWidget(
+      appBar:  DefaultAppBarWidget(
+          onPop: () {
+            navigateAndRemove(context: context, widget: BottomNavBar());
+          },
         backColor: Color(0xfffed2d3),
         systemUiOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
@@ -45,7 +49,7 @@ class Q3Screen extends StatelessWidget {
               alignment: Alignment.topCenter,
               decoration: const BoxDecoration(
                   image: DecorationImage(
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                       image: AssetImage(
                         AppImages.q3,
                       ))),
@@ -133,12 +137,19 @@ class Q3Screen extends StatelessWidget {
                           return showToast(msg: "please choose an answer");
                         }else {
                           SurveyCubit.get(context).saveAnswerSurvey();
-                          navigateTo(
+                               Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => Q4Screen(
+                              answerIds: SurveyCubit.get(context).answerIds,
+                            surveyModel: surveyModel,
+                          ) ),
+            );
+                      /*    navigateTo(
                           context: context,
                           widget: Q4Screen(
                               answerIds: SurveyCubit.get(context).answerIds,
                             surveyModel: surveyModel,
-                          ));
+                          ));*/
                           SurveyCubit.get(context).answerId = null;
                           print("answerId: ${SurveyCubit.get(context).answerId}");
                         }

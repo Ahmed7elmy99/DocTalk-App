@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gif/gif.dart';
 
+import '../app/utils/consts.dart';
+import 'home_feature/presentation/screens/bottom_nav_bar.dart';
+
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({Key? key}) : super(key: key);
 
@@ -14,10 +17,9 @@ class _LoadingScreenState extends State<LoadingScreen>
   @override
   void initState() {
     controller = GifController(vsync: this);
-    /* Future.delayed(const Duration(seconds: 3), () {
-      navigateTo(context: context, widget: LoginScreen());
-    } */
-    ;
+    Future.delayed(const Duration(seconds: 3), () {
+      navigateAndRemove(context: context, widget: const BottomNavBar() ,);
+    });
     super.initState();
   }
 

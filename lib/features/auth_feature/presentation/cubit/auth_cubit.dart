@@ -7,6 +7,7 @@ import 'package:doc_talk/features/auth_feature/presentation/screens/reset_passwo
 import 'package:doc_talk/features/home_feature/presentation/screens/bottom_nav_bar.dart';
 
 import 'package:doc_talk/features/loading_screen.dart';
+import 'package:doc_talk/welcome_home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -50,7 +51,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthInitial());
   }
 
-  void signup({
+   void signup({
     required BuildContext context,
     required String name,
     required String image,
@@ -72,14 +73,15 @@ class AuthCubit extends Cubit<AuthState> {
     ).then((value) {
       print(value.data);
       print("from Success");
-      navigateTo(context: context, widget: LoadingScreen());
-      emit(AuthInitial());
+      navigateTo(context: context, widget: const LoadingScreen());
+      emit(AuthSuccess());
     }).catchError((e) {
       print(e);
-      emit(AuthInitial());
+      emit(AuthError());
     });
   }
-   late  String token ;
+
+  late String token;
   Future<void> login(BuildContext context) async {
     if (formstate.currentState!.validate()) {
       emit(AuthLoading());
@@ -91,14 +93,22 @@ class AuthCubit extends Cubit<AuthState> {
         },
       ).then((value) async {
         userModel = UserModel.fromJson(value.data);
-            await CashHelper.setString(key: "token", value: userModel?.token);
-            CashHelper.setString(key:"surveyResult", value: userModel?.patient?.surveyResult.toString());
-           CashHelper.setString(key: "diagnosis", value: userModel?.patient?.diagnoses.toString());
-                 CashHelper.setString(key: "name", value: userModel?.patient?.name.toString());
-                     CashHelper.setString(key: "image", value: userModel?.patient?.image.toString());
+        await CashHelper.setString(key: "token", value: userModel?.token);
+        CashHelper.setString(
+            key: "surveyResult",
+            value: userModel?.patient?.surveyResult.toString());
+        CashHelper.setString(
+            key: "diagnosis", value: userModel?.patient?.diagnoses.toString());
+             CashHelper.setString(
+            key: "Email",
+            value:loginEmailCon.text);
+        CashHelper.setString(
+            key: "name", value: userModel?.patient?.name.toString());
+        CashHelper.setString(
+            key: "image", value: userModel?.patient?.image.toString());
 
-            print(userModel?.token);
-        navigateAndRemove(context: context, widget: BottomNavBar());
+        print(userModel?.token);
+        navigateAndRemove(context: context, widget: WelcomeScreen());
         emit(AuthSuccess());
       }).catchError((e) {
         print(e.toString());
@@ -108,44 +118,51 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void resetPassEmail(BuildContext context) {
-    emit(AuthLoading());
-    DioHelper.postData(
-      url: "http://130.61.130.252/api/auth/request-reset-token",
-      data: {"email": resetPassEmailCon.text},
-    ).then((value) {
-      print(value.data);
-      navigateTo(context: context, widget: const OtpScreen());
-    }).catchError((e) {
-      print(e.toString());
-      emit(AuthInitial());
-    });
+    
+      emit(AuthLoading());
+      DioHelper.postData(
+        url: "http://130.61.130.252/api/auth/request-reset-token",
+        data: {"email": resetPassEmailCon.text},
+      ).then((value) {
+        print(value.data);
+        navigateTo(context: context, widget: const OtpScreen());
+      }).catchError((e) {
+        print(e.toString());
+        emit(AuthInitial());
+      });
+    
   }
 
   void verifyOtp(BuildContext context) {
-    emit(AuthLoading());
-    DioHelper.postData(
-      url: "http://130.61.130.252/api/auth/verify-reset-token",
-      data: {"email": resetPassEmailCon.text, "token": otpCon.text},
-    ).then((value) {
-      print(value.data);
-      navigateTo(context: context, widget: const ResetPasswordScreen());
-    }).catchError((e) {
-      print(e.toString());
-      emit(AuthInitial());
-    });
+    
+      emit(AuthLoading());
+
+      DioHelper.postData(
+        url: "http://130.61.130.252/api/auth/verify-reset-token",
+        data: {"email": resetPassEmailCon.text, "token": otpCon.text},
+      ).then((value) {
+        print(value.data);
+        navigateTo(context: context, widget: const ResetPasswordScreen());
+      }).catchError((e) {
+        print(e.toString());
+        emit(AuthInitial());
+      });
+    
   }
 
   void resetPassword(BuildContext context) {
-    emit(AuthLoading());
-    DioHelper.patchData(
-      url: "http://130.61.130.252/api/auth/reset-password",
-      data: {"email": resetPassEmailCon.text, "password": newPassCon.text},
-    ).then((value) {
-      print(value.data);
-      navigateAndRemove(context: context, widget: const LoginScreen());
-    }).catchError((e) {
-      print(e.toString());
-      emit(AuthInitial());
-    });
-  }
+    
+      emit(AuthLoading());
+      DioHelper.patchData(
+        url: "http://130.61.130.252/api/auth/reset-password",
+        data: {"email": resetPassEmailCon.text, "password": newPassCon.text},
+      ).then((value) {
+        print(value.data);
+        navigateAndRemove(context: context, widget: const LoginScreen());
+      }).catchError((e) {
+        print(e.toString());
+        emit(AuthInitial());
+      });
+    }
+  
 }

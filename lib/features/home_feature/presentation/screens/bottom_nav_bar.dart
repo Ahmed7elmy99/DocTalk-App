@@ -8,7 +8,8 @@ import 'package:doc_talk/features/home_feature/presentation/widgets/custom_butto
 import 'package:doc_talk/features/questionair_feature/cubit/states_survey.dart';
 import 'package:doc_talk/features/questionair_feature/cubit/survey_cubit.dart';
 import 'package:doc_talk/features/questionair_feature/presentation/screens/q1_screen.dart';
-import 'package:doc_talk/survey_results.dart';
+
+import 'package:doc_talk/test.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -66,11 +67,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
           return FloatingActionButton(
             backgroundColor: Color(0xFF2A7473),
             onPressed: () async {
-             if (await CashHelper.getString(key:"surveyResult") == null) {
+             if (await CashHelper.getString(key:"surveyResult") != null) {
              await cubit.getSurveyData(context: context, id: 1);
    
   } else  {
-     navigateTo(context: context, widget: const SurveyResults());
+     navigateTo(context: context, widget:  TestScreen());
   }
             //  await cubit.getSurveyData(context: context, id: 1);
               // navigateTo(context: context, widget: Q1Screen());

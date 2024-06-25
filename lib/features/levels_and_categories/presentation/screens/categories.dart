@@ -28,7 +28,7 @@ class CategoriesScreen extends StatelessWidget {
           },
           icon: Icon(
             CupertinoIcons.back,
-            color: AppColors.black.withOpacity(.9),
+            color: Colors.black.withOpacity(.9),
           ),
         ),
       ),
@@ -39,57 +39,60 @@ class CategoriesScreen extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            crossAxisSpacing: ScreenUtil().setWidth(10),
-            mainAxisSpacing: ScreenUtil().setWidth(10),
-            childAspectRatio: 0.7,
-          ),
-          itemCount: categoriesModel.length, // Total number of items
-          itemBuilder: (BuildContext context, int index) {
-            return Padding(
-              padding: EdgeInsets.all(10.w),
-              child: MaterialButton(
+        child: Padding(
+          padding:  EdgeInsets.only(top: 140.h),
+          child: GridView.builder(
+            padding: EdgeInsets.all(10.sp),  // Adding some padding to the GridView
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              crossAxisSpacing: 40.w,  // Spacing of 40 from the right
+              mainAxisSpacing: 24.17.h,  // Spacing of 24 from the bottom
+              childAspectRatio: 0.7,
+            ),
+            itemCount: categoriesModel.length,
+            itemBuilder: (BuildContext context, int index) {
+              return MaterialButton(
                 padding: EdgeInsets.zero,
                 onPressed: () {
                   navigateTo(context: context, widget: FamilyScreen());
                 },
                 child: Container(
+                  width: 99.w,
+                  height: 146.h,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius:
-                        BorderRadius.circular(ScreenUtil().setWidth(20)),
+                    borderRadius: BorderRadius.circular(20.sp),
                   ),
                   child: Column(
                     children: [
-                      Expanded(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(ScreenUtil().setWidth(20)),
-                            topRight:
-                                Radius.circular(ScreenUtil().setWidth(20)),
-                          ),
-                          child: Image.network(
-                            "${categoriesModel[index].image}",
-                            fit: BoxFit.cover,
-                          ),
+                      ClipRRect(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20.sp),
+                          topRight: Radius.circular(20.sp),
+                        ),
+                        child: Image.network(
+                          "${categoriesModel[index].image}",
+                          width: 99.w,
+                          height: 102.h,
+                          fit: BoxFit.fill,
                         ),
                       ),
-                      SizedBox(height: ScreenUtil().setHeight(10)),
-                      TextWidget(
-                        title: "${categoriesModel[index].title}",
-                        titleSize: 16.sp,
-                        titleColor: AppColors.black,
-                        titleFontWeight: FontWeight.w400,
+                      SizedBox(height: 10.h),
+                      Expanded(
+                        child: TextWidget(
+                          title: "${categoriesModel[index].title}",
+                          titleSize: 16.sp,
+                          titleColor: Colors.black,
+                          titleFontWeight: FontWeight.w400,
+                        ),
                       ),
                       SizedBox(height: 10.h),
                     ],
                   ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );

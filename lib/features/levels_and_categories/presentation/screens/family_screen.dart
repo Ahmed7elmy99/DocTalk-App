@@ -95,7 +95,7 @@ class _FamilyScreenState extends State<FamilyScreen> {
                 ),
                 MaterialButton(
                   onPressed: () {
-                    navigateTo(context: context, widget:const SpeecScreen());
+                    navigateTo(context: context, widget: const SpeecScreen());
                   },
                   child: Row(
                     children: [
@@ -158,7 +158,7 @@ class _FamilyScreenState extends State<FamilyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFD0C93D),
+      backgroundColor: Colors.black, // Set the background color to black
       body: Stack(
         children: [
           Center(

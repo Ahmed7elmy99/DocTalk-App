@@ -1,6 +1,7 @@
 import 'package:doc_talk/features/auth_feature/presentation/cubit/auth_cubit.dart';
 import 'package:doc_talk/features/auth_feature/presentation/screens/forget_password_screen.dart';
 import 'package:doc_talk/features/auth_feature/presentation/screens/register_screen.dart';
+import 'package:doc_talk/features/quiz/views/loading_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,6 +37,7 @@ class LoginScreen extends StatelessWidget {
         body: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state is AuthLoading) {
+          
               showDialog(
                 context: context,
                 builder: (context) =>
@@ -71,9 +73,9 @@ class LoginScreen extends StatelessWidget {
                     controller: cubit.loginEmailCon,
                     keyboardType: TextInputType.emailAddress,
                   ),
-                  16.verticalSpace,
+                  10.verticalSpace,
                   CustomFormField(
-                    hint: "Type password",
+                    hint: "Enter password",
                     controller: cubit.loginPasswordCon,
                     obscure: cubit.isConfirm,
                     suffixIconWidget: IconButton(
@@ -85,19 +87,22 @@ class LoginScreen extends StatelessWidget {
                           : Icons.visibility_off),
                     ),
                   ),
-                  8.verticalSpace,
-                  Align(
-                    alignment: AlignmentDirectional.centerEnd,
-                    child: CustomTextButton(
-                      title: "Forget password?",
-                      onPressed: () {
+                  // 8.verticalSpace,
+                  InkWell(
+                      onTap:() {
                         navigateTo(
                             context: context,
                             widget: const ForgetPasswordScreen());
                       },
-                      titleSize: 14.sp,
-                      textDecoration: TextDecoration.underline,
-                    ),
+                      child: Align(
+                        alignment: AlignmentDirectional.centerEnd,
+                        child: TextWidget(
+                          title: "Forget password?",
+                          titleColor: AppColors.black,
+                          titleSize:  18.sp,
+
+                        ),
+                      ),
                   ),
                   56.verticalSpace,
                   ButtonWidget(
@@ -112,7 +117,7 @@ class LoginScreen extends StatelessWidget {
                     textSize: 20.sp,
                     textColor: AppColors.white,
                   ),
-                  16.verticalSpace,
+                  5.verticalSpace,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

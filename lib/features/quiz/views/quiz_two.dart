@@ -1,11 +1,11 @@
-
-import 'package:doc_talk/features/quiz/views/quiz_three.dart';
+import 'package:doc_talk/features/home_feature/presentation/screens/alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../app/utils/app_colors.dart';
 import '../widgets/background_widget.dart';
 import '../widgets/custom_button.dart';
+import 'quiz_three.dart';
 
 class QuizTwoView extends StatefulWidget {
   const QuizTwoView({Key? key}) : super(key: key);
@@ -15,12 +15,89 @@ class QuizTwoView extends StatefulWidget {
 }
 
 class _QuizTwoViewState extends State<QuizTwoView> {
-  List<String> questions = [
-    'assets/images/image.png',
-    'assets/images/image.png',
-    'assets/images/image.png',
-    'assets/images/image.png',
+  final List<String> questions = [
+    'assets/images/quiz_one_1.png',
+    'assets/images/quiz_one_2.png',
+    'assets/images/quiz_one_1.png',
+    'assets/images/quiz_one_2.png',
   ];
+
+  final String hiddenCardPath = 'assets/images/logo.png';
+  List<String> gameImg = [];
+  List<Map<int, String>> matchCheck = [];
+  int tries = 0;
+  int score = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    questions.shuffle();
+    gameImg = List<String>.filled(questions.length, hiddenCardPath);
+  }
+
+  void _onCardTap(int index) {
+    setState(() {
+      tries++;
+      gameImg[index] = questions[index];
+      matchCheck.add({index: questions[index]});
+    });
+
+    if (matchCheck.length == 2) {
+      if (matchCheck[0].values.first == matchCheck[1].values.first) {
+        setState(() {
+          score += 100;
+          matchCheck.clear();
+        });
+        if (gameImg.every((img) => img != hiddenCardPath)) {
+          _showGlobalAlertDialog(success: true);
+        }
+      } else {
+        Future.delayed(const Duration(milliseconds: 500), () {
+          setState(() {
+            gameImg[matchCheck[0].keys.first] = hiddenCardPath;
+            gameImg[matchCheck[1].keys.first] = hiddenCardPath;
+            matchCheck.clear();
+          });
+          if (tries >= 4) {
+            _showGlobalAlertDialog(success: false);
+          }
+        });
+      }
+    }
+  }
+
+  void _showGlobalAlertDialog({required bool success}) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: success
+              ? Image.asset("assets/images/thank.gif")
+              : Text(
+                  "That's wrong",
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 24,
+                  ),
+                ),
+          backgroundColor: Colors.white,
+          actions: <Widget>[
+            CustomButton(
+              color: AppColors.quizButtonColor,
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => QuizThreeView()),
+                );
+              },
+            )
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +108,7 @@ class _QuizTwoViewState extends State<QuizTwoView> {
               padding: EdgeInsets.only(top: 40.sp, right: 10.sp),
               child: Text(
                 'Quiz 2',
-                style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 18.sp),
               ),
             ),
             SizedBox(height: 20.h),
@@ -42,8 +119,10 @@ class _QuizTwoViewState extends State<QuizTwoView> {
                 children: [
                   Text(
                     'Choose matched cards',
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.sp,
+                    ),
                   ),
                   IconButton(
                     onPressed: () {},
@@ -56,28 +135,27 @@ class _QuizTwoViewState extends State<QuizTwoView> {
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20,
                 ),
-                shrinkWrap: true,
                 itemCount: questions.length,
                 itemBuilder: (context, index) {
-                  return Image.asset(questions[index]);
+                  return GestureDetector(
+                    onTap: () => _onCardTap(index),
+                    child: Container(
+                      margin: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFFB46A),
+                        borderRadius: BorderRadius.circular(15.0),
+                        image: DecorationImage(
+                          image: AssetImage(gameImg[index]),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  );
                 },
               ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 32.sp),
-              child: CustomButton(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const QuizThreeView()),
-                  );
-                },
-                color: AppColors.quizButtonColor,
-              ),
-            )
           ],
         ),
       ),
