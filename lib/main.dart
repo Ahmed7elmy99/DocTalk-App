@@ -11,6 +11,7 @@ import 'package:doc_talk/features/levels_and_categories/presentation/cubit/level
 
 import 'package:doc_talk/features/questionair_feature/cubit/survey_cubit.dart';
 import 'package:doc_talk/features/quiz/cubit/quiz_cubit.dart';
+import 'package:doc_talk/features/quiz/views/quiz_three_shapes_story.dart';
 
 
 import 'package:doc_talk/features/splash_and_onboarding_feature/presentation/screens/splash_screen.dart';
@@ -28,7 +29,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
-import 'features/quiz/views/done_view.dart';
+
 
 //new
 //nwe2
@@ -85,12 +86,12 @@ class MyApp extends StatelessWidget {
                 ),
           ),
           debugShowCheckedModeBanner: false,
-          home://WelcomeScreen()
+          home:QuizThreeShapesStory()
           
           
-        CashHelper.getString(key: "token") == null
+      /*  CashHelper.getString(key: "token") == null
               ? const SplashScreen()
-              : const BottomNavBar(),
+              : const BottomNavBar(),*/
         ));
   }
 }

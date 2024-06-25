@@ -126,7 +126,7 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                       child: Image.network(
                                         "${LevelsCubit.get(context).categoryiesModel2[index].image}",
-                                           width: 99.w,
+                                          width: 99.w,
                           height: 102.h,
                                         fit: BoxFit.fill,
                                       ),
