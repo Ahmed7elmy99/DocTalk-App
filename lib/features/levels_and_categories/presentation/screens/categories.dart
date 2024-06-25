@@ -74,7 +74,7 @@ class CategoriesScreen extends StatelessWidget {
                           "${categoriesModel[index].image}",
                           width: 99.w,
                           height: 102.h,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
                         ),
                       ),
                       SizedBox(height: 10.h),

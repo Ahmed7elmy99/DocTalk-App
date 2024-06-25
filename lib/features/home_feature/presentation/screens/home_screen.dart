@@ -97,7 +97,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     36.verticalSpace,
                     SizedBox(
-                      height: 150.h,
+                      height: 146.h,
                       child: ListView.builder(
                         itemCount:
                             LevelsCubit.get(context).categoryiesModel2.length,
@@ -110,7 +110,7 @@ class HomeScreen extends StatelessWidget {
                                   widget: const FamilyScreen());
                             },
                             child: Container(
-                              width: 100.w,
+                              width: 99.w,
                               height: 146.h,
                               margin: EdgeInsets.only(left: 16.w),
                               decoration: BoxDecoration(
@@ -126,7 +126,9 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                       child: Image.network(
                                         "${LevelsCubit.get(context).categoryiesModel2[index].image}",
-                                        fit: BoxFit.cover,
+                                           width: 99.w,
+                          height: 102.h,
+                                        fit: BoxFit.fill,
                                       ),
                                     ),
                                   ),
