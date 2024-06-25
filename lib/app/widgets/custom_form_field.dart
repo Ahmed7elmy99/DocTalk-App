@@ -119,7 +119,7 @@ class CustomFormField extends StatelessWidget {
               style: TextStyle(
                 height: 1.2.h,
                 color: AppColors.black,
-                fontSize: 20.sp,
+                fontSize: 17.sp,
               ),
               cursorHeight: 20.h,
               decoration: InputDecoration(
@@ -132,8 +132,8 @@ class CustomFormField extends StatelessWidget {
                       horizontal: 20
                     ),
                 errorStyle: TextStyle(
-                  fontSize: 14.sp,
-                  height: 2.h,
+                  fontSize: 12.sp,
+                  height: 0,
                 ),
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(borderRadiusValue ?? 25),

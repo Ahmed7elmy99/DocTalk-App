@@ -18,9 +18,15 @@ import '../../../../app/widgets/text_widget.dart';
 import 'login_screen.dart';
 
 
-class OtpScreen extends StatelessWidget {
+class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
 
+  @override
+  State<OtpScreen> createState() => _OtpScreenState();
+}
+
+class _OtpScreenState extends State<OtpScreen> {
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,56 +44,62 @@ class OtpScreen extends StatelessWidget {
         body: BlocBuilder<AuthCubit, AuthState>(
           builder: (context, state) {
             var cubit = AuthCubit.get(context);
-            return ListView(
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
-              children: [
-                ImageWidget(
-                  imageUrl: AppImages.authLogo,
-                  width: 170.w,
-                  height: 170.h,
-                ),
-                40.verticalSpace,
-                TextWidget(
-                  title: "Recovery Email Sent!",
-                  titleColor: AppColors.black,
-                  titleSize: 20.sp,
-                ),
-                10.verticalSpace,
-                TextWidget(
-                  title: "Please check your email and enter the code we sent to confirm your account",
-                  titleColor: AppColors.black,
-                  titleSize: 16.sp,
-                ),
-                32.verticalSpace,
-                CustomFormField(
-                  hint: "Enter Code",
-                  controller: cubit.otpCon,
-                ),
-                16.verticalSpace,
-                CustomTextButton(
-                  title: "Resend..",
-                  onPressed: () {},
-                  titleSize: 15.sp,
-                  titleColor: AppColors.mainColor,
-                  textDecoration: TextDecoration.underline,
-                ),
-                56.verticalSpace,
-                ButtonWidget(
-                  onPressed: () {
-                    cubit.verifyOtp(context);
-                  },
-                  color: AppColors.mainColor,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  outlined: false,
-                  border: Border.all(color: AppColors.mainColor),
-                  text: "Done",
-                  textSize: 20.sp,
-                  textColor: AppColors.white,
-                ),
-                16.verticalSpace,
+            return Form(
+              key: formKey,
+              child: ListView(
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                children: [
+                  ImageWidget(
+                    imageUrl: AppImages.authLogo,
+                    width: 170.w,
+                    height: 200.h,
+                  ),
+                  40.verticalSpace,
+                  TextWidget(
+                    title: "Recovery Email Sent!",
+                    titleColor: AppColors.black,
+                    titleSize: 20.sp,
+                  ),
+                  10.verticalSpace,
+                  TextWidget(
+                    title: "Please check your email and enter the code we sent to confirm your account",
+                    titleColor: AppColors.black,
+                    titleSize: 16.sp,
+                  ),
+                  32.verticalSpace,
+                  CustomFormField(
+                    hint: "Enter Code",
+                    controller: cubit.otpCon,
+                  ),
+                  5.verticalSpace,
+                  CustomTextButton(
+                    title: "Resend..",
+                    onPressed: () {},
+                    titleSize: 15.sp,
+                    titleColor: AppColors.mainColor,
+                    textDecoration: TextDecoration.underline,
+                  ),
+                  30.verticalSpace,
+                  ButtonWidget(
+                    onPressed: () {
+
+                      if(formKey.currentState!.validate()){
+                        cubit.verifyOtp(context);
+                      }
+                    },
+                    color: AppColors.mainColor,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    outlined: false,
+                    border: Border.all(color: AppColors.mainColor),
+                    text: "Done",
+                    textSize: 20.sp,
+                    textColor: AppColors.white,
+                  ),
+                  16.verticalSpace,
 
 
-              ],
+                ],
+              ),
             );
           },
         )
