@@ -49,7 +49,7 @@ class Q4Screen extends StatelessWidget {
               alignment: Alignment.topCenter,
               decoration:const BoxDecoration(
                   image: DecorationImage(
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                       image: AssetImage(
                         AppImages.q4,
                       )

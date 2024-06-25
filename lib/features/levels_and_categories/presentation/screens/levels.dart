@@ -48,7 +48,7 @@ class LevelsScreen extends StatelessWidget {
               color: const Color(0xFF5B358C),
               child: Stack(
                 children: [
-                  Positioned(
+             /*     Positioned(
                     top: 65.h,
                     child: IconButton(
                       alignment: Alignment.center,
@@ -61,11 +61,11 @@ class LevelsScreen extends StatelessWidget {
                         size: 20.sp,
                       ),
                     ),
-                  ),
+                  ),*/
                   Positioned(
                     left: 104.w,
                     right: 104.w,
-                    top: 53.h,
+                    top: 64.h,
                     child: Container(
                       width: 230.w,
                       height: 230.w,
@@ -82,7 +82,7 @@ class LevelsScreen extends StatelessWidget {
                   Positioned(
                     left: 129.w,
                     right: 129.w,
-                    top: 95.h,
+                    top: 98.h,
                     child: Container(
                       width: 170.w,
                       height: 170.w,

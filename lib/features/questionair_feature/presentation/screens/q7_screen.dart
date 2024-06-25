@@ -25,12 +25,12 @@ class Q7Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor:const  Color(0xfffef3d5),
+      backgroundColor:Colors.white,
       appBar: DefaultAppBarWidget(
           onPop: () {
             navigateAndRemove(context: context, widget: BottomNavBar());
           },
-        backColor: Color(0xfffef3d5),
+        backColor: Colors.transparent,
         systemUiOverlayStyle:  SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
             statusBarBrightness: Brightness.dark,
@@ -80,7 +80,7 @@ class Q7Screen extends StatelessWidget {
               width: double.infinity,
               decoration:const BoxDecoration(
                 image: DecorationImage(
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                   image: AssetImage(
                     AppImages.q7,
                   )

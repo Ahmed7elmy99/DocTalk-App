@@ -79,7 +79,7 @@ class Q6Screen extends StatelessWidget {
               width: double.infinity,
               decoration:const BoxDecoration(
                 image: DecorationImage(
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                   image: AssetImage(
                     AppImages.q6,
                   )

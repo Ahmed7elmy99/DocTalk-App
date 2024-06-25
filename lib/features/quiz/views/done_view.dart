@@ -14,11 +14,12 @@ const DoneView({ Key? key }) : super(key: key);
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.all(60.0),
-            child: Image.asset('assets/images/Avatars1.png',width:150),
+            padding:  EdgeInsets.only(top: 200.h),
+            child: Image.asset('assets/images/Avatars1.png',width:200.w,height: 200.h,),
           ),
            SizedBox(height:50.h),
-          Text('Good jop,${CashHelper.getString(key: "name")}..',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20.sp),),
+          Text('Good jop,${CashHelper.getString(key: "name")}..',style: TextStyle(fontWeight: FontWeight.w500,fontFamily: 'Poppins',
+fontSize: 24.sp,color: Colors.black,),),
           Spacer(),
           Image.asset('assets/images/Frame 2610807.png',width: double.infinity,fit: BoxFit.cover,),
 
