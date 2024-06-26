@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class LevelsScreen extends StatelessWidget {
   LevelsScreen({Key? key, required this.levelsModel}) : super(key: key);
   final List<LevelsModel> levelsModel;
@@ -182,7 +183,6 @@ class LevelsScreen extends StatelessWidget {
                 },
               ),
             ),
-                 
           ],
         ),
       ),
