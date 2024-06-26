@@ -21,10 +21,10 @@ class QuizFiveView extends StatefulWidget {
 
 class _QuizFiveViewState extends State<QuizFiveView> {
   List<String> questions = [
-    "assets/images/triangel.png",
-    "assets/images/circle.png",
-    "assets/images/square.png",
-    "assets/images/crescent.png",
+    "assets/images/Rectangle 5.png",
+    "assets/images/Circle (2).png",
+    "assets/images/Rectangle4.png",
+    "assets/images/Triangel (3).png",
   ];
 
   @override
@@ -47,7 +47,7 @@ class _QuizFiveViewState extends State<QuizFiveView> {
             return Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 40.sp, right: 10.sp,),
+                  padding: EdgeInsets.only(top: 40.sp, right: 12.sp,),
                   child: Text(
                     'Quiz 5',
                     style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.bold),
@@ -78,6 +78,7 @@ class _QuizFiveViewState extends State<QuizFiveView> {
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 20,
+                        mainAxisSpacing: 20,
                       ),
                       shrinkWrap: true,
                       itemCount: questions.length,
@@ -127,7 +128,7 @@ class _QuizFiveViewState extends State<QuizFiveView> {
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Image.asset("assets/images/angry.gif"),
+              Image.asset("assets/images/oops.gif"),
               const Text(
                 "That's wrong",
                 style: TextStyle(

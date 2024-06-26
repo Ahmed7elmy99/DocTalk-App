@@ -126,7 +126,7 @@ class _QuizOneViewState extends State<QuizOneView> {
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Image.asset("assets/images/angry.gif"),
+              Image.asset("assets/images/oops.gif"),
               const Text(
                 "That's wrong",
                 style: TextStyle(

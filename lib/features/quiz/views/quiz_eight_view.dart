@@ -21,16 +21,16 @@ class QuizEightView extends StatefulWidget {
 
 class _QuizEightViewState extends State<QuizEightView> {
   List<String> questions = [
-    "assets/images/triangel.png",
-    "assets/images/diamond.png",
+    "assets/images/Circle3.png",
+    "assets/images/Traingle4.png",
     "assets/images/square.png",
-    "assets/images/star.png",
+    "assets/images/Frame 2610796.png",
   ];
   List<String> questions2 = [
     "Square",
-    "Star",
-    "Diamond",
-    "Triangel",
+    "Rectangle",
+    "Traingle",
+    "Circle",
   ];
   int select = 5;
   bool isMom =false;
@@ -229,7 +229,7 @@ class _QuizEightViewState extends State<QuizEightView> {
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Image.asset("assets/images/angry.gif"),
+              Image.asset("assets/images/oops.gif"),
               const Text(
                 "That's wrong",
                 style: TextStyle(
