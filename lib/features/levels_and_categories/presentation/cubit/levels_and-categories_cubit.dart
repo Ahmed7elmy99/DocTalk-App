@@ -146,7 +146,7 @@ class LevelsCubit extends Cubit<LevelState> {
   }
  /* List<StoriesModel> storiesModel = [];
 
-  Future<void> getStoriesData({
+  Future<void> getStoriesByCategoryId({
     required BuildContext context,
     required int CategoryId,
   }) async {
@@ -158,12 +158,12 @@ class LevelsCubit extends Cubit<LevelState> {
         headers: {
           "Authorization": "${CashHelper.getString(key: "token")}",
         },
-        queryParameters: {"levelId": CategoryId},
+        queryParameters: {"categoryId": CategoryId},
       );
 
       if (response.data is List) {
         storiesModel = List<StoriesModel>.from(
-          response.data.map((item) => CategoryiesModel.fromJson(item)),
+          response.data.map((item) => StoriesModel.fromJson(item)),
         );
       } else {
         throw Exception("Invalid response format");

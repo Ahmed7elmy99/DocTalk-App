@@ -59,7 +59,7 @@ class _QuizThreeShapesStoryState extends State<QuizThreeShapesStory> {
           _controller6.text.isNotEmpty &&
           (_controller1.text + _controller2.text + _controller3.text + _controller4.text + _controller5.text + _controller6.text !=
               _correctName)) {
-        _showGlobalAlertDialog2();
+        _showGlobalAlertDialogWrong();
         _score = 0;
         print(_score);
       }
@@ -79,6 +79,20 @@ class _QuizThreeShapesStoryState extends State<QuizThreeShapesStory> {
       );
     }, canCancel: false);
   }
+    void _showGlobalAlertDialogWrong() {
+    return globalAlertDialogueWrong("",
+        canGif: true,
+        bColor: const Color(0xffF19336),
+        context: context,
+        okButtonText: "Next", onOk: () {
+      Navigator.pop(context);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => QuizFourView()),
+      );
+    }, canCancel: false);
+  }
+
 
   void _showGlobalAlertDialog2() {
     showDialog(

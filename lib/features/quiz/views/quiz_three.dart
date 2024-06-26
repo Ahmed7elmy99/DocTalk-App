@@ -48,7 +48,8 @@ class _QuizThreeViewState extends State<QuizThreeView> {
           _controller3.text.isNotEmpty &&
           (_controller1.text + _controller2.text + _controller3.text !=
               _correctName)) {
-        _showGlobalAlertDialog2();
+        _showGlobalAlertDialogWrong();
+      
         _score = 0;
         print(_score);
       }
@@ -57,6 +58,19 @@ class _QuizThreeViewState extends State<QuizThreeView> {
 
   void _showGlobalAlertDialog() {
     return globalAlertDialogue("",
+        canGif: true,
+        bColor: const Color(0xffF19336),
+        context: context,
+        okButtonText: "Next", onOk: () {
+      Navigator.pop(context);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => QuizFourView()),
+      );
+    }, canCancel: false);
+  }
+  void _showGlobalAlertDialogWrong() {
+    return globalAlertDialogueWrong("",
         canGif: true,
         bColor: const Color(0xffF19336),
         context: context,

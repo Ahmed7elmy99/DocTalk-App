@@ -81,12 +81,12 @@ class MyApp extends StatelessWidget {
                 ),
           ),
           debugShowCheckedModeBanner: false,
-          home:QuizFourView()
-          //QuizThreeView()
+          home://QuizFourView()
+          QuizThreeView()
               //  QuizFourView()
 
               //
-          /*    CashHelper.getString(key: "token") == null
+           /*  CashHelper.getString(key: "token") == null
                   ? const SplashScreen()
                   : const BottomNavBar(),*/
         ));
