@@ -31,6 +31,7 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 import 'features/quiz/views/done_view.dart';
+import 'features/quiz/views/quiz_five_view.dart';
 
 //new
 //nwe2
@@ -87,7 +88,7 @@ class MyApp extends StatelessWidget {
                 ),
           ),
           debugShowCheckedModeBanner: false,
-          home:QuizFourView()
+          home:QuizFiveView()
           
         //
         // CashHelper.getString(key: "token") == null
