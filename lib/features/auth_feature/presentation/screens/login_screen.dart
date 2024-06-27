@@ -44,7 +44,8 @@ class LoginScreen extends StatelessWidget {
                     const Center(child: CircularProgressIndicator()),
               );
             } else if (state is AuthError) {
-              navigator!.pop(context);
+            //  navigator!.pop(context);
+               Navigator.pop(context);
               showDialog(
                 context: context,
                 builder: (context) => const Center(

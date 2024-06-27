@@ -1,5 +1,5 @@
 import 'package:doc_talk/app/utils/consts.dart';
-import 'package:doc_talk/categories.dart';
+//import 'package:doc_talk/categories.dart';
 
 import 'package:doc_talk/features/levels_and_categories/data/models/levels_model.dart';
 import 'package:doc_talk/features/levels_and_categories/presentation/cubit/levels_and-categories_cubit.dart';
@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class LevelsScreen extends StatelessWidget {
   LevelsScreen({Key? key, required this.levelsModel}) : super(key: key);
   final List<LevelsModel> levelsModel;
@@ -48,20 +49,6 @@ class LevelsScreen extends StatelessWidget {
               color: const Color(0xFF5B358C),
               child: Stack(
                 children: [
-             /*     Positioned(
-                    top: 65.h,
-                    child: IconButton(
-                      alignment: Alignment.center,
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.white,
-                        size: 20.sp,
-                      ),
-                    ),
-                  ),*/
                   Positioned(
                     left: 104.w,
                     right: 104.w,
@@ -136,16 +123,18 @@ class LevelsScreen extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Column(
-                children: [
-                  Expanded(
+              child: ListView.builder(
+                padding: EdgeInsets.zero,
+                itemCount: levelsModel.length,
+                itemBuilder: (context, index) {
+                  return Expanded(
                     flex: 1,
                     child: MaterialButton(
                       padding: EdgeInsets.zero,
-                      onPressed: () {
-                        navigateTo(
+                      onPressed: () async {
+                        await LevelsCubit.get(context).getCategoriesData(
                           context: context,
-                          widget: StarterCategoriesScreen(),
+                          levelId: levelsModel[index].id!,
                         );
                       },
                       child: Row(
@@ -153,113 +142,8 @@ class LevelsScreen extends StatelessWidget {
                           Expanded(
                             flex: 1,
                             child: Container(
-                              decoration: const BoxDecoration(
-                                color: Color(0xFF78C8E3),
-                              ),
-                              child:
-                                  Image.asset("assets/images/startericon.png"),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 4,
-                            child: Container(
-                              child: Padding(
-                                padding:
-                                    EdgeInsets.only(left: 24.w, right: 8.w),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Starter ',
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                        color: const Color(0xFF1E1E1E),
-                                        fontSize: 20.sp,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w500,
-                                        height: 0,
-                                      ),
-                                    ),
-                                    Image.asset(
-                                        "assets/images/chevron-down.png"),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  for (int index = 0; index < levelsModel.length; index++)
-                    Expanded(
-                      flex: 1,
-                      child: MaterialButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () async {
-                          await LevelsCubit.get(context).getCategoriesData(
-                            context: context,
-                            levelId: levelsModel[index].id!,
-                          );
-                        },
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: colors[index],
-                                ),
-                                child: Image.asset("assets/images/lock.png"),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 4,
-                              child: Container(
-                                child: Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 24.w, right: 8.w),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "${levelsModel[index].title} ",
-                                        textAlign: TextAlign.start,
-                                        style: TextStyle(
-                                          color: const Color(0xFF1E1E1E),
-                                          fontSize: 20.sp,
-                                          fontFamily: 'Poppins',
-                                          fontWeight: FontWeight.w500,
-                                          height: 0,
-                                        ),
-                                      ),
-                                      Image.asset(
-                                          "assets/images/chevron-down.png"),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  Expanded(
-                    flex: 1,
-                    child: MaterialButton(
-                      padding: EdgeInsets.zero,
-                      onPressed: () {
-                        // Your onPressed logic for Final quiz
-                      },
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                color: Color(0xFF10ABA1),
+                              decoration: BoxDecoration(
+                                color: colors[index % colors.length],
                               ),
                               child: Image.asset("assets/images/lock.png"),
                             ),
@@ -275,7 +159,7 @@ class LevelsScreen extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Final quiz',
+                                      "${levelsModel[index].title} ",
                                       textAlign: TextAlign.start,
                                       style: TextStyle(
                                         color: const Color(0xFF1E1E1E),
@@ -295,8 +179,8 @@ class LevelsScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                  ),
-                ],
+                  );
+                },
               ),
             ),
           ],

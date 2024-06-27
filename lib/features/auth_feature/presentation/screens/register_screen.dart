@@ -95,28 +95,43 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   40.verticalSpace,
-                  ButtonWidget(
-                    onPressed: () {
-                      if (cubit.passwordCon.text ==
-                              cubit.conFirmPasswordCon.text &&
-                          formKey.currentState!.validate()) {
-                        navigateTo(context: context, widget: const Second());
-                      } else if (cubit.passwordCon.text !=
-                          cubit.conFirmPasswordCon.text) {
-                        showToast(
-                            msg:
-                                "Chek That password and Confirmed password are the Same");
-                      }
-                    },
-                    loading: state is AuthLoading,
-                    color: AppColors.mainColor,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    outlined: false,
-                    border: Border.all(color: AppColors.mainColor),
-                    text: "Join DocTalk",
-                    textSize: 20.sp,
-                    textColor: AppColors.white,
-                  ),
+ButtonWidget(
+  onPressed: () {
+    if (formKey.currentState!.validate()) {
+      String password = cubit.passwordCon.text;
+      String confirmPassword = cubit.conFirmPasswordCon.text;
+
+      bool isValidPassword(String password) {
+        RegExp regex = RegExp(
+            r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@])[A-Za-z\d@]{8,}$');
+        return regex.hasMatch(password);
+      }
+
+      if (password == confirmPassword) {
+        if (isValidPassword(password)) {
+          navigateTo(context: context, widget: const Second());
+        } else {
+          showToast(
+            backgroundColor: Colors.red,
+              msg: "Password must contain at least one capital letter, one small letter, numbers, @, and be at least 8 characters long.");
+        }
+      } else {
+        showToast(
+                      backgroundColor: Colors.red,
+            msg: "Check that password and confirmed password are the same.");
+      }
+    }
+  },
+  loading: state is AuthLoading,
+  color: AppColors.mainColor,
+  mainAxisAlignment: MainAxisAlignment.center,
+  outlined: false,
+  border: Border.all(color: AppColors.mainColor),
+  text: "Join DocTalk",
+  textSize: 20.sp,
+  textColor: AppColors.white,
+),
+
                   16.verticalSpace,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

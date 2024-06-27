@@ -1,27 +1,27 @@
 import 'package:doc_talk/features/home_feature/presentation/screens/alert.dart';
+import 'package:doc_talk/features/quiz/views/quiz_eight_view.dart';
+import 'package:doc_talk/features/quiz/views/quiz_four.dart';
+import 'package:doc_talk/features/quiz/widgets/background_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
-import '../../../app/utils/app_colors.dart';
-import '../widgets/background_widget.dart';
-import '../widgets/custom_button.dart';
-import 'quiz_four.dart';
-
-class QuizThreeView extends StatefulWidget {
-  const QuizThreeView({Key? key}) : super(key: key);
+class QuizThreeShapesStory extends StatefulWidget {
+  const QuizThreeShapesStory({Key? key}) : super(key: key);
 
   @override
-  State<QuizThreeView> createState() => _QuizThreeViewState();
+  State<QuizThreeShapesStory> createState() => _QuizThreeShapesStoryState();
 }
 
-class _QuizThreeViewState extends State<QuizThreeView> {
+class _QuizThreeShapesStoryState extends State<QuizThreeShapesStory> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _controller1 = TextEditingController();
   final TextEditingController _controller2 = TextEditingController();
   final TextEditingController _controller3 = TextEditingController();
+  final TextEditingController _controller4 = TextEditingController();
+  final TextEditingController _controller5 = TextEditingController();
+  final TextEditingController _controller6 = TextEditingController();
   int _score = 0;
-  final String _correctName = 'MOM';
+  final String _correctName = 'CIRCLE';
 
   List<String> questions = [];
 
@@ -33,12 +33,21 @@ class _QuizThreeViewState extends State<QuizThreeView> {
         _controller2.text = title;
       } else if (_controller3.text.isEmpty) {
         _controller3.text = title;
+      }else if (_controller4.text.isEmpty) {
+        _controller4.text = title;
+      } else if (_controller5.text.isEmpty) {
+        _controller5.text = title;
+      }else if (_controller6.text.isEmpty) {
+        _controller6.text = title;
       }
 
       if (_controller1.text.isNotEmpty &&
           _controller2.text.isNotEmpty &&
           _controller3.text.isNotEmpty &&
-          (_controller1.text + _controller2.text + _controller3.text ==
+          _controller4.text.isNotEmpty &&
+          _controller5.text.isNotEmpty &&
+          _controller6.text.isNotEmpty &&
+          (_controller1.text + _controller2.text + _controller3.text + _controller4.text + _controller5.text + _controller6.text  ==
               _correctName)) {
         _showGlobalAlertDialog();
         _score = 25;
@@ -46,10 +55,12 @@ class _QuizThreeViewState extends State<QuizThreeView> {
       } else if (_controller1.text.isNotEmpty &&
           _controller2.text.isNotEmpty &&
           _controller3.text.isNotEmpty &&
-          (_controller1.text + _controller2.text + _controller3.text !=
+          _controller4.text.isNotEmpty &&
+          _controller5.text.isNotEmpty &&
+          _controller6.text.isNotEmpty &&
+          (_controller1.text + _controller2.text + _controller3.text + _controller4.text + _controller5.text + _controller6.text !=
               _correctName)) {
         _showGlobalAlertDialogWrong();
-      
         _score = 0;
         print(_score);
       }
@@ -65,11 +76,11 @@ class _QuizThreeViewState extends State<QuizThreeView> {
       Navigator.pop(context);
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => QuizFourView()),
+        MaterialPageRoute(builder: (context) => QuizEightView()),
       );
     }, canCancel: false);
   }
-  void _showGlobalAlertDialogWrong() {
+    void _showGlobalAlertDialogWrong() {
     return globalAlertDialogueWrong("",
         canGif: true,
         bColor: const Color(0xffF19336),
@@ -78,10 +89,11 @@ class _QuizThreeViewState extends State<QuizThreeView> {
       Navigator.pop(context);
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => QuizFourView()),
+        MaterialPageRoute(builder: (context) => QuizEightView()),
       );
     }, canCancel: false);
   }
+
 
   void _showGlobalAlertDialog2() {
     showDialog(
@@ -181,7 +193,7 @@ class _QuizThreeViewState extends State<QuizThreeView> {
               width: 379.w,
               height: 425.h,
               decoration: ShapeDecoration(
-                color: Color(0xFFFDF4EA),
+                color: Color(0xFFFE9F4FF),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.sp),
                 ),
@@ -190,16 +202,17 @@ class _QuizThreeViewState extends State<QuizThreeView> {
                 children: [
                   SizedBox(height: 20.h),
                   Text(
-                    'Who is this.?',
+                    'What is this.?',
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp),
-                  ),
+                  ),SizedBox(height: 15.h),
                   Container(
-                    width: 258.w,
-                    height: 304.h,
-                    child: Image.asset('assets/images/mom quiz.png'),
+                    width: 209.w,
+                    height: 266.h,
+                    child: Image.asset('assets/images/CIRCLE_QUIZ.png'),
                   ),
                   SizedBox(height: 40.h),
+                  
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -230,6 +243,36 @@ class _QuizThreeViewState extends State<QuizThreeView> {
                           controller: _controller3,
                         ),
                       ),
+                                            SizedBox(
+                        width: 20.w,
+                      ),
+                        SizedBox(
+                        width: 36.5.w,
+                        height: 0,
+                        child: TextFormField(
+                          controller: _controller4,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20.w,
+                      ),
+                      SizedBox(
+                        width: 36.5.w,
+                        height: 0,
+                        child: TextFormField(
+                          controller: _controller5,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20.w,
+                      ),
+                      SizedBox(
+                        width: 36.5.w,
+                        height: 0,
+                        child: TextFormField(
+                          controller: _controller6,
+                        ),
+                      ),
                     ],
                   )
                 ],
@@ -245,11 +288,11 @@ class _QuizThreeViewState extends State<QuizThreeView> {
                 padding: EdgeInsets.only(right: 45.5.w, left: 46.5.w),
                 child: Row(children: [
                   CustomCardQuiz4(
-                    color: Color(0xFFFED426),
+                    color:  Color(0xFF4BA651),
                     onTap: () {
-                      _handleCardTap('A');
+                      _handleCardTap('L');
                     },
-                    title: 'A',
+                    title: 'L',
                   ),
                   SizedBox(
                     width: 20.w,
@@ -257,9 +300,9 @@ class _QuizThreeViewState extends State<QuizThreeView> {
                   CustomCardQuiz4(
                     color: Color(0xFF4BA651),
                     onTap: () {
-                      _handleCardTap('M');
+                      _handleCardTap('C');
                     },
-                    title: 'M',
+                    title: 'C',
                   ),
                   SizedBox(
                     width: 20.w,
@@ -275,24 +318,24 @@ class _QuizThreeViewState extends State<QuizThreeView> {
                     width: 20.w,
                   ),
                   CustomCardQuiz4(
-                    color: Color(0xFFFED426),
+                    color:  Color(0xFF4BA651),
                     onTap: () {
-                      _handleCardTap('F');
+                      _handleCardTap('C');
                     },
-                    title: 'F',
+                    title: 'C',
                   )
                 ]),
               ),
               Padding(
                 padding:
-                    EdgeInsets.only(right: 77.5.w, left: 88.5.w, top: 44.h),
+                    EdgeInsets.only(right: 45.5.w, left: 46.5.w, top: 44.h),
                 child: Row(children: [
                   CustomCardQuiz4(
                     color: Color(0xFF4BA651),
                     onTap: () {
-                      _handleCardTap('M');
+                      _handleCardTap('I');
                     },
-                    title: 'M',
+                    title: 'I',
                   ),
                   SizedBox(
                     width: 20.w,
@@ -300,19 +343,29 @@ class _QuizThreeViewState extends State<QuizThreeView> {
                   CustomCardQuiz4(
                     color: Color(0xFF4BA651),
                     onTap: () {
-                      _handleCardTap('O');
+                      _handleCardTap('P');
                     },
-                    title: 'O',
+                    title: 'P',
                   ),
                   SizedBox(
                     width: 20.w,
                   ),
                   CustomCardQuiz4(
-                    color: Color(0xFFFED426),
+                    color:  Color(0xFF4BA651),
                     onTap: () {
-                      _handleCardTap('T');
+                      _handleCardTap('R');
                     },
-                    title: 'T',
+                    title: 'R',
+                  ),
+                    SizedBox(
+                    width: 20.w,
+                  ),
+                  CustomCardQuiz4(
+                    color:  Color(0xFF4BA651),
+                    onTap: () {
+                      _handleCardTap('E');
+                    },
+                    title: 'E',
                   ),
                 ]),
               )

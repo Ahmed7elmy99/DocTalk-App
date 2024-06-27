@@ -80,7 +80,8 @@ class HomeScreen extends StatelessWidget {
                     DefaultAppBarWidget(
                       title: "Hi, ${CashHelper.getString(key: "name")}",
                       canBack: false,
-                      leadingWidth: 0,
+                     // leadingWidth: 0,
+                  
                       backColor: Colors.transparent,
                       actionsWidgets: [
                         IconButton(
@@ -126,7 +127,7 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                       child: Image.network(
                                         "${LevelsCubit.get(context).categoryiesModel2[index].image}",
-                                           width: 99.w,
+                                          width: 99.w,
                           height: 102.h,
                                         fit: BoxFit.fill,
                                       ),

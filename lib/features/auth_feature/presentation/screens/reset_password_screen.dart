@@ -1,4 +1,6 @@
+import 'package:doc_talk/app/utils/consts.dart';
 import 'package:doc_talk/features/auth_feature/presentation/cubit/auth_cubit.dart';
+import 'package:doc_talk/features/parents_and_child_info_feature/presntation/screens/second.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -91,13 +93,30 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   56.verticalSpace,
                   ButtonWidget(
                     onPressed: () {
-                      if(cubit.passwordCon.text == cubit.conFirmPasswordCon.text&&formKey.currentState!.validate()){
-                        cubit.resetPassword(context);
-                      }else{
-                        showToast(msg: "Chek That password and Confirmed password are the Same");
+                 if (formKey.currentState!.validate()) {
+      String password = cubit.passwordCon.text;
+      String confirmPassword = cubit.conFirmPasswordCon.text;
 
-                      }
+      bool isValidPassword(String password) {
+        RegExp regex = RegExp(
+            r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@])[A-Za-z\d@]{8,}$');
+        return regex.hasMatch(password);
+      }
 
+      if (password == confirmPassword) {
+        if (isValidPassword(password)) {
+          navigateTo(context: context, widget: const Second());
+        } else {
+          showToast(
+            backgroundColor: Colors.red,
+              msg: "Password must contain at least one capital letter, one small letter, numbers, @, and be at least 8 characters long.");
+        }
+      } else {
+        showToast(
+                      backgroundColor: Colors.red,
+            msg: "Check that password and confirmed password are the same.");
+      }
+    }
                     },
                     color: AppColors.mainColor,
                     mainAxisAlignment: MainAxisAlignment.center,

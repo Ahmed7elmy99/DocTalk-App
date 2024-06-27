@@ -12,7 +12,7 @@ import '../../../app/utils/app_colors.dart';
 import '../widgets/background_widget.dart';
 import '../widgets/custom_button.dart';
 
-class QuizFiveView extends StatefulWidget {
+class QuizFiveView  extends StatefulWidget {
   const QuizFiveView({Key? key}) : super(key: key);
 
   @override
@@ -49,7 +49,7 @@ class _QuizFiveViewState extends State<QuizFiveView> {
                 Padding(
                   padding: EdgeInsets.only(top: 40.sp, right: 12.sp,),
                   child: Text(
-                    'Quiz 5',
+                    'Quiz 1',
                     style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.bold),
                   ),
                 ),

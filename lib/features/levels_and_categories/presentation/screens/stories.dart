@@ -1,20 +1,20 @@
 
-import 'package:doc_talk/app/utils/app_colors.dart';
+/*import 'package:doc_talk/app/utils/app_colors.dart';
 import 'package:doc_talk/app/utils/consts.dart';
 
 
 import 'package:doc_talk/app/widgets/text_widget.dart';
 import 'package:doc_talk/family_screen.dart';
-import 'package:doc_talk/features/levels_and_categories/data/models/categories_Model.dart';
-import 'package:doc_talk/features/levels_and_categories/presentation/cubit/levels_and-categories_cubit.dart';
+import 'package:doc_talk/features/levels_and_categories/data/models/stories_Model.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
-class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key, required this.categoriesModel});
-  final List<CategoryiesModel> categoriesModel;
+class StoriesScreen extends StatelessWidget {
+  const StoriesScreen({super.key, required this.storiesModel});
+  final List<StoriesModel> storiesModel;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,18 +22,6 @@ class CategoriesScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         scrolledUnderElevation: 0,
-        centerTitle: true,
-        title: Text(
-'Categories',
-style: TextStyle(
-color: Colors.black,
-fontSize: 20.sp,
-fontFamily: 'Poppins',
-fontWeight: FontWeight.w600,
-height: 0,
-letterSpacing: 1.sp,
-),
-),
         elevation: 0,
         leading: IconButton(
           onPressed: () {
@@ -62,15 +50,11 @@ letterSpacing: 1.sp,
               mainAxisSpacing: 24.17.h,  // Spacing of 24 from the bottom
               childAspectRatio: 0.7,
             ),
-            itemCount: categoriesModel.length,
+            itemCount: storiesModel.length,
             itemBuilder: (BuildContext context, int index) {
               return MaterialButton(
                 padding: EdgeInsets.zero,
                 onPressed: () {
-              /*     await LevelsCubit.get(context).getStoriesByCategoryId(
-                          context: context,
-                          CategoryId: categoriesModel[index].id!,
-                        );*/
                   navigateTo(context: context, widget: FamilyScreen());
                 },
                 child: Container(
@@ -88,7 +72,7 @@ letterSpacing: 1.sp,
                           topRight: Radius.circular(20.sp),
                         ),
                         child: Image.network(
-                          "${categoriesModel[index].image}",
+                          "${storiesModel[index].image}",
                           width: 99.w,
                           height: 102.h,
                           fit: BoxFit.fill,
@@ -97,7 +81,7 @@ letterSpacing: 1.sp,
                       SizedBox(height: 10.h),
                       Expanded(
                         child: TextWidget(
-                          title: "${categoriesModel[index].title}",
+                          title: "${storiesModel[index].title}",
                           titleSize: 16.sp,
                           titleColor: Colors.black,
                           titleFontWeight: FontWeight.w400,
@@ -114,4 +98,4 @@ letterSpacing: 1.sp,
       ),
     );
   }
-}
+}*/

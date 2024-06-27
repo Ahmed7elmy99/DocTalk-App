@@ -50,7 +50,7 @@ class _QuizEightViewState extends State<QuizEightView> {
             Padding(
               padding: EdgeInsets.only(top: 40.sp, right: 10.sp),
               child: Text(
-                'Quiz 8',
+                'Quiz 4',
                 style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.bold),
               ),
             ),
@@ -171,7 +171,7 @@ class _QuizEightViewState extends State<QuizEightView> {
                                 isGrand =true;
                               });
                             },
-                            child: Image.asset(questions[3])),
+                            child: Image.asset(questions[3],)),
                         InkWell(
                           onTap: () {
                             setState(() {
