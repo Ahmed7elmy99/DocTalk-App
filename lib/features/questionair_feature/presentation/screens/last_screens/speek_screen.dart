@@ -2,16 +2,23 @@ import 'package:doc_talk/app/utils/consts.dart';
 import 'package:doc_talk/app/widgets/button_widget.dart';
 import 'package:doc_talk/app/widgets/image_widget.dart';
 import 'package:doc_talk/app/widgets/text_widget.dart';
+import 'package:doc_talk/features/levels_and_categories/data/models/categories_Model.dart';
+import 'package:doc_talk/features/levels_and_categories/data/models/stories_Model.dart';
+import 'package:doc_talk/features/levels_and_categories/presentation/screens/stories.dart';
 
 import 'package:doc_talk/features/questionair_feature/presentation/screens/last_screens/go_to_quiz_screen.dart';
+import 'package:doc_talk/features/quiz/views/quiz_three_shapes_story.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../home_feature/presentation/screens/alert.dart';
 
 class SpeecScreen extends StatelessWidget {
-  const SpeecScreen({super.key});
-
+  const SpeecScreen({super.key, required this.storiesModel, required this.index, required this.categoriesModel, required this.index2});
+  final List<StoriesModel> storiesModel;
+  final List<CategoryiesModel> categoriesModel;
+  final int index ;
+   final int index2 ;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,8 +40,17 @@ class SpeecScreen extends StatelessWidget {
                         bColor: const Color(0xffF19336),
                         context: context,
                         okButtonText: "Next", onOk: () {
-                      Navigator.pop(context);
+if(categoriesModel[index2].id == 1 &&storiesModel[index].title == "Review"){
+    Navigator.pop(context);
                       navigateTo(context: context, widget: GoToQuizScreen());
+}else if(categoriesModel[index2].id == 2 &&storiesModel[index].title == "Review"){
+     Navigator.pop(context);
+                      navigateTo(context: context, widget:QuizThreeShapesStory ());
+}
+else{
+    navigateTo(context: context, widget: StoriesScreen(storiesModel: storiesModel,categoryiesModel: categoriesModel,index2: index2,));
+}
+                  
                     }, canCancel: false);
                   },
                   outlined: false,

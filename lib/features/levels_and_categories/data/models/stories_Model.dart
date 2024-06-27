@@ -3,6 +3,7 @@ class StoriesModel {
   String? title;
   int? order;
   int? successValue;
+  String? image;
   String? video;
   int? categoryId;
   Null? category;
@@ -12,6 +13,7 @@ class StoriesModel {
   StoriesModel(
       {this.id,
       this.title,
+      this.image,
       this.order,
       this.successValue,
       this.video,
@@ -23,6 +25,7 @@ class StoriesModel {
   StoriesModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
+    image = json['image'];
     order = json['order'];
     successValue = json['successValue'];
     video = json['video'];
@@ -36,6 +39,7 @@ class StoriesModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['title'] = this.title;
+     data['image'] = this.image;
     data['order'] = this.order;
     data['successValue'] = this.successValue;
     data['video'] = this.video;

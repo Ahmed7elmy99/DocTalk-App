@@ -1,12 +1,13 @@
 import 'package:doc_talk/app/utils/consts.dart';
+import 'package:doc_talk/features/levels_and_categories/data/models/stories_Model.dart';
 import 'package:doc_talk/features/questionair_feature/presentation/screens/last_screens/speek_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:video_player/video_player.dart';
 
-class FamilyScreen extends StatefulWidget {
-  const FamilyScreen({Key? key}) : super(key: key);
-
+/*class FamilyScreen extends StatefulWidget {
+  const FamilyScreen({Key? key, required this.storiesModel}) : super(key: key);
+  final List<StoriesModel> storiesModel;
   @override
   _FamilyScreenState createState() => _FamilyScreenState();
 }
@@ -19,7 +20,7 @@ class _FamilyScreenState extends State<FamilyScreen> {
   @override
   void initState() {
     super.initState();
-    controller = VideoPlayerController.asset("assets/videos/family_video.mp4");
+    controller = VideoPlayerController.network("${widget.storiesModel[0].video}");
 
     controller.addListener(() {
       if (controller.value.position >= controller.value.duration) {
@@ -184,4 +185,4 @@ class _FamilyScreenState extends State<FamilyScreen> {
       ),
     );
   }
-}
+}*/

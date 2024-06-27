@@ -14,6 +14,7 @@ import 'package:doc_talk/features/drawer_feature/presentation/screens/drawer.dar
 import 'package:doc_talk/features/levels_and_categories/presentation/cubit/levels_and-categories_cubit.dart';
 import 'package:doc_talk/features/levels_and_categories/presentation/cubit/levels_and-categories_states.dart';
 import 'package:doc_talk/features/levels_and_categories/presentation/screens/levels.dart';
+import 'package:doc_talk/features/levels_and_categories/presentation/screens/stories.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,6 +30,24 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.green,
         body: BlocConsumer<LevelsCubit, LevelState>(
           listener: (context, state) {
+                        if (state is StoriesLoading) {
+              showDialog(
+                context: context,
+                builder: (context) =>
+                    const Center(child: CircularProgressIndicator()),
+              );
+            } else if (state is StoriesSuccess) {
+              Navigator.pop(context);
+                int selectedIndex = LevelsCubit.get(context).selectedIndex;
+              navigateTo(
+                context: context,
+                widget: StoriesScreen(
+                  storiesModel: LevelsCubit.get(context).storiesModel,
+                  categoryiesModel:  LevelsCubit.get(context).categoryiesModel2,
+                  index2:selectedIndex ,
+                ),
+              );
+            }
             if (state is CategoryHomeLoading) {
               showDialog(
                 context: context,
@@ -105,10 +124,15 @@ class HomeScreen extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           return InkWell(
-                            onTap: () {
-                              navigateTo(
+                            onTap: () async{
+                               LevelsCubit.get(context).setSelectedIndex(index);
+                               await LevelsCubit.get(context).getStoriesByCategoryId(
+                        context: context,
+                        CategoryId: LevelsCubit.get(context).categoryiesModel2[index].id!,
+                      );
+                           /*  navigateTo(
                                   context: context,
-                                  widget: const FamilyScreen());
+                                  widget: const FamilyScreen());*/
                             },
                             child: Container(
                               width: 99.w,

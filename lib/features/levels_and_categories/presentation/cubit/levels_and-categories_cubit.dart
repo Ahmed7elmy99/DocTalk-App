@@ -4,6 +4,7 @@ import 'package:doc_talk/app/utils/cach_helper.dart';
 import 'package:doc_talk/app/utils/dio_helper.dart';
 import 'package:doc_talk/features/levels_and_categories/data/models/categories_Model.dart';
 import 'package:doc_talk/features/levels_and_categories/data/models/levels_model.dart';
+import 'package:doc_talk/features/levels_and_categories/data/models/stories_Model.dart';
 import 'package:doc_talk/features/levels_and_categories/presentation/cubit/levels_and-categories_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,6 +15,13 @@ class LevelsCubit extends Cubit<LevelState> {
   static LevelsCubit get(context) => BlocProvider.of<LevelsCubit>(context);
 
   List<LevelsModel> levelModel = [];
+   int selectedIndex=0;
+
+  // Other methods and properties
+
+  void setSelectedIndex(int index) {
+    selectedIndex = index;
+  }
 
   Future<void> getLevelsData({
     required BuildContext context,
@@ -144,7 +152,7 @@ class LevelsCubit extends Cubit<LevelState> {
       emit(CategoryHomeError());
     }
   }
- /* List<StoriesModel> storiesModel = [];
+  List<StoriesModel> storiesModel = [];
 
   Future<void> getStoriesByCategoryId({
     required BuildContext context,
@@ -154,7 +162,7 @@ class LevelsCubit extends Cubit<LevelState> {
 
     try {
       final response = await DioHelper.getData(
-        url: "http://doctalkapi.runasp.net/api/Category/GetCategoryByLevelId",
+        url: "http://doctalkapi.runasp.net/api/Story/GetStoryByCategoryId",
         headers: {
           "Authorization": "${CashHelper.getString(key: "token")}",
         },
@@ -187,6 +195,6 @@ class LevelsCubit extends Cubit<LevelState> {
 
       emit(StoriesError());
     }
-  }*/
+  }
   
 }

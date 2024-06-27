@@ -12,7 +12,7 @@ class CategoryError extends LevelState {}
 class CategoryHomeLoading extends LevelState {}
 class CategoryHomeSuccess extends LevelState {}
 class CategoryHomeError extends LevelState {}
-/*class StoriesLoading extends LevelState {}
+class StoriesLoading extends LevelState {}
 class StoriesSuccess extends LevelState {}
-class StoriesError extends LevelState {}*/
+class StoriesError extends LevelState {}
 
