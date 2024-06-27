@@ -118,7 +118,7 @@ class _QuizThreeShapesStoryState extends State<QuizThreeShapesStory> {
                       Navigator.pop(context);
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => QuizFourView()),
+                        MaterialPageRoute(builder: (context) => QuizEightView()),
                       );
                     },
                     child: Container(

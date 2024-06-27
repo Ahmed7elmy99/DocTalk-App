@@ -99,6 +99,7 @@ class AuthCubit extends Cubit<AuthState> {
             value: userModel?.patient?.surveyResult.toString());
         CashHelper.setString(
             key: "diagnosis", value: userModel?.patient?.diagnoses.toString());
+          CashHelper .setInt(key: "id", value: userModel?.patient?.id);
              CashHelper.setString(
             key: "Email",
             value:loginEmailCon.text);

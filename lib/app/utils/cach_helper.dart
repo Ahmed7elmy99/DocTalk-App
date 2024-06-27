@@ -12,6 +12,15 @@ class CashHelper{
   static Future<bool> setString({required String key, required dynamic value})async{
     return await shared.setString(key, value);
   }
+    static Future<bool> setInt(
+      {required String key, required dynamic value}) async {
+    return await shared.setInt(key, value);
+  }
+  static int? getInt({
+    required String key,
+  }) {
+    return shared.getInt(key);
+  }
 
   static String? getString({
     required String key,

@@ -6,15 +6,16 @@ import 'package:doc_talk/features/auth_feature/presentation/cubit/auth_cubit.dar
 import 'package:doc_talk/features/home_feature/presentation/screens/bottom_nav_bar.dart';
 
 import 'package:doc_talk/features/levels_and_categories/presentation/cubit/levels_and-categories_cubit.dart';
+import 'package:doc_talk/features/levels_and_categories/presentation/cubit/story_cubit.dart';
 
 import 'package:doc_talk/features/questionair_feature/cubit/survey_cubit.dart';
-import 'package:doc_talk/features/quiz/cubit/quiz_cubit.dart';
-import 'package:doc_talk/features/quiz/views/quiz_five_view.dart';
-import 'package:doc_talk/features/quiz/views/quiz_four.dart';
-import 'package:doc_talk/features/quiz/views/quiz_one.dart';
-import 'package:doc_talk/features/quiz/views/quiz_three.dart';
-
+import 'package:doc_talk/features/quiz/views/done_view.dart';
 import 'package:doc_talk/features/splash_and_onboarding_feature/presentation/screens/splash_screen.dart';
+
+
+
+
+
 //import 'package:doc_talk/test.dart';
 
 //import 'package:doc_talk/test.dart';
@@ -24,6 +25,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+
+import 'features/questionair_feature/cubit/quiz_cubit.dart';
 
 
 
@@ -43,6 +46,10 @@ void main() async {
         BlocProvider(
           create: (BuildContext context) => SurveyCubit(),
         ),
+                BlocProvider(
+          create: (BuildContext context) => StoryCubit(),
+        ),
+
         BlocProvider(
           create: (BuildContext context) => LevelsCubit()
             ..getCategoriesHomeData(context: context, levelId: 1),
@@ -82,9 +89,10 @@ class MyApp extends StatelessWidget {
                 ),
           ),
           debugShowCheckedModeBanner: false,
-          home:
+          home://DoneView1()
+          //QuizTen()
               
-            CashHelper.getString(key: "token") == null
+           CashHelper.getString(key: "token") == null
                   ? const SplashScreen()
                   : const BottomNavBar(),
         ));

@@ -47,14 +47,15 @@ class _LoadingScreenState extends State<LoadingScreen>
     );
   }
 }*/
-class LoadingScreen extends StatefulWidget {
-  const LoadingScreen({Key? key}) : super(key: key);
+class LoadingScreen1 extends StatefulWidget {
+  const LoadingScreen1({Key? key}) : super(key: key);
 
   @override
-  State<LoadingScreen> createState() => _LoadingScreenState();
+  State<LoadingScreen1> createState() => _LoadingScreen1State();
 }
 
-class _LoadingScreenState extends State<LoadingScreen> with TickerProviderStateMixin {
+class _LoadingScreen1State extends State<LoadingScreen1>
+    with TickerProviderStateMixin {
   late GifController controller;
 
   @override
@@ -65,7 +66,64 @@ class _LoadingScreenState extends State<LoadingScreen> with TickerProviderStateM
       controller.repeat(min: 0, max: 29, period: Duration(seconds: 1));
     });
     Future.delayed(const Duration(seconds: 3), () {
-      navigateTo(context: context, widget: DoneView());
+    
+  //  navigateTo(context: context, widget: DoneView1());
+  Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => DoneView1()),
+              );
+    });
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xffe9e9eb),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Gif(
+              image: AssetImage("assets/images/loading.gif"),
+              controller: controller,
+              autostart: Autostart.loop,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+class LoadingScreen2 extends StatefulWidget {
+  const LoadingScreen2({Key? key}) : super(key: key);
+
+  @override
+  State<LoadingScreen2> createState() => _LoadingScreen2State();
+}
+
+class _LoadingScreen2State extends State<LoadingScreen2>
+    with TickerProviderStateMixin {
+  late GifController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = GifController(vsync: this);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.repeat(min: 0, max: 29, period: Duration(seconds: 1));
+    });
+    Future.delayed(const Duration(seconds: 3), () {
+    //  navigateTo(context: context, widget: DoneView2());
+     Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => DoneView2()),
+              );
     });
   }
 
@@ -101,7 +159,6 @@ class _LoadingScreenState extends State<LoadingScreen> with TickerProviderStateM
   );
 }*/
 
-
 class LoadingView extends StatelessWidget {
   const LoadingView({Key? key}) : super(key: key);
 
@@ -111,7 +168,7 @@ class LoadingView extends StatelessWidget {
       // Navigate to the next screen
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const DoneView()),
+        MaterialPageRoute(builder: (context) => const DoneView1()),
       );
     });
     return Scaffold(

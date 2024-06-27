@@ -1,6 +1,7 @@
 import 'package:doc_talk/app/utils/consts.dart';
 import 'package:doc_talk/features/quiz/cubit/quiz_cubit.dart';
 import 'package:doc_talk/features/quiz/views/quiz_eight_view.dart';
+import 'package:doc_talk/features/quiz/views/quiz_ten.dart';
 import 'package:doc_talk/features/quiz/views/quiz_two.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -146,7 +147,7 @@ class _QuizFiveViewState extends State<QuizFiveView> {
                 Navigator.pop(context);
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const QuizEightView()),
+                  MaterialPageRoute(builder: (context) => const QuizTen()),
                 );
               },
             )
