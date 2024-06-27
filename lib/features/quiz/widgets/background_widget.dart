@@ -14,11 +14,12 @@ class QuizBackGround extends StatelessWidget {
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/image 13.png'), // Check image path
-            fit: BoxFit.fill,
+            image: AssetImage(
+                'assets/images/image 13 (1).png'), // Check image path
+            fit: BoxFit.cover,
           ),
         ),
-        alignment: Alignment.topCenter,
+        alignment: Alignment.center,
         child: child);
   }
 }

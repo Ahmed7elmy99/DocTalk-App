@@ -1,11 +1,33 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
+import 'package:audio_waveforms/audio_waveforms.dart';
+import 'package:doc_talk/features/parents_and_child_info_feature/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_sound_record/flutter_sound_record.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:record_mp3/record_mp3.dart';
+
+import '../../../../../app/widgets/button_widget.dart';
+import '../../../../../app/widgets/image_widget.dart';
+import '../../../../../app/widgets/text_widget.dart';
+import '../../../../levels_and_categories/presentation/cubit/story_cubit.dart';
+import '../../../cubit/quiz_cubit.dart';
+
+import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:audio_waveforms/audio_waveforms.dart';
+import 'package:doc_talk/features/parents_and_child_info_feature/widgets/custom_button.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:record_mp3/record_mp3.dart';
 
 import '../../../../../app/widgets/button_widget.dart';
 import '../../../../../app/widgets/image_widget.dart';
@@ -21,27 +43,22 @@ class SpeakScreen extends StatefulWidget {
 }
 
 class _SpeakScreenState extends State<SpeakScreen> {
-  final FlutterSoundRecord _recorder = FlutterSoundRecord();
   bool _isRecording = false;
   String? _filePath;
   String? _audioBase64;
+  late RecorderController _recorderController;
 
   @override
   void initState() {
     super.initState();
     _initializeRecorder();
-  }
-
-  @override
-  void dispose() {
-    _recorder.stop();
-    super.dispose();
+    _recorderController = RecorderController();
   }
 
   Future<void> _initializeRecorder() async {
     await Permission.microphone.request();
     if (await Permission.microphone.isGranted) {
-      // Initialize the recorder if any initialization is needed
+      // Microphone permission granted
     } else {
       // Handle the case when the user denies the permission
       print('Microphone permission denied');
@@ -50,24 +67,38 @@ class _SpeakScreenState extends State<SpeakScreen> {
 
   Future<String> _convertAudioToBase64(String filePath) async {
     List<int> bytes = await File(filePath).readAsBytes();
-    return base64Encode(bytes);
+    String base64String = base64Encode(bytes);
+
+    // Ensure base64 string length is a multiple of 4
+    int remainder = base64String.length % 4;
+    if (remainder != 0) {
+      base64String += '=' * (4 - remainder);
+    }
+
+    return base64String;
   }
 
   Future<void> _startRecording() async {
     try {
+      await _initializeRecorder(); // Ensure permissions are requested
       Directory tempDir = await getTemporaryDirectory();
       String path = '${tempDir.path}/audio.mp3';
+      bool hasPermission = await Permission.microphone.isGranted;
 
-      await _recorder.start(
-        path: path,
-        encoder: AudioEncoder.AAC, // MP3 encoding
-        bitRate: 128000, // You can adjust the bitrate if necessary
-      );
+      if (hasPermission) {
+        RecordMp3.instance.start(path, (type) {
+          print("Record error--->$type");
+        });
 
-      setState(() {
-        _isRecording = true;
-        _filePath = path;
-      });
+        _recorderController.record(); // Start the waveform recording
+
+        setState(() {
+          _isRecording = true;
+          _filePath = path;
+        });
+      } else {
+        print('Microphone permission denied');
+      }
     } catch (e) {
       print('Error starting recorder: $e');
     }
@@ -75,19 +106,45 @@ class _SpeakScreenState extends State<SpeakScreen> {
 
   Future<void> _stopRecording() async {
     try {
-      await _recorder.stop();
-      if (_filePath != null) {
+      bool stopResult = RecordMp3.instance.stop();
+      if (stopResult && _filePath != null) {
         String base64 = await _convertAudioToBase64(_filePath!);
+        _recorderController.stop(); // Stop the waveform recording
+
         setState(() {
           _isRecording = false;
           _audioBase64 = base64;
         });
         print('Recorded file path: $_filePath');
-        print('Base64: $_audioBase64');
+        log('Base64: $_audioBase64');
+
+        if (_audioBase64 != null) {
+          await context.read<QuizCubit>().postQuiz(
+                record: _audioBase64!,
+                storyId: context.read<StoryCubit>().storyId,
+              );
+          bool? isPassed = context.read<QuizCubit>().isPassed;
+          _showQuizPassedDialog(isPassed!);
+        }
       }
     } catch (e) {
       print('Error stopping recorder: $e');
     }
+  }
+
+  void _showQuizPassedDialog(bool isPassed) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return QuizPassedDialog(isPassed: isPassed);
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _recorderController.dispose();
+    super.dispose();
   }
 
   @override
@@ -109,39 +166,26 @@ class _SpeakScreenState extends State<SpeakScreen> {
                 builder: (context, state) {
                   return Column(
                     children: [
-                      ElevatedButton(
+                      ButtonWidget(
                         onPressed: () async {
                           if (_isRecording) {
-                            _stopRecording();
-                            context.read<QuizCubit>().postQuiz(
-                                record: _audioBase64!,
-                                storyId: context
-                                    .read<StoryCubit>()
-                                    .storyId
-                                    .toString());
+                            await _stopRecording();
                           } else {
                             await _startRecording();
                           }
-                        },
-                        child: Text(_isRecording
-                            ? 'Stop Recording'
-                            : 'Start Recording'),
-                      ),
-                      ButtonWidget(
-                        onPressed: () async {
-                          // You can handle any additional button logic here if needed
                         },
                         outlined: false,
                         width: 226,
                         color: Colors.transparent,
                         mainAxisAlignment: MainAxisAlignment.center,
-                        text: "Speak this word",
+                        text:
+                            _isRecording ? 'Stop Recording' : 'Speak this word',
                         textColor: const Color(0xff707070),
                         border: Border.all(color: const Color(0xff707070)),
                       ),
                       const SizedBox(height: 24),
                       const TextWidget(
-                        title: "“MOM”",
+                        title: "“ME”",
                         titleSize: 32,
                         titleColor: Colors.black,
                       ),
@@ -151,22 +195,30 @@ class _SpeakScreenState extends State<SpeakScreen> {
               ),
             ),
             const SizedBox(height: 32),
-            GestureDetector(
-              onTap: () async {
-                try {
-                  context.read<QuizCubit>().postQuiz(
-                      record: _audioBase64!,
-                      storyId: context.read<StoryCubit>().storyId.toString());
-                } catch (e) {
-                  print('Error posting quiz: $e');
-                }
-              },
-              child: const ImageWidget(
+            if (_isRecording)
+              AudioWaveforms(
+                recorderController: _recorderController,
+                size: const Size(363, 80),
+                waveStyle: const WaveStyle(
+                  waveColor: Color(0xFFF19336),
+                  extendWaveform: true,
+                  showMiddleLine: false,
+                ),
+              )
+            else
+              Container(
+                alignment: Alignment.center,
+                child: Text(
+                  "No Recording",
+                  style: TextStyle(fontSize: 25, color: Colors.white),
+                ),
                 width: 363,
                 height: 80,
-                imageUrl: "assets/images/Player.png",
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF19336),
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
-            ),
             const Spacer(),
             const Align(
               alignment: AlignmentDirectional.bottomStart,
@@ -179,6 +231,33 @@ class _SpeakScreenState extends State<SpeakScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class QuizPassedDialog extends StatelessWidget {
+  const QuizPassedDialog({super.key, required this.isPassed});
+  final bool isPassed;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      content: isPassed
+          ? Image.asset('assets/images/thank.gif')
+          : Image.asset('assets/images/oops.gif'),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () {
+            isPassed
+                ? Navigator.of(context).pop()
+                : Navigator.of(context).pop();
+          },
+          child: CustomButton(
+            label: isPassed ? "Next" : "Again",
+            color: const Color(0xFFF19336),
+          ),
+        ),
+      ],
     );
   }
 }

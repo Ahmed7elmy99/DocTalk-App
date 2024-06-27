@@ -38,7 +38,7 @@ class AuthCubit extends Cubit<AuthState> {
   UserModel? userModel;
   bool isVisiable = true;
   bool isConfirm = true;
-
+  String? avatarPath;
   void changePass() {
     isVisiable = !isVisiable;
     emit(AuthInitial());
@@ -104,7 +104,7 @@ class AuthCubit extends Cubit<AuthState> {
             key: "image", value: userModel?.patient?.image.toString());
 
         print(userModel?.token);
-        navigateAndRemove(context: context, widget: BottomNavBar());
+        navigateAndRemove(context: context, widget: const BottomNavBar());
         emit(AuthSuccess());
       }).catchError((e) {
         print(e.toString());

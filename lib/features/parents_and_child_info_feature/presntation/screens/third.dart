@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:doc_talk/app/utils/colors.dart';
 import 'package:doc_talk/features/parents_and_child_info_feature/widgets/child_linear_progress.dart';
 import 'package:doc_talk/features/parents_and_child_info_feature/widgets/custom_button.dart';
-import 'package:doc_talk/features/parents_and_child_info_feature/widgets/parent_linear_progress.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../auth_feature/presentation/cubit/auth_cubit.dart';
 
-class Third extends StatelessWidget {
+class Third extends StatefulWidget {
   const Third(
       {Key? key,
       required this.childName,
@@ -22,6 +22,19 @@ class Third extends StatelessWidget {
   final String gender;
   final String avatarImagePath;
   final int age;
+
+  @override
+  State<Third> createState() => _ThirdState();
+}
+
+class _ThirdState extends State<Third> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<AuthCubit>().avatarPath =
+        widget.imagePath != '' ? widget.imagePath : widget.avatarImagePath;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,18 +48,18 @@ class Third extends StatelessWidget {
           icon: const Icon(Icons.arrow_back_ios),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: <Widget>[
-            ChildlinearProgressWidget(value: 1),
-            Row(
+      body: Column(
+        children: <Widget>[
+          const ChildlinearProgressWidget(value: 1),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
               children: <Widget>[
                 CircleAvatar(
                   backgroundColor: Colors.transparent,
-                  backgroundImage: imagePath != ''
-                      ? FileImage(File(imagePath)) as ImageProvider
-                      : AssetImage(avatarImagePath),
+                  backgroundImage: widget.imagePath != ''
+                      ? FileImage(File(widget.imagePath)) as ImageProvider
+                      : AssetImage(widget.avatarImagePath),
                   minRadius: 40,
                 ),
                 const SizedBox(width: 5),
@@ -61,7 +74,7 @@ class Third extends StatelessWidget {
                         ),
                         const SizedBox(width: 5),
                         Text(
-                          childName,
+                          widget.childName,
                           style: const TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w500),
                         ),
@@ -72,26 +85,26 @@ class Third extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 113,
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CustomButton(
+              label: 'Next',
+              onTap: () {
+                AuthCubit.get(context).signup(
+                  context: context,
+                  name: widget.childName,
+                  image: widget.imagePath,
+                  gender: widget.gender,
+                  age: widget.age,
+                );
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CustomButton(
-                label: 'Next',
-                onTap: () {
-                  AuthCubit.get(context).signup(
-                    context: context,
-                    name: childName,
-                    image: imagePath,
-                    gender: gender,
-                    age: age,
-                  );
-                },
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }

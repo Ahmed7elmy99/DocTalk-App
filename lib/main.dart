@@ -7,6 +7,8 @@ import 'package:doc_talk/features/levels_and_categories/presentation/cubit/level
 import 'package:doc_talk/features/levels_and_categories/presentation/cubit/story_cubit.dart';
 import 'package:doc_talk/features/questionair_feature/cubit/quiz_cubit.dart';
 import 'package:doc_talk/features/questionair_feature/cubit/survey_cubit.dart';
+import 'package:doc_talk/features/questionair_feature/presentation/screens/last_screens/speek_screen.dart';
+import 'package:doc_talk/features/quiz/views/quiz10_shapes.dart';
 import 'package:doc_talk/features/quiz/views/quiz_two.dart';
 import 'package:doc_talk/features/splash_and_onboarding_feature/presentation/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
