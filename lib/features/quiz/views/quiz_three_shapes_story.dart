@@ -1,4 +1,5 @@
 import 'package:doc_talk/features/home_feature/presentation/screens/alert.dart';
+import 'package:doc_talk/features/quiz/views/quiz_eight_view.dart';
 import 'package:doc_talk/features/quiz/views/quiz_four.dart';
 import 'package:doc_talk/features/quiz/widgets/background_widget.dart';
 import 'package:flutter/material.dart';
@@ -75,7 +76,7 @@ class _QuizThreeShapesStoryState extends State<QuizThreeShapesStory> {
       Navigator.pop(context);
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => QuizFourView()),
+        MaterialPageRoute(builder: (context) => QuizEightView()),
       );
     }, canCancel: false);
   }
@@ -88,7 +89,7 @@ class _QuizThreeShapesStoryState extends State<QuizThreeShapesStory> {
       Navigator.pop(context);
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => QuizFourView()),
+        MaterialPageRoute(builder: (context) => QuizEightView()),
       );
     }, canCancel: false);
   }

@@ -80,7 +80,8 @@ class HomeScreen extends StatelessWidget {
                     DefaultAppBarWidget(
                       title: "Hi, ${CashHelper.getString(key: "name")}",
                       canBack: false,
-                      leadingWidth: 0,
+                     // leadingWidth: 0,
+                  
                       backColor: Colors.transparent,
                       actionsWidgets: [
                         IconButton(

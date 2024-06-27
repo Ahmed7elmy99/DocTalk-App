@@ -6,6 +6,7 @@ import 'package:doc_talk/app/utils/consts.dart';
 import 'package:doc_talk/app/widgets/text_widget.dart';
 import 'package:doc_talk/family_screen.dart';
 import 'package:doc_talk/features/levels_and_categories/data/models/categories_Model.dart';
+import 'package:doc_talk/features/levels_and_categories/presentation/cubit/levels_and-categories_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,6 +22,18 @@ class CategoriesScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         scrolledUnderElevation: 0,
+        centerTitle: true,
+        title: Text(
+'Categories',
+style: TextStyle(
+color: Colors.black,
+fontSize: 20.sp,
+fontFamily: 'Poppins',
+fontWeight: FontWeight.w600,
+height: 0,
+letterSpacing: 1.sp,
+),
+),
         elevation: 0,
         leading: IconButton(
           onPressed: () {
@@ -54,6 +67,10 @@ class CategoriesScreen extends StatelessWidget {
               return MaterialButton(
                 padding: EdgeInsets.zero,
                 onPressed: () {
+              /*     await LevelsCubit.get(context).getStoriesByCategoryId(
+                          context: context,
+                          CategoryId: categoriesModel[index].id!,
+                        );*/
                   navigateTo(context: context, widget: FamilyScreen());
                 },
                 child: Container(

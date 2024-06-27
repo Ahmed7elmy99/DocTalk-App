@@ -12,25 +12,25 @@ import '../widgets/background_widget.dart';
 import '../widgets/custom_button.dart';
 
 
-class QuizFourView extends StatefulWidget {
-  const QuizFourView({Key? key}) : super(key: key);
+class QuizEightView extends StatefulWidget {
+  const QuizEightView({Key? key}) : super(key: key);
 
   @override
-  State<QuizFourView> createState() => _QuizFourViewState();
+  State<QuizEightView> createState() => _QuizEightViewState();
 }
 
-class _QuizFourViewState extends State<QuizFourView> {
+class _QuizEightViewState extends State<QuizEightView> {
   List<String> questions = [
-    "assets/images/quiz_one_1.png",
-    "assets/images/quiz_one_2.png",
-    "assets/images/quiz_one_3.png",
-    "assets/images/quiz_one_4.png",
+    "assets/images/Circle3.png",
+    "assets/images/Traingle4.png",
+    "assets/images/square.png",
+    "assets/images/Frame 2610796.png",
   ];
   List<String> questions2 = [
-    "MOM",
-    "Grand-Ma",
-    "Sister",
-    "Brother",
+    "Square",
+    "Rectangle",
+    "Traingle",
+    "Circle",
   ];
   int select = 5;
   bool isMom =false;
@@ -63,7 +63,7 @@ class _QuizFourViewState extends State<QuizFourView> {
                   Text(
                     'Match each picture \nwith its word',
                     style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
+                    TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
                   ),
                   IconButton(
                     onPressed: () async{
@@ -82,11 +82,11 @@ class _QuizFourViewState extends State<QuizFourView> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         InkWell(
-                          onTap:(){
-                            setState(() {
-                              isBrother = true;
-                            });
-                          },
+                            onTap:(){
+                              setState(() {
+                                isBrother = true;
+                              });
+                            },
                             child: Image.asset(questions[0])),
                         InkWell(
                           onTap: () {
@@ -147,7 +147,7 @@ class _QuizFourViewState extends State<QuizFourView> {
                         InkWell(
                           onTap: () {
                             setState(() {
-                             isSister2 = true;
+                              isSister2 = true;
                             });
                           },
                           child: Text(
@@ -171,7 +171,7 @@ class _QuizFourViewState extends State<QuizFourView> {
                                 isGrand =true;
                               });
                             },
-                            child: Image.asset(questions[3])),
+                            child: Image.asset(questions[3],)),
                         InkWell(
                           onTap: () {
                             setState(() {
@@ -197,7 +197,7 @@ class _QuizFourViewState extends State<QuizFourView> {
               child: CustomButton(
                 onTap: () {
                   if((isBrother == true &&isBrother2 == true) &&
-                    (  isSister==true && isSister2==true )
+                      (  isSister==true && isSister2==true )
                       &&
                       (isMom==true && isMom2==true)
                       &&

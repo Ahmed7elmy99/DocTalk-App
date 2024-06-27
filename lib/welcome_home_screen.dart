@@ -1,7 +1,8 @@
-import 'package:doc_talk/app/utils/consts.dart';
-import 'package:doc_talk/features/home_feature/presentation/screens/bottom_nav_bar.dart';
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:doc_talk/features/home_feature/presentation/screens/bottom_nav_bar.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -76,7 +77,11 @@ class WelcomeScreen extends StatelessWidget {
                 left: 135.w,
                 child: MaterialButton(
                   onPressed: () {
-                    navigateTo(context: context, widget: BottomNavBar());
+                  //  navigateTo(context: context, widget:BottomNavBar ());
+                   Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => BottomNavBar()),
+      );
                   },
                   child: Container(
                     width: 140.w,

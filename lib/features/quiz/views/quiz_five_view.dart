@@ -1,5 +1,6 @@
 import 'package:doc_talk/app/utils/consts.dart';
 import 'package:doc_talk/features/quiz/cubit/quiz_cubit.dart';
+import 'package:doc_talk/features/quiz/views/quiz_eight_view.dart';
 import 'package:doc_talk/features/quiz/views/quiz_two.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -11,19 +12,19 @@ import '../../../app/utils/app_colors.dart';
 import '../widgets/background_widget.dart';
 import '../widgets/custom_button.dart';
 
-class QuizOneView extends StatefulWidget {
-  const QuizOneView({Key? key}) : super(key: key);
+class QuizFiveView  extends StatefulWidget {
+  const QuizFiveView({Key? key}) : super(key: key);
 
   @override
-  State<QuizOneView> createState() => _QuizOneViewState();
+  State<QuizFiveView> createState() => _QuizFiveViewState();
 }
 
-class _QuizOneViewState extends State<QuizOneView> {
+class _QuizFiveViewState extends State<QuizFiveView> {
   List<String> questions = [
-    "assets/images/quiz_one_1.png",
-    "assets/images/quiz_one_2.png",
-    "assets/images/quiz_one_3.png",
-    "assets/images/quiz_one_4.png",
+    "assets/images/Rectangle 5.png",
+    "assets/images/Circle (2).png",
+    "assets/images/Rectangle4.png",
+    "assets/images/Triangel (3).png",
   ];
 
   @override
@@ -46,7 +47,7 @@ class _QuizOneViewState extends State<QuizOneView> {
             return Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 40.sp, right: 10.sp,),
+                  padding: EdgeInsets.only(top: 40.sp, right: 12.sp,),
                   child: Text(
                     'Quiz 1',
                     style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.bold),
@@ -59,13 +60,13 @@ class _QuizOneViewState extends State<QuizOneView> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Where is mom?',
+                        'Where is Circle?',
                         style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
                       ),
                       IconButton(
                         onPressed: () async {
-                          await FlutterTts().speak("Where is mom?");
+                          await FlutterTts().speak("Where is Circle?");
                         },
                         icon: Icon(Icons.volume_down_alt, size: 30.sp),
                       ),
@@ -77,18 +78,19 @@ class _QuizOneViewState extends State<QuizOneView> {
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 20,
+                        mainAxisSpacing: 20,
                       ),
                       shrinkWrap: true,
                       itemCount: questions.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
                             onTap: () {
-                              index == 2 ?
-                                  c.correct = 25
+                              index == 1 ?
+                              c.correct = 25
                                   :
-                                  c.correct= 0;
+                              c.correct= 0;
                               print(c.correct);
-                              _showGlobalAlertDialog(success: index == 2?true:false);
+                              _showGlobalAlertDialog(success: index == 1?true:false);
 
                             },
                             child: Image.asset(questions[index]));
@@ -117,7 +119,7 @@ class _QuizOneViewState extends State<QuizOneView> {
   void _showGlobalAlertDialog({required bool success}) {
     showDialog(
       context: context,
-      barrierDismissible: false,
+        barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
           content: success
@@ -144,7 +146,7 @@ class _QuizOneViewState extends State<QuizOneView> {
                 Navigator.pop(context);
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const QuizTwoView()),
+                  MaterialPageRoute(builder: (context) => const QuizEightView()),
                 );
               },
             )

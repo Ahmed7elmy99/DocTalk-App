@@ -9,6 +9,7 @@ import 'package:doc_talk/features/levels_and_categories/presentation/cubit/level
 
 import 'package:doc_talk/features/questionair_feature/cubit/survey_cubit.dart';
 import 'package:doc_talk/features/quiz/cubit/quiz_cubit.dart';
+import 'package:doc_talk/features/quiz/views/quiz_five_view.dart';
 import 'package:doc_talk/features/quiz/views/quiz_four.dart';
 import 'package:doc_talk/features/quiz/views/quiz_one.dart';
 import 'package:doc_talk/features/quiz/views/quiz_three.dart';
@@ -81,14 +82,11 @@ class MyApp extends StatelessWidget {
                 ),
           ),
           debugShowCheckedModeBanner: false,
-          home://QuizFourView()
-          QuizThreeView()
-              //  QuizFourView()
-
-              //
-           /*  CashHelper.getString(key: "token") == null
+          home:
+              
+            CashHelper.getString(key: "token") == null
                   ? const SplashScreen()
-                  : const BottomNavBar(),*/
+                  : const BottomNavBar(),
         ));
   }
 }
