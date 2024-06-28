@@ -38,17 +38,22 @@ class DoneView1 extends StatelessWidget {
               //  const Spacer(),
               SizedBox(height: 15.h,),
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: 4,
-                    shrinkWrap: true,
-                    itemBuilder: (BuildContext context, int index) {
-                      return TaskContainer(
-                        ispassed: true,
-                        index: index,
-                      );
-                    },
+                  child:SingleChildScrollView(
+                    child: Column(
+                      children: [
+                    TaskContainer(index: 1,widget: CashHelper.getInt(key: "quiz one")==25?  Image.asset("assets/images/correct image.png",width: 30.w, height: 30.h,): Image.asset("assets/images/false image.png",
+                      width: 30.w, height: 30.h)) ,
+                    TaskContainer(index: 2,widget: CashHelper.getInt(key: "quizTwo")==25?  Image.asset("assets/images/correct image.png",width: 30.w, height: 30.h,): Image.asset("assets/images/false image.png",
+                      width: 30.w, height: 30.h) ),
+                    TaskContainer(index: 3,widget: CashHelper.getInt(key: "quiz three")==25?  Image.asset("assets/images/correct image.png",width: 30.w, height: 30.h,): Image.asset("assets/images/false image.png",
+                      width: 30.w, height: 30.h) ),
+                    TaskContainer(index: 4,widget: CashHelper.getInt(key: "quiz four")==25?  Image.asset("assets/images/correct image.png",width: 30.w, height: 30.h,): Image.asset("assets/images/false image.png",
+                      width: 30.w, height: 30.h) )
+                      ]
+                    ),
+                  )
                   ),
-                ),
+                
               ],
             ),
           ],
@@ -89,17 +94,19 @@ class DoneView2 extends StatelessWidget {
                 ),
                     SizedBox(height: 15.h,),
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: 4,
-                    shrinkWrap: true,
-                    itemBuilder: (BuildContext context, int index) {
-                      return TaskContainer(
-                        ispassed: true,
-                        index: index,
-                      );
-                    },
+                  child:Column(
+                    children: [
+TaskContainer(index: 1,widget: CashHelper.getInt(key: "quiz one shapes")==25?  Image.asset("assets/images/correct image.png",width: 30.w, height: 30.h,): Image.asset("assets/images/false image.png",
+                    width: 30.w, height: 30.h)) ,
+TaskContainer(index: 2,widget: CashHelper.getInt(key: "Quiz Shapes")==25?   Image.asset("assets/images/correct image.png",width: 30.w, height: 30.h,): Image.asset("assets/images/false image.png",
+                    width: 30.w, height: 30.h) ),
+TaskContainer(index: 3,widget: CashHelper.getInt(key: "quiz three shapes")==25?  Image.asset("assets/images/correct image.png",width: 30.w, height: 30.h,): Image.asset("assets/images/false image.png",
+                    width: 30.w, height: 30.h) ),
+TaskContainer(index: 4,widget: CashHelper.getInt(key: "quiz four shapes")==25?  Image.asset("assets/images/correct image.png",width: 30.w, height: 30.h,): Image.asset("assets/images/false image.png",
+                    width: 30.w, height: 30.h) )
+                    ]
+                  )
                   ),
-                ),
               ],
             ),
           ],

@@ -1,3 +1,4 @@
+import 'package:doc_talk/app/utils/cach_helper.dart';
 import 'package:doc_talk/app/utils/consts.dart';
 import 'package:doc_talk/features/quiz/cubit/quiz_cubit.dart';
 import 'package:doc_talk/features/quiz/views/quiz_two.dart';
@@ -88,6 +89,10 @@ class _QuizOneViewState extends State<QuizOneView> {
                     return GestureDetector(
                         onTap: () {
                           index == 2 ? c.correct = 25 : c.correct = 0;
+                          CashHelper.setInt(
+                              key: "quiz one",
+                              value:c.correct
+                                );
                           print(c.correct);
                           _showGlobalAlertDialog(
                               success: index == 2 ? true : false);

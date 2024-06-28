@@ -100,12 +100,10 @@ class MyApp extends StatelessWidget {
           ),
           debugShowCheckedModeBanner: false,
   
-          home://Test2Screen()
-             
-           CashHelper.getString(key: "token") == null
+          home:
+          CashHelper.getString(key: "token") == null
                   ? const SplashScreen()
-                  : const BottomNavBar(),
-        ));
+                  : const BottomNavBar(),));
   }
 }
 //Shift + Alt + F 

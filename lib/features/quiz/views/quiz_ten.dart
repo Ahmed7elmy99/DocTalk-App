@@ -1,11 +1,13 @@
 
 import 'package:doc_talk/app/utils/app_colors.dart';
+import 'package:doc_talk/app/utils/cach_helper.dart';
 import 'package:doc_talk/features/quiz/views/quiz_three_shapes_story.dart';
 import '../widgets/custom_button.dart';
 import 'package:doc_talk/features/quiz/views/quiz_three.dart';
 import 'package:doc_talk/features/quiz/widgets/background_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 
 class QuizTen extends StatefulWidget {
@@ -17,17 +19,17 @@ class QuizTen extends StatefulWidget {
 
 class _QuizTenState extends State<QuizTen> {
   final List<String> questions = [
-    'assets/images/rectangle5.png',
-    'assets/images/square5.png',
-    'assets/images/rectangle5.png',
-    'assets/images/square5.png',
+    'assets/images/rectangle.png',
+    'assets/images/square.png',
+    'assets/images/rectangle.png',
+    'assets/images/square.png',
   ];
   final String hiddenCardPath = 'assets/images/logo.png';
   List<String> gameImg = [];
   List<Map<int, String>> matchCheck = [];
   int tries = 0;
   int score = 0;
-  bool canTap = true; // Prevent multiple taps
+  int gameResult = 0; // Variable to track the game result
 
   @override
   void initState() {
@@ -37,8 +39,6 @@ class _QuizTenState extends State<QuizTen> {
   }
 
   void _onCardTap(int index) {
-    if (!canTap || gameImg[index] != hiddenCardPath) return;
-
     setState(() {
       tries++;
       gameImg[index] = questions[index];
@@ -46,14 +46,16 @@ class _QuizTenState extends State<QuizTen> {
     });
 
     if (matchCheck.length == 2) {
-      canTap = false; // Disable taps temporarily
       if (matchCheck[0].values.first == matchCheck[1].values.first) {
         setState(() {
           score += 100;
           matchCheck.clear();
-          canTap = true; // Enable taps
         });
         if (gameImg.every((img) => img != hiddenCardPath)) {
+          gameResult = 25; // Update gameResult to 25 if passed
+          CashHelper.setInt(
+              key: "Quiz Shapes", value: gameResult); // Store the result
+          print('Game Result: $gameResult'); // Print game result to console
           _showGlobalAlertDialog(success: true);
         }
       } else {
@@ -62,9 +64,12 @@ class _QuizTenState extends State<QuizTen> {
             gameImg[matchCheck[0].keys.first] = hiddenCardPath;
             gameImg[matchCheck[1].keys.first] = hiddenCardPath;
             matchCheck.clear();
-            canTap = true; // Enable taps
           });
           if (tries >= 4) {
+            gameResult = 0; // Update gameResult to 0 if failed
+            CashHelper.setInt(
+                key: "Quiz Shapes", value: gameResult); // Store the result
+            print('Game Result: $gameResult'); // Print game result to console
             _showGlobalAlertDialog(success: false);
           }
         });
@@ -79,7 +84,7 @@ class _QuizTenState extends State<QuizTen> {
         return AlertDialog(
           content: success
               ? Image.asset("assets/images/thank.gif")
-              : const Text(
+              : Text(
                   "That's wrong",
                   style: TextStyle(
                     color: Colors.red,

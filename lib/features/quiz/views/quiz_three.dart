@@ -1,3 +1,4 @@
+import 'package:doc_talk/app/utils/cach_helper.dart';
 import 'package:doc_talk/features/home_feature/presentation/screens/alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -62,6 +63,10 @@ class _QuizThreeViewState extends State<QuizThreeView> {
         bColor: const Color(0xffF19336),
         context: context,
         okButtonText: "Next", onOk: () {
+           CashHelper.setInt(
+                              key: "quiz three",
+                              value: _score,
+                                );
       Navigator.pop(context);
       Navigator.pushReplacement(
         context,
@@ -75,6 +80,10 @@ class _QuizThreeViewState extends State<QuizThreeView> {
         bColor: const Color(0xffF19336),
         context: context,
         okButtonText: "Next", onOk: () {
+            CashHelper.setInt(
+                              key: "quiz three",
+                              value: _score,
+                                );
       Navigator.pop(context);
       Navigator.pushReplacement(
         context,

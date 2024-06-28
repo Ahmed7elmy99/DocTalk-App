@@ -1,3 +1,4 @@
+import 'package:doc_talk/app/utils/cach_helper.dart';
 import 'package:doc_talk/features/home_feature/presentation/screens/alert.dart';
 import 'package:doc_talk/features/quiz/views/quiz_eight_view.dart';
 import 'package:doc_talk/features/quiz/views/quiz_four.dart';
@@ -73,6 +74,10 @@ class _QuizThreeShapesStoryState extends State<QuizThreeShapesStory> {
         bColor: const Color(0xffF19336),
         context: context,
         okButtonText: "Next", onOk: () {
+            CashHelper.setInt(
+                              key: "quiz three shapes",
+                              value: _score,
+                                );
       Navigator.pop(context);
       Navigator.pushReplacement(
         context,
@@ -86,6 +91,10 @@ class _QuizThreeShapesStoryState extends State<QuizThreeShapesStory> {
         bColor: const Color(0xffF19336),
         context: context,
         okButtonText: "Next", onOk: () {
+            CashHelper.setInt(
+                              key: "quiz three shapes",
+                              value: _score,
+                                );
       Navigator.pop(context);
       Navigator.pushReplacement(
         context,

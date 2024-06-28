@@ -1,3 +1,4 @@
+import 'package:doc_talk/app/utils/cach_helper.dart';
 import 'package:doc_talk/features/quiz/cubit/quiz_cubit.dart';
 import 'package:doc_talk/features/quiz/views/loading_view.dart';
 
@@ -210,8 +211,16 @@ class _QuizEightViewState extends State<QuizEightView> {
                       (isGrand == true && isGrand2 == true)) {
                     QuizCubit2.getObject(context).correct = 50;
                     _showGlobalAlertDialog(success: true);
+                       CashHelper.setInt(
+                              key: "quiz four shapes",
+                              value: 25,
+                                );
                   } else {
                     _showGlobalAlertDialog(success: false);
+                       CashHelper.setInt(
+                              key: "quiz four shapes",
+                              value: 0,
+                                );
                   }
                 },
                 color: AppColors.quizButtonColor,

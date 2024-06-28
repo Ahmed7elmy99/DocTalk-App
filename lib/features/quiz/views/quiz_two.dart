@@ -1,3 +1,4 @@
+import 'package:doc_talk/app/utils/cach_helper.dart';
 import 'package:doc_talk/features/home_feature/presentation/screens/alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,6 +28,7 @@ class _QuizTwoViewState extends State<QuizTwoView> {
   List<Map<int, String>> matchCheck = [];
   int tries = 0;
   int score = 0;
+  int gameResult = 0; // Variable to track the game result
 
   @override
   void initState() {
@@ -49,6 +51,10 @@ class _QuizTwoViewState extends State<QuizTwoView> {
           matchCheck.clear();
         });
         if (gameImg.every((img) => img != hiddenCardPath)) {
+          gameResult = 25;
+          CashHelper.setInt(key: 'quizTwo', value: gameResult);
+          // Update gameResult to 25 if passed
+          print('Game Result: $gameResult'); // Print game result to console
           _showGlobalAlertDialog(success: true);
         }
       } else {
@@ -59,6 +65,9 @@ class _QuizTwoViewState extends State<QuizTwoView> {
             matchCheck.clear();
           });
           if (tries >= 4) {
+            CashHelper.setInt(key: 'quizTwo', value: gameResult);
+            gameResult = 0; // Update gameResult to 0 if failed
+            print('Game Result: $gameResult'); // Print game result to console
             _showGlobalAlertDialog(success: false);
           }
         });
