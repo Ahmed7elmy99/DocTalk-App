@@ -17,6 +17,7 @@ import 'package:doc_talk/features/quiz/views/quiz_four.dart';
 import 'package:doc_talk/features/quiz/views/quiz_one.dart';
 import 'package:doc_talk/features/quiz/views/quiz_three.dart';
 import 'package:doc_talk/features/splash_and_onboarding_feature/presentation/screens/splash_screen.dart';
+import 'package:doc_talk/test.dart';
 
 
 
@@ -98,8 +99,8 @@ class MyApp extends StatelessWidget {
                 ),
           ),
           debugShowCheckedModeBanner: false,
-
-          home:
+  
+          home://Test2Screen()
              
            CashHelper.getString(key: "token") == null
                   ? const SplashScreen()

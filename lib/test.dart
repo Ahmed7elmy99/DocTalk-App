@@ -1,8 +1,12 @@
 import 'package:doc_talk/app/utils/cach_helper.dart';
 import 'package:doc_talk/app/utils/consts.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gif/gif.dart';
+
+import 'package:doc_talk/app/utils/app_assets.dart';
+import 'features/home_feature/presentation/screens/bottom_nav_bar.dart';
 
 
 class WhoIsThisScreen extends StatefulWidget {
@@ -221,118 +225,158 @@ class TestScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          Positioned(
-            top: 209.h,
-            right: 107.84.w,
-            left: 107.w,
-            child: Container(
-              width: 213.16.w,
-            height: 116.11.h,
-              child: Image.asset(
-                "assets/images/image_result_survey.png",
-               
-              ),
+      extendBody: true,
+      extendBodyBehindAppBar: true,
+       appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          scrolledUnderElevation: 0,
+          centerTitle: true,
+          title: Text(
+            'Survey Result',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 20.sp,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w600,
+              height: 0,
+              letterSpacing: 1.sp,
             ),
           ),
-          Center(
-            child: Container(
-              width: 291.w,
-              height: 306.h,
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
-              decoration: ShapeDecoration(
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.r),
+          elevation: 0,
+          leading: IconButton(
+            onPressed: () {
+            //  Navigator.pop(context);
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>BottomNavBar ()));
+            },
+            icon: Icon(
+              CupertinoIcons.back,
+              color: Colors.black.withOpacity(.9),
+            ),
+          ),
+        ),
+      backgroundColor: Colors.white,
+      body: Container(
+          decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(AppImages.back), fit: BoxFit.cover),
+        ),
+        child: Stack(
+          children: [
+            Positioned(
+              top: 209.h,
+              right: 107.84.w,
+              left: 107.w,
+              child: Container(
+                width: 213.16.w,
+              height: 116.11.h,
+                child: Image.asset(
+                  "assets/images/image_result_survey.png",
+                 
                 ),
-                shadows: [
-                  BoxShadow(
-                    color: Color(0x26000000),
-                    blurRadius: 40.r,
-                    offset: Offset(0, 4.h),
-                    spreadRadius: 0,
-                  )
-                ],
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'You get ${CashHelper.getString(key: "surveyResult")} points from 48 ',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20.sp,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w500,
-                            height: 1.5.h,
-                          ),
-                        ),
-                        SizedBox(height: 10.h),
-                        SizedBox(
-                          width: double.infinity,
-                          child: Text(
-                            'we will recommend some exercises for your child to help improve his ability in talking',
+            ),
+            Center(
+              child: Container(
+                width: 291.w,
+                height: 306.h,
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
+                decoration: ShapeDecoration(
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.r),
+                  ),
+                  shadows: [
+                    BoxShadow(
+                      color: Color(0x26000000),
+                      blurRadius: 40.r,
+                      offset: Offset(0, 4.h),
+                      spreadRadius: 0,
+                    )
+                  ],
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            'You get ${CashHelper.getString(key: "surveyResult")} points from 48 ',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: Color(0xE51E1E1E),
-                              fontSize: 18.sp,
+                              color: Colors.black,
+                              fontSize: 20.sp,
                               fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w400,
+                              fontWeight: FontWeight.w500,
                               height: 1.5.h,
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                 /* SizedBox(height: 24.h),
-                  Container(
-                    height: 40.h,
-                    padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
-                    clipBehavior: Clip.antiAlias,
-                    decoration: ShapeDecoration(
-                      color: Color(0xFF2A7473),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25.r),
+                          SizedBox(height: 10.h),
+                          SizedBox(
+                            width: double.infinity,
+                            child: Text(
+                              'we will recommend some exercises for your child to help improve his ability in talking',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Color(0xE51E1E1E),
+                                fontSize: 18.sp,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w400,
+                                height: 1.5.h,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Back to home',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14.sp,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w700,
-                            height: 1.2.h,
-                            letterSpacing: -0.14.w,
+                    SizedBox(height: 24.h),
+                    InkWell(
+                      onTap: () {
+                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>BottomNavBar ()));
+                      },
+                      child: Container(
+                        height: 40.h,
+                        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+                        clipBehavior: Clip.antiAlias,
+                        decoration: ShapeDecoration(
+                          color: Color(0xFF2A7473),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25.r),
                           ),
                         ),
-                        SizedBox(width: 8.w,),
-                        Icon(Icons.arrow_forward, color: Colors.white, size: 16.sp,),
-                      ],
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Back to home',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14.sp,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w700,
+                                height: 1.2.h,
+                                letterSpacing: -0.14.w,
+                              ),
+                            ),
+                            SizedBox(width: 8.w,),
+                            Icon(Icons.arrow_forward, color: Colors.white, size: 16.sp,),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),*/
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -343,119 +387,154 @@ class Test2Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          Positioned(
-            top: 209.h,
-            right: 107.84.w,
-            left: 107.w,
-            child: Container(
-              width: 213.16.w,
-            height: 116.11.h,
-              child: Image.asset(
-                "assets/images/image_result_survey.png",
-              
-              ),
+      extendBodyBehindAppBar: true,
+     extendBody: true,
+        appBar: AppBar(
+          
+          backgroundColor: Colors.transparent,
+          scrolledUnderElevation: 0,
+          centerTitle: true,
+          title: Text(
+            'Saved Stories',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 20.sp,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w600,
+              height: 0,
+              letterSpacing: 1.sp,
             ),
           ),
-          Center(
-            child: Container(
-              width: 291.w,
-              height: 306.h,
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
-              decoration: ShapeDecoration(
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.r),
+          elevation: 0,
+          leading: IconButton(
+            onPressed: () {
+            //  Navigator.pop(context);
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>BottomNavBar ()));
+            },
+            icon: Icon(
+              CupertinoIcons.back,
+              color: Colors.black.withOpacity(.9),
+            ),
+          ),
+        ),
+      backgroundColor: Colors.white,
+      body:
+        /* Container(
+            width: 213.16.w,
+          height: 116.11.h,
+            child: Image.asset(
+              "assets/images/image_result_survey.png",
+            
+            ),
+          ),*/
+          Container(
+             decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(AppImages.back), fit: BoxFit.cover),
+        ),
+            child: Center(
+              child: Container(
+                width: 291.w,
+                height: 306.h,
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
+                decoration: ShapeDecoration(
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.r),
+                  ),
+                  shadows: [
+                    BoxShadow(
+                      color: Color(0x26000000),
+                      blurRadius: 40.r,
+                      offset: Offset(0, 4.h),
+                      spreadRadius: 0,
+                    )
+                  ],
                 ),
-                shadows: [
-                  BoxShadow(
-                    color: Color(0x26000000),
-                    blurRadius: 40.r,
-                    offset: Offset(0, 4.h),
-                    spreadRadius: 0,
-                  )
-                ],
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'You get ${CashHelper.getString(key: "surveyResult")} points from 48 ',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20.sp,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w500,
-                            height: 1.5.h,
-                          ),
-                        ),
-                        SizedBox(height: 10.h),
-                        SizedBox(
-                          width: double.infinity,
-                          child: Text(
-                            'we will recommend some exercises for your child to help improve his ability in talking',
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                      /*    Text(
+                            'You get ${CashHelper.getString(key: "surveyResult")} points from 48 ',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: Color(0xE51E1E1E),
-                              fontSize: 18.sp,
+                              color: Colors.black,
+                              fontSize: 20.sp,
                               fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w400,
+                              fontWeight: FontWeight.w500,
                               height: 1.5.h,
                             ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 24.h),
-                  Container(
-                    height: 40.h,
-                    padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
-                    clipBehavior: Clip.antiAlias,
-                    decoration: ShapeDecoration(
-                      color: Color(0xFF2A7473),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25.r),
+                          ),*/
+                          SizedBox(height: 10.h),
+                          SizedBox(
+            width: 259.w,
+            child: Text(
+            'There is no Saved Stories yet, Unlock your stories to be able to save it',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+            color: Colors.black,
+            fontSize: 20.sp,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.w500,
+            height: 0,
+            ),
+            ),
+            )
+                        ],
                       ),
                     ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Back to home',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14.sp,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w700,
-                            height: 1.2.h,
-                            letterSpacing: -0.14.w,
+                    SizedBox(height: 24.h),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>BottomNavBar ()));
+                      },
+                      child: Container(
+                        height: 40.h,
+                        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+                        clipBehavior: Clip.antiAlias,
+                        decoration: ShapeDecoration(
+                          color: Color(0xFF2A7473),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25.r),
                           ),
                         ),
-                        SizedBox(width: 8.w,),
-                        Icon(Icons.arrow_forward, color: Colors.white, size: 16.sp,),
-                      ],
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Back to home',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14.sp,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w700,
+                                height: 1.2.h,
+                                letterSpacing: -0.14.w,
+                              ),
+                            ),
+                            SizedBox(width: 8.w,),
+                            Icon(Icons.arrow_forward, color: Colors.white, size: 16.sp,),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
-        ],
-      ),
+        
+      
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:doc_talk/app/utils/cach_helper.dart';
 import 'package:doc_talk/app/utils/consts.dart';
+import 'package:doc_talk/explore_screen.dart';
 import 'package:doc_talk/features/drawer_feature/presentation/screens/drawer.dart';
 import 'package:doc_talk/features/home_feature/presentation/screens/home_screen.dart';
 import 'package:doc_talk/features/home_feature/presentation/screens/settings_view.dart';
@@ -8,8 +9,9 @@ import 'package:doc_talk/features/home_feature/presentation/widgets/custom_butto
 import 'package:doc_talk/features/questionair_feature/cubit/states_survey.dart';
 import 'package:doc_talk/features/questionair_feature/cubit/survey_cubit.dart';
 import 'package:doc_talk/features/questionair_feature/presentation/screens/q1_screen.dart';
-
 import 'package:doc_talk/test.dart';
+
+//import 'package:doc_talk/test.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,8 +28,10 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   List<Widget> bottomScreens = [
     const HomeScreen(),
-    const MyDrawer(),
-    const HomeScreen(),
+   // const MyDrawer(),
+   // const HomeScreen(),
+   const ExploreScreen(),
+  const Test2Screen(),
     const SettingsView()
   ];
 
@@ -71,7 +75,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
              await cubit.getSurveyData(context: context, id: 1);
    
   } else  {
-     navigateTo(context: context, widget:  TestScreen());
+    // navigateTo(context: context, widget:  TestScreen());
+  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  TestScreen()));
   }
             //  await cubit.getSurveyData(context: context, id: 1);
               // navigateTo(context: context, widget: Q1Screen());
