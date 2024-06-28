@@ -9,7 +9,13 @@ import 'package:doc_talk/features/levels_and_categories/presentation/cubit/level
 import 'package:doc_talk/features/levels_and_categories/presentation/cubit/story_cubit.dart';
 
 import 'package:doc_talk/features/questionair_feature/cubit/survey_cubit.dart';
+import 'package:doc_talk/features/questionair_feature/presentation/screens/last_screens/go_to_quiz_screen.dart';
+import 'package:doc_talk/features/quiz/cubit/quiz_cubit.dart';
 import 'package:doc_talk/features/quiz/views/done_view.dart';
+import 'package:doc_talk/features/quiz/views/quiz_five_view.dart';
+import 'package:doc_talk/features/quiz/views/quiz_four.dart';
+import 'package:doc_talk/features/quiz/views/quiz_one.dart';
+import 'package:doc_talk/features/quiz/views/quiz_three.dart';
 import 'package:doc_talk/features/splash_and_onboarding_feature/presentation/screens/splash_screen.dart';
 
 
@@ -56,6 +62,9 @@ void main() async {
         ),
         BlocProvider(
           create: (BuildContext context) => QuizCubit(),
+        ),
+          BlocProvider(
+          create: (BuildContext context) => QuizCubit2(),
         )
       ],
       child: const MyApp(),
@@ -89,9 +98,9 @@ class MyApp extends StatelessWidget {
                 ),
           ),
           debugShowCheckedModeBanner: false,
-          home://DoneView1()
-          //QuizTen()
-              
+
+          home:
+             
            CashHelper.getString(key: "token") == null
                   ? const SplashScreen()
                   : const BottomNavBar(),

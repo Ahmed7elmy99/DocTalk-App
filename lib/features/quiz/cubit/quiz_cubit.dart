@@ -9,30 +9,29 @@ import '../models/quiz_model.dart';
 
 part 'quiz_state.dart';
 
-class QuizCubit extends Cubit<QuizState> {
-  QuizCubit() : super(QuizInitial());
-  static QuizCubit getObject(context ) => BlocProvider.of(context);
+class QuizCubit2 extends Cubit<QuizState> {
+  QuizCubit2() : super(QuizInitial());
+  static QuizCubit2 getObject(context) => BlocProvider.of(context);
 
   int correct = 0;
 
-  List<QuizModel> ?quiz ;
+  List<QuizModel>? quiz;
 
-
-  void getQuiz(){
+  void getQuiz() {
     emit(QuizLoad());
     print("1");
     DioHelper.getData(
-        url: "http://doctalkapi.runasp.net/api/QuizAnswer/GetQuizAnswerByQuizId?quizId=1",
-      headers: {
-          "Authorization":"Bearer ${ CashHelper.getString(key: "token")}",
-      }
-    ).then((value) {
-      for(var e in value.data){
+        url:
+            "http://doctalkapi.runasp.net/api/QuizAnswer/GetQuizAnswerByQuizId?quizId=1",
+        headers: {
+          "Authorization": "Bearer ${CashHelper.getString(key: "token")}",
+        }).then((value) {
+      for (var e in value.data) {
         quiz?.add(QuizModel.fromJson(e));
       }
       print("Doneeeeeeeeeeee");
       emit(QuizInitial());
-    }).catchError((e){
+    }).catchError((e) {
       print(e.toString());
       emit(QuizInitial());
     });

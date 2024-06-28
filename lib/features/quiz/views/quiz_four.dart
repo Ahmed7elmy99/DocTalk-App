@@ -206,7 +206,7 @@ class _QuizFourViewState extends State<QuizFourView> {
                       (isSister == true && isSister2 == true) &&
                       (isMom == true && isMom2 == true) &&
                       (isGrand == true && isGrand2 == true)) {
-                    QuizCubit.getObject(context).correct = 50;
+                    QuizCubit2.getObject(context).correct = 50;
                     _showGlobalAlertDialog(success: true);
                   } else {
                     _showGlobalAlertDialog(success: false);

@@ -52,7 +52,7 @@ class LevelsScreen extends StatelessWidget {
                   Positioned(
                     left: 104.w,
                     right: 104.w,
-                    top: 64.h,
+                    top: 65.h,
                     child: Container(
                       width: 230.w,
                       height: 230.w,
@@ -127,8 +127,8 @@ class LevelsScreen extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 itemCount: levelsModel.length,
                 itemBuilder: (context, index) {
-                  return Expanded(
-                    flex: 1,
+                  return SizedBox(
+                    height: 84.h,  // Set a fixed height for each item
                     child: MaterialButton(
                       padding: EdgeInsets.zero,
                       onPressed: () async {
@@ -139,40 +139,33 @@ class LevelsScreen extends StatelessWidget {
                       },
                       child: Row(
                         children: [
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: colors[index % colors.length],
-                              ),
-                              child: Image.asset("assets/images/lock.png"),
+                          Container(
+                            width: 80.w, // Set a fixed width for the lock image container
+                            decoration: BoxDecoration(
+                              color: colors[index % colors.length],
                             ),
+                            child: Image.asset("assets/images/lock.png"),
                           ),
                           Expanded(
-                            flex: 4,
                             child: Container(
-                              child: Padding(
-                                padding:
-                                    EdgeInsets.only(left: 24.w, right: 8.w),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "${levelsModel[index].title} ",
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                        color: const Color(0xFF1E1E1E),
-                                        fontSize: 20.sp,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w500,
-                                        height: 0,
-                                      ),
+                              padding: EdgeInsets.only(left: 24.w, right: 8.w),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "${levelsModel[index].title} ",
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      color: const Color(0xFF1E1E1E),
+                                      fontSize: 20.sp,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w500,
+                                      height: 0,
                                     ),
-                                    Image.asset(
-                                        "assets/images/chevron-down.png"),
-                                  ],
-                                ),
+                                  ),
+                                  Image.asset("assets/images/chevron-down.png"),
+                                ],
                               ),
                             ),
                           ),

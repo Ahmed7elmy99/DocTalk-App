@@ -103,7 +103,7 @@ class _FamilyScreenState extends State<FamilyScreen> {
                   onPressed: () {
                   
                   //  navigateTo(context: context, widget:  SpeakScreen(storiesModel: widget.storiesModel, index: widget.index,categoriesModel: widget.categoryiesModel,index2: widget.index2,));
-                     Navigator.pushReplacement(
+                  Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => SpeakScreen(storiesModel: widget.storiesModel, index: widget.index,categoriesModel: widget.categoryiesModel,index2: widget.index2,)),
               );

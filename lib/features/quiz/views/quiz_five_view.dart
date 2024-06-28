@@ -13,7 +13,7 @@ import '../../../app/utils/app_colors.dart';
 import '../widgets/background_widget.dart';
 import '../widgets/custom_button.dart';
 
-class QuizFiveView  extends StatefulWidget {
+class QuizFiveView extends StatefulWidget {
   const QuizFiveView({Key? key}) : super(key: key);
 
   @override
@@ -31,7 +31,7 @@ class _QuizFiveViewState extends State<QuizFiveView> {
   @override
   void initState() {
     super.initState();
-    QuizCubit.getObject(context).getQuiz();
+    QuizCubit2.getObject(context).getQuiz();
   }
 
   FlutterTts flutterTts = FlutterTts();
@@ -42,16 +42,20 @@ class _QuizFiveViewState extends State<QuizFiveView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: QuizBackGround(
-        child: BlocBuilder<QuizCubit, QuizState>(
+        child: BlocBuilder<QuizCubit2, QuizState>(
           builder: (context, state) {
-            var c = QuizCubit.getObject(context);
+            var c = QuizCubit2.getObject(context);
             return Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 40.sp, right: 12.sp,),
+                  padding: EdgeInsets.only(
+                    top: 40.sp,
+                    right: 12.sp,
+                  ),
                   child: Text(
                     'Quiz 1',
-                    style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
                   ),
                 ),
                 SizedBox(height: 20.h),
@@ -62,8 +66,8 @@ class _QuizFiveViewState extends State<QuizFiveView> {
                     children: [
                       Text(
                         'Where is Circle?',
-                        style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16.sp),
                       ),
                       IconButton(
                         onPressed: () async {
@@ -76,27 +80,24 @@ class _QuizFiveViewState extends State<QuizFiveView> {
                 ),
                 Expanded(
                     child: GridView.builder(
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 20,
-                        mainAxisSpacing: 20,
-                      ),
-                      shrinkWrap: true,
-                      itemCount: questions.length,
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                            onTap: () {
-                              index == 1 ?
-                              c.correct = 25
-                                  :
-                              c.correct= 0;
-                              print(c.correct);
-                              _showGlobalAlertDialog(success: index == 1?true:false);
-
-                            },
-                            child: Image.asset(questions[index]));
-                      },
-                    )),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20,
+                  ),
+                  shrinkWrap: true,
+                  itemCount: questions.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                        onTap: () {
+                          index == 1 ? c.correct = 25 : c.correct = 0;
+                          print(c.correct);
+                          _showGlobalAlertDialog(
+                              success: index == 1 ? true : false);
+                        },
+                        child: Image.asset(questions[index]));
+                  },
+                )),
                 // Padding(
                 //   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 32.sp),
                 //   child: CustomButton(
@@ -117,28 +118,28 @@ class _QuizFiveViewState extends State<QuizFiveView> {
       ),
     );
   }
+
   void _showGlobalAlertDialog({required bool success}) {
     showDialog(
       context: context,
-        barrierDismissible: false,
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
           content: success
               ? Image.asset("assets/images/thank.gif")
-              :
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset("assets/images/oops.gif"),
-              const Text(
-                "That's wrong",
-                style: TextStyle(
-                  color: Colors.red,
-                  fontSize: 24,
+              : Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Image.asset("assets/images/oops.gif"),
+                    const Text(
+                      "That's wrong",
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 24,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
           backgroundColor: Colors.white,
           actions: <Widget>[
             CustomButton(
