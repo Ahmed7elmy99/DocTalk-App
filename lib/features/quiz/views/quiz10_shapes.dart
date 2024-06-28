@@ -1,4 +1,5 @@
 import 'package:doc_talk/app/utils/app_colors.dart';
+import 'package:doc_talk/app/utils/cach_helper.dart';
 import 'package:doc_talk/features/parents_and_child_info_feature/widgets/custom_button.dart';
 import 'package:doc_talk/features/quiz/views/quiz_three.dart';
 import 'package:doc_talk/features/quiz/widgets/background_widget.dart';
@@ -24,6 +25,7 @@ class _QuizTenState extends State<QuizTen> {
   List<Map<int, String>> matchCheck = [];
   int tries = 0;
   int score = 0;
+  int gameResult = 0; // Variable to track the game result
 
   @override
   void initState() {
@@ -46,6 +48,10 @@ class _QuizTenState extends State<QuizTen> {
           matchCheck.clear();
         });
         if (gameImg.every((img) => img != hiddenCardPath)) {
+          gameResult = 25; // Update gameResult to 25 if passed
+          CacheHelper.setInt(
+              key: "Quiz Shapes", value: gameResult); // Store the result
+          print('Game Result: $gameResult'); // Print game result to console
           _showGlobalAlertDialog(success: true);
         }
       } else {
@@ -56,6 +62,10 @@ class _QuizTenState extends State<QuizTen> {
             matchCheck.clear();
           });
           if (tries >= 4) {
+            gameResult = 0; // Update gameResult to 0 if failed
+            CacheHelper.setInt(
+                key: "Quiz Shapes", value: gameResult); // Store the result
+            print('Game Result: $gameResult'); // Print game result to console
             _showGlobalAlertDialog(success: false);
           }
         });
@@ -95,6 +105,7 @@ class _QuizTenState extends State<QuizTen> {
     );
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: QuizBackGround(
