@@ -9,6 +9,8 @@ import 'package:doc_talk/features/levels_and_categories/presentation/cubit/level
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+
+List<StoriesModel> storiesModel1 = [];
 class LevelsCubit extends Cubit<LevelState> {
   LevelsCubit() : super(LevelInitial());
 
@@ -196,7 +198,7 @@ class LevelsCubit extends Cubit<LevelState> {
       emit(StoriesError());
     }
   }
-List<StoriesModel> storiesModel1 = [];
+//List<StoriesModel> storiesModel1 = [];
   Future<void> getFavoritesStories({
     required BuildContext context,
     
@@ -221,8 +223,9 @@ List<StoriesModel> storiesModel1 = [];
         throw Exception("Invalid response format");
       }
 
+
       print(response.data);
-      print("Success");
+      print("favourites come");
 
       emit(FavoritesSuccess());
     } catch (e) {

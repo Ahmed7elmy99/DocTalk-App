@@ -1,13 +1,17 @@
 import 'package:doc_talk/app/utils/cach_helper.dart';
 import 'package:doc_talk/app/utils/consts.dart';
+import 'package:doc_talk/features/levels_and_categories/data/models/stories_Model.dart';
+import 'package:doc_talk/features/levels_and_categories/presentation/cubit/levels_and-categories_cubit.dart';
+import 'package:doc_talk/features/levels_and_categories/presentation/cubit/levels_and-categories_states.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:gif/gif.dart';
 
 import 'package:doc_talk/app/utils/app_assets.dart';
 import 'features/home_feature/presentation/screens/bottom_nav_bar.dart';
-
 
 class WhoIsThisScreen extends StatefulWidget {
   @override
@@ -19,12 +23,14 @@ class _WhoIsThisScreenState extends State<WhoIsThisScreen> {
   final TextEditingController _controller = TextEditingController();
   int _score = 0;
   final String _correctName = 'MOM'; // Change this to the name of your image
-  final String _imagePath = 'assets/images/Frame 2610771.png'; // Path to your image
+  final String _imagePath =
+      'assets/images/Frame 2610771.png'; // Path to your image
 
   void _checkName() {
     if (_formKey.currentState!.validate()) {
       setState(() {
-        if (_controller.text.trim().toLowerCase() == _correctName.toLowerCase()) {
+        if (_controller.text.trim().toLowerCase() ==
+            _correctName.toLowerCase()) {
           _score = 25;
         } else {
           _score = 0;
@@ -95,7 +101,6 @@ class _WhoIsThisScreenState extends State<WhoIsThisScreen> {
   }
 }
 
-
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({Key? key}) : super(key: key);
 
@@ -103,7 +108,8 @@ class LoadingScreen extends StatefulWidget {
   State<LoadingScreen> createState() => _LoadingScreenState();
 }
 
-class _LoadingScreenState extends State<LoadingScreen> with TickerProviderStateMixin {
+class _LoadingScreenState extends State<LoadingScreen>
+    with TickerProviderStateMixin {
   GifController? controller;
 
   @override
@@ -168,11 +174,12 @@ class DoneView extends StatelessWidget {
     );
   }
 }
+
 class ResultContainer extends StatefulWidget {
   const ResultContainer({
-    super.key, 
+    super.key,
   });
- //final SurveyResultModel surveyResultModel;
+  //final SurveyResultModel surveyResultModel;
 
   @override
   State<ResultContainer> createState() => _ResultContainerState();
@@ -202,8 +209,8 @@ class _ResultContainerState extends State<ResultContainer> {
                 style: TextStyle(fontSize: 28.sp, color: Colors.white),
               ),
               SizedBox(height: 20.h),
-              Text("${CashHelper.getString(key: "diagnosis")}"
-                ,
+              Text(
+                "${CashHelper.getString(key: "diagnosis")}",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 20.sp,
@@ -218,7 +225,6 @@ class _ResultContainerState extends State<ResultContainer> {
   }
 }
 
-
 class TestScreen extends StatelessWidget {
   const TestScreen({super.key});
 
@@ -227,36 +233,37 @@ class TestScreen extends StatelessWidget {
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
-       appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          scrolledUnderElevation: 0,
-          centerTitle: true,
-          title: Text(
-            'Survey Result',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 20.sp,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w600,
-              height: 0,
-              letterSpacing: 1.sp,
-            ),
-          ),
-          elevation: 0,
-          leading: IconButton(
-            onPressed: () {
-            //  Navigator.pop(context);
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>BottomNavBar ()));
-            },
-            icon: Icon(
-              CupertinoIcons.back,
-              color: Colors.black.withOpacity(.9),
-            ),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        scrolledUnderElevation: 0,
+        centerTitle: true,
+        title: Text(
+          'Survey Result',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 20.sp,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.w600,
+            height: 0,
+            letterSpacing: 1.sp,
           ),
         ),
+        elevation: 0,
+        leading: IconButton(
+          onPressed: () {
+            //  Navigator.pop(context);
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => BottomNavBar()));
+          },
+          icon: Icon(
+            CupertinoIcons.back,
+            color: Colors.black.withOpacity(.9),
+          ),
+        ),
+      ),
       backgroundColor: Colors.white,
       body: Container(
-          decoration: const BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
               image: AssetImage(AppImages.back), fit: BoxFit.cover),
         ),
@@ -268,10 +275,9 @@ class TestScreen extends StatelessWidget {
               left: 107.w,
               child: Container(
                 width: 213.16.w,
-              height: 116.11.h,
+                height: 116.11.h,
                 child: Image.asset(
                   "assets/images/image_result_survey.png",
-                 
                 ),
               ),
             ),
@@ -337,11 +343,15 @@ class TestScreen extends StatelessWidget {
                     SizedBox(height: 24.h),
                     InkWell(
                       onTap: () {
-                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>BottomNavBar ()));
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => BottomNavBar()));
                       },
                       child: Container(
                         height: 40.h,
-                        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 12.w, vertical: 8.h),
                         clipBehavior: Clip.antiAlias,
                         decoration: ShapeDecoration(
                           color: Color(0xFF2A7473),
@@ -365,8 +375,14 @@ class TestScreen extends StatelessWidget {
                                 letterSpacing: -0.14.w,
                               ),
                             ),
-                            SizedBox(width: 8.w,),
-                            Icon(Icons.arrow_forward, color: Colors.white, size: 16.sp,),
+                            SizedBox(
+                              width: 8.w,
+                            ),
+                            Icon(
+                              Icons.arrow_forward,
+                              color: Colors.white,
+                              size: 16.sp,
+                            ),
                           ],
                         ),
                       ),
@@ -381,163 +397,195 @@ class TestScreen extends StatelessWidget {
     );
   }
 }
-class Test2Screen extends StatelessWidget {
-  const Test2Screen({super.key});
+
+class Test2Screen extends StatefulWidget {
+  const Test2Screen({Key? key, required this.storiesModel}) : super(key: key);
+
+  final List<StoriesModel> storiesModel;
+
+  @override
+  State<Test2Screen> createState() => _Test2ScreenState();
+}
+
+class _Test2ScreenState extends State<Test2Screen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      ahmed();
+    });
+  }
+
+  Future<void> ahmed() async {
+    await LevelsCubit.get(context).getFavoritesStories(
+      context: context,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-     extendBody: true,
-        appBar: AppBar(
-          
-          backgroundColor: Colors.transparent,
-          scrolledUnderElevation: 0,
-          centerTitle: true,
-          title: Text(
-            'Saved Stories',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 20.sp,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w600,
-              height: 0,
-              letterSpacing: 1.sp,
-            ),
-          ),
-          elevation: 0,
-          leading: IconButton(
-            onPressed: () {
-            //  Navigator.pop(context);
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>BottomNavBar ()));
-            },
-            icon: Icon(
-              CupertinoIcons.back,
-              color: Colors.black.withOpacity(.9),
-            ),
-          ),
-        ),
-      backgroundColor: Colors.white,
-      body:
-        /* Container(
-            width: 213.16.w,
-          height: 116.11.h,
-            child: Image.asset(
-              "assets/images/image_result_survey.png",
-            
-            ),
-          ),*/
-          Container(
-             decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage(AppImages.back), fit: BoxFit.cover),
-        ),
-            child: Center(
-              child: Container(
-                width: 291.w,
-                height: 306.h,
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
-                decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.r),
-                  ),
-                  shadows: [
-                    BoxShadow(
-                      color: Color(0x26000000),
-                      blurRadius: 40.r,
-                      offset: Offset(0, 4.h),
-                      spreadRadius: 0,
-                    )
-                  ],
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                      /*    Text(
-                            'You get ${CashHelper.getString(key: "surveyResult")} points from 48 ',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20.sp,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w500,
-                              height: 1.5.h,
-                            ),
-                          ),*/
-                          SizedBox(height: 10.h),
-                          SizedBox(
-            width: 259.w,
-            child: Text(
-            'There is no Saved Stories yet, Unlock your stories to be able to save it',
-            textAlign: TextAlign.center,
-            style: TextStyle(
+      extendBody: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        scrolledUnderElevation: 0,
+        centerTitle: true,
+        title: Text(
+          'Saved Stories',
+          style: TextStyle(
             color: Colors.black,
             fontSize: 20.sp,
             fontFamily: 'Poppins',
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w600,
             height: 0,
-            ),
-            ),
-            )
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 24.h),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>BottomNavBar ()));
-                      },
-                      child: Container(
-                        height: 40.h,
-                        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
-                        clipBehavior: Clip.antiAlias,
-                        decoration: ShapeDecoration(
-                          color: Color(0xFF2A7473),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25.r),
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Back to home',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14.sp,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w700,
-                                height: 1.2.h,
-                                letterSpacing: -0.14.w,
-                              ),
-                            ),
-                            SizedBox(width: 8.w,),
-                            Icon(Icons.arrow_forward, color: Colors.white, size: 16.sp,),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+            letterSpacing: 1.sp,
+          ),
+        ),
+        elevation: 0,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => BottomNavBar()));
+          },
+          icon: Icon(
+            CupertinoIcons.back,
+            color: Colors.black.withOpacity(.9),
+          ),
+        ),
+      ),
+      backgroundColor: Colors.white,
+      body: BlocConsumer<LevelsCubit, LevelState>(
+        listener: (context, state) {
+          if (state is FavoritesLoading) {
+            showDialog(
+              context: context,
+              builder: (context) =>
+                  const Center(child: CircularProgressIndicator()),
+            );
+          }
+          if (state is FavoritesSuccess) {
+            Navigator.pop(context);
+          }
+        },
+        builder: (context, state) {
+          if (storiesModel1.isNotEmpty) {
+            return Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(AppImages.back), fit: BoxFit.cover),
+              ),
+              child: ListView.builder(
+                itemCount: storiesModel1.length,
+                itemBuilder: (context, index) =>
+                 Container(
+                  width: 400.w,
+                  height: 150.h,
+                  child: Image.network(storiesModel1[index].image!),
                 ),
               ),
-            ),
-          ),
-        
-      
+            );
+          } else {
+            return Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(AppImages.back), fit: BoxFit.cover),
+              ),
+              child: Center(
+                child: Container(
+                  width: 291.w,
+                  height: 306.h,
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
+                  decoration: ShapeDecoration(
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    shadows: [
+                      BoxShadow(
+                        color: Color(0x26000000),
+                        blurRadius: 40.r,
+                        offset: Offset(0, 4.h),
+                        spreadRadius: 0,
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(height: 10.h),
+                      SizedBox(
+                        width: 259.w,
+                        child: Text(
+                          'There are no Saved Stories yet. Unlock your stories to be able to save them.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20.sp,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w500,
+                            height: 0,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 24.h),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => BottomNavBar()));
+                        },
+                        child: Container(
+                          height: 40.h,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 12.w, vertical: 8.h),
+                          clipBehavior: Clip.antiAlias,
+                          decoration: ShapeDecoration(
+                            color: Color(0xFF2A7473),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25.r),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Back to home',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14.sp,
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w700,
+                                  height: 1.2.h,
+                                  letterSpacing: -0.14.w,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 8.w,
+                              ),
+                              Icon(
+                                Icons.arrow_forward,
+                                color: Colors.white,
+                                size: 16.sp,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 }
-
-
-

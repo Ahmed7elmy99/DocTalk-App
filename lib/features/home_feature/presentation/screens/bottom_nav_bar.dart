@@ -5,6 +5,7 @@ import 'package:doc_talk/features/drawer_feature/presentation/screens/drawer.dar
 import 'package:doc_talk/features/home_feature/presentation/screens/home_screen.dart';
 import 'package:doc_talk/features/home_feature/presentation/screens/settings_view.dart';
 import 'package:doc_talk/features/home_feature/presentation/widgets/custom_button_bottom_app_bar.dart';
+import 'package:doc_talk/features/levels_and_categories/presentation/cubit/levels_and-categories_cubit.dart';
 
 import 'package:doc_talk/features/questionair_feature/cubit/states_survey.dart';
 import 'package:doc_talk/features/questionair_feature/cubit/survey_cubit.dart';
@@ -31,7 +32,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
    // const MyDrawer(),
    // const HomeScreen(),
    const ExploreScreen(),
-  const Test2Screen(),
+   Test2Screen( storiesModel: storiesModel1),
     const SettingsView()
   ];
 
