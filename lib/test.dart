@@ -1,5 +1,6 @@
 import 'package:doc_talk/app/utils/cach_helper.dart';
 import 'package:doc_talk/app/utils/consts.dart';
+import 'package:doc_talk/app/widgets/text_widget.dart';
 import 'package:doc_talk/features/levels_and_categories/data/models/stories_Model.dart';
 import 'package:doc_talk/features/levels_and_categories/presentation/cubit/levels_and-categories_cubit.dart';
 import 'package:doc_talk/features/levels_and_categories/presentation/cubit/levels_and-categories_states.dart';
@@ -473,19 +474,77 @@ class _Test2ScreenState extends State<Test2Screen> {
             return Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage(AppImages.back), fit: BoxFit.cover),
+                  image: AssetImage(
+                      'assets/images/backgroundCategoriesScreen.png'),
+                  fit: BoxFit.cover,
+                ),
               ),
-              child: ListView.builder(
-                itemCount: storiesModel1.length,
-                itemBuilder: (context, index) =>
-                 Container(
-                  width: 400.w,
-                  height: 150.h,
-                  child: Image.network(storiesModel1[index].image!),
+              child: Padding(
+                padding: EdgeInsets.only(top: 140.h),
+                child: GridView.builder(
+                  padding: EdgeInsets.all(
+                      10.sp), // Adding some padding to the GridView
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 40.w, // Spacing of 40 from the right
+                    mainAxisSpacing: 24.17.h, // Spacing of 24 from the bottom
+                    childAspectRatio: 0.7,
+                  ),
+                  itemCount: storiesModel1.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return MaterialButton(
+                      padding: EdgeInsets.zero,
+                      onPressed: () {
+                        /*   navigateTo(
+                      context: context,
+                      widget: FamilyScreen(
+                        storiesModel: storiesModel,
+                        index: index,
+                        categoryiesModel: categoryiesModel,
+                        index2: index2,
+                      )
+                      );*/
+                      },
+                      child: Container(
+                        width: 99.w,
+                        height: 146.h,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20.sp),
+                        ),
+                        child: Column(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20.sp),
+                                topRight: Radius.circular(20.sp),
+                              ),
+                              child: Image.network(
+                                "${storiesModel1[index].image}",
+                                width: 99.w,
+                                height: 102.h,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                            SizedBox(height: 10.h),
+                            Expanded(
+                              child: TextWidget(
+                                title: "${storiesModel1[index].title}",
+                                titleSize: 16.sp,
+                                titleColor: Colors.black,
+                                titleFontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            SizedBox(height: 10.h),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             );
-          } else {
+          } else  {
             return Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
