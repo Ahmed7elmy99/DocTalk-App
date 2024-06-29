@@ -94,17 +94,19 @@ class DoneView2 extends StatelessWidget {
                 ),
                     SizedBox(height: 15.h,),
                 Expanded(
-                  child:Column(
-                    children: [
-TaskContainer(index: 1,widget: CashHelper.getInt(key: "quiz one shapes")==25?  Image.asset("assets/images/correct image.png",width: 30.w, height: 30.h,): Image.asset("assets/images/false image.png",
-                    width: 30.w, height: 30.h)) ,
-TaskContainer(index: 2,widget: CashHelper.getInt(key: "Quiz Shapes")==25?   Image.asset("assets/images/correct image.png",width: 30.w, height: 30.h,): Image.asset("assets/images/false image.png",
-                    width: 30.w, height: 30.h) ),
-TaskContainer(index: 3,widget: CashHelper.getInt(key: "quiz three shapes")==25?  Image.asset("assets/images/correct image.png",width: 30.w, height: 30.h,): Image.asset("assets/images/false image.png",
-                    width: 30.w, height: 30.h) ),
-TaskContainer(index: 4,widget: CashHelper.getInt(key: "quiz four shapes")==25?  Image.asset("assets/images/correct image.png",width: 30.w, height: 30.h,): Image.asset("assets/images/false image.png",
-                    width: 30.w, height: 30.h) )
-                    ]
+                  child:SingleChildScrollView(
+                    child: Column(
+                      children: [
+                    TaskContainer(index: 1,widget: CashHelper.getInt(key: "quiz one shapes")==25?  Image.asset("assets/images/correct image.png",width: 30.w, height: 30.h,): Image.asset("assets/images/false image.png",
+                      width: 30.w, height: 30.h)) ,
+                    TaskContainer(index: 2,widget: CashHelper.getInt(key: "Quiz Shapes")==25?   Image.asset("assets/images/correct image.png",width: 30.w, height: 30.h,): Image.asset("assets/images/false image.png",
+                      width: 30.w, height: 30.h) ),
+                    TaskContainer(index: 3,widget: CashHelper.getInt(key: "quiz three shapes")==25?  Image.asset("assets/images/correct image.png",width: 30.w, height: 30.h,): Image.asset("assets/images/false image.png",
+                      width: 30.w, height: 30.h) ),
+                    TaskContainer(index: 4,widget: CashHelper.getInt(key: "quiz four shapes")==25?  Image.asset("assets/images/correct image.png",width: 30.w, height: 30.h,): Image.asset("assets/images/false image.png",
+                      width: 30.w, height: 30.h) )
+                      ]
+                    ),
                   )
                   ),
               ],

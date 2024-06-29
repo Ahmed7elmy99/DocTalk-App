@@ -19,9 +19,11 @@ class QuizTen extends StatefulWidget {
 
 class _QuizTenState extends State<QuizTen> {
   final List<String> questions = [
-    'assets/images/rectangle.png',
+   // 'assets/images/rectangle.png',
     'assets/images/square.png',
-    'assets/images/rectangle.png',
+   "assets/images/triangle77.png",
+    //'assets/images/rectangle.png',
+    "assets/images/triangle77.png",
     'assets/images/square.png',
   ];
   final String hiddenCardPath = 'assets/images/logo.png';

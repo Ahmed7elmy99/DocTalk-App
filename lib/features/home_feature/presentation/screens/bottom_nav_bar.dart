@@ -71,7 +71,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           return FloatingActionButton(
             backgroundColor: Color(0xFF2A7473),
             onPressed: () async {
-             if (await CashHelper.getString(key:"surveyResult") == null) {
+             if ( CashHelper.getString(key:"surveyResult") == "null") {
              await cubit.getSurveyData(context: context, id: 1);
    
   } else  {

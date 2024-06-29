@@ -100,8 +100,8 @@ class MyApp extends StatelessWidget {
           ),
           debugShowCheckedModeBanner: false,
   
-          home:
-          CashHelper.getString(key: "token") == null
+          home://QuizFiveView()
+         CashHelper.getString(key: "token") == null
                   ? const SplashScreen()
                   : const BottomNavBar(),));
   }

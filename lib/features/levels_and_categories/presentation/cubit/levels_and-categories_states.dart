@@ -15,4 +15,8 @@ class CategoryHomeError extends LevelState {}
 class StoriesLoading extends LevelState {}
 class StoriesSuccess extends LevelState {}
 class StoriesError extends LevelState {}
+class FavoritesLoading extends LevelState {}
+class FavoritesSuccess extends LevelState {}
+class FavoritesError extends LevelState {}
+
 

@@ -1,15 +1,27 @@
 import 'package:doc_talk/app/utils/consts.dart';
+import 'package:doc_talk/app/widgets/flutter_toast.dart';
 import 'package:doc_talk/features/levels_and_categories/data/models/categories_Model.dart';
 import 'package:doc_talk/features/levels_and_categories/data/models/stories_Model.dart';
 import 'package:doc_talk/features/questionair_feature/presentation/screens/last_screens/speek_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
+import 'features/levels_and_categories/presentation/cubit/levels_and-categories_cubit.dart';
+import 'features/levels_and_categories/presentation/cubit/levels_and-categories_states.dart';
+
 class FamilyScreen extends StatefulWidget {
-  const FamilyScreen({Key? key, required this.storiesModel, required this.index, required this.categoryiesModel, required this.index2}) : super(key: key);
+  const FamilyScreen(
+      {Key? key,
+      required this.storiesModel,
+      required this.index,
+      required this.categoryiesModel,
+      required this.index2})
+      : super(key: key);
   final List<StoriesModel> storiesModel;
-   final List<CategoryiesModel> categoryiesModel;
+  final List<CategoryiesModel> categoryiesModel;
   final int index;
   final int index2;
   @override
@@ -24,8 +36,8 @@ class _FamilyScreenState extends State<FamilyScreen> {
   @override
   void initState() {
     super.initState();
-    controller =
-        VideoPlayerController.network("${widget.storiesModel[widget.index].video}");
+    controller = VideoPlayerController.network(
+        "${widget.storiesModel[widget.index].video}");
 
     controller.addListener(() {
       if (controller.value.position >= controller.value.duration) {
@@ -101,15 +113,18 @@ class _FamilyScreenState extends State<FamilyScreen> {
                 ),
                 MaterialButton(
                   onPressed: () {
-                  
-                  //  navigateTo(context: context, widget:  SpeakScreen(storiesModel: widget.storiesModel, index: widget.index,categoriesModel: widget.categoryiesModel,index2: widget.index2,));
-                  Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => SpeakScreen(storiesModel: widget.storiesModel, index: widget.index,categoriesModel: widget.categoryiesModel,index2: widget.index2,)),
-              );
- //  navigateTo(context: context, widget:  SpeakScreen());
-
-
+                    //  navigateTo(context: context, widget:  SpeakScreen(storiesModel: widget.storiesModel, index: widget.index,categoriesModel: widget.categoryiesModel,index2: widget.index2,));
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SpeakScreen(
+                                storiesModel: widget.storiesModel,
+                                index: widget.index,
+                                categoriesModel: widget.categoryiesModel,
+                                index2: widget.index2,
+                              )),
+                    );
+                    //  navigateTo(context: context, widget:  SpeakScreen());
                   },
                   child: Row(
                     children: [
@@ -132,8 +147,13 @@ class _FamilyScreenState extends State<FamilyScreen> {
                   ),
                 ),
                 MaterialButton(
-                  onPressed: () {
+                  onPressed: () async{
                     // Handle save button click
+                    await   LevelsCubit.get(context).addToFavoritesStories(
+                      storyId: widget.storiesModel[widget.index].id!, 
+                        context: context,
+                        
+                      );
                   },
                   child: Row(
                     children: [
@@ -172,30 +192,46 @@ class _FamilyScreenState extends State<FamilyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: Stack(
-        children: [
-          Center(
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 337.h,
-              child: VideoPlayer(controller),
-            ),
-          ),
-          if (isVideoFinished && !isBottomSheetOpen)
-            GestureDetector(
-              onTap: () {
-                setState(() {
-                  isBottomSheetOpen = true;
-                });
-                _openBottomSheet();
-              },
-              child: Container(
-                color: Colors.transparent,
+        backgroundColor: Colors.black,
+        body: BlocConsumer<LevelsCubit, LevelState>(
+          listener: (context, state) {
+        /*    if (state is FavoritesLoading) {
+               showDialog(
+                context: context,
+                builder: (context) =>
+                    const Center(child: CircularProgressIndicator()),
+              );
+          }*/
+                      if (state is FavoritesSuccess) {
+                      //  Navigator.pop(context);
+                      showToast(
+            backgroundColor: Colors.black,
+              msg: " Story Added To Favorites",);
+          }
+          },
+          builder: (context, state) => Stack(
+            children: [
+              Center(
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: 337.h,
+                  child: VideoPlayer(controller),
+                ),
               ),
-            ),
-        ],
-      ),
-    );
+              if (isVideoFinished && !isBottomSheetOpen)
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      isBottomSheetOpen = true;
+                    });
+                    _openBottomSheet();
+                  },
+                  child: Container(
+                    color: Colors.transparent,
+                  ),
+                ),
+            ],
+          ),
+        ));
   }
 }

@@ -196,5 +196,95 @@ class LevelsCubit extends Cubit<LevelState> {
       emit(StoriesError());
     }
   }
+List<StoriesModel> storiesModel1 = [];
+  Future<void> getFavoritesStories({
+    required BuildContext context,
+    
+  }) async {
+    emit(FavoritesLoading());
+
+    try {
+      final response = await DioHelper.getData(
+        url: "http://130.61.130.252/api/story/favorite",
+        headers: {
+        //  "Authorization": "${CashHelper.getString(key: "token")}",
+        "Authorization":"Bearer ${ CashHelper.getString(key: "token")}"
+        },
+       // queryParameters: {"categoryId": CategoryId},
+      );
+
+      if (response.data is List) {
+        storiesModel1 = List<StoriesModel>.from(
+          response.data.map((item) => StoriesModel.fromJson(item)),
+        );
+      } else {
+        throw Exception("Invalid response format");
+      }
+
+      print(response.data);
+      print("Success");
+
+      emit(FavoritesSuccess());
+    } catch (e) {
+      if (e is DioError) {
+        if (e.response != null) {
+          print(
+              "DioError [${e.response?.statusCode}] ${e.response?.statusMessage}");
+        } else {
+          print("DioError: ${e.message}");
+        }
+      } else {
+        print("Error: $e");
+      }
+
+      emit(FavoritesError());
+    }
+  }
+
+  List<StoriesModel> storiesModel2 = [];
+    Future<void> addToFavoritesStories({
+  
+    required BuildContext context,
+    required int storyId,
+  }) async {
+    emit(FavoritesLoading());
+
+    try {
+      final response = await DioHelper.postData(
+        url:"http://130.61.130.252/api/story/favorite/$storyId",
+        headers: {
+        //  "Authorization": "${CashHelper.getString(key: "token")}",
+        "Authorization":"Bearer ${ CashHelper.getString(key: "token")}"
+        },
+       // queryParameters: {"storyId": storyId},
+      );
+
+   /*   if (response.data is List) {
+        storiesModel2 = List<StoriesModel>.from(
+          response.data.map((item) => StoriesModel.fromJson(item)),
+        );
+      } else {
+        throw Exception("Invalid response format");
+      }*/
+
+      print(response.data);
+      print("added to favorites successfully");
+
+      emit(FavoritesSuccess());
+    } catch (e) {
+      if (e is DioError) {
+        if (e.response != null) {
+          print(
+              "DioError [${e.response?.statusCode}] ${e.response?.statusMessage}");
+        } else {
+          print("DioError: ${e.message}");
+        }
+      } else {
+        print("Error: $e");
+      }
+
+      emit(FavoritesError());
+    }
+  }
   
 }
