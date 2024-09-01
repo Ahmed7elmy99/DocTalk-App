@@ -15,4 +15,4 @@ processing, gamification, and building adaptive learning platforms focused on ch
 
 ## State Management and API Integration
 * State Management: The flutter_bloc package ensures effective state management, allowing the app to gracefully handle data from APIs, including loading, success, and error states.
-* API Integration: The application leverages the http package to interact with a backend AP
+* API Integration: The application leverages the dio package to interact with a backend AP
