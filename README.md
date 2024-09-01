@@ -6,7 +6,7 @@ DocTalk is Specialized Children's Learning and Rehabilitation App
 
 Check out this video to learn more about the project:
 
-https://github.com/Ahmed7elmy99/DocTalk-App/blob/Helmy/Doctalk%20App.mp4
+[Watch the Video](https://github.com/Ahmed7elmy99/DocTalk-App/raw/Helmy/Doctalk%20App.mp4)
 ## Features
 - **Tailored Assessments**:Includes surveys to assess each child's specific issues
 - **Structured Learning Path**:Structured in levels and categories, with each level having a series of story-based videos for the child to watch
