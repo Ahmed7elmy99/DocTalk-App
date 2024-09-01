@@ -1,4 +1,4 @@
-# doc_talk
+# Doc_talk - Medicine Application - Graduation Project
 
 A new Flutter project.
 
