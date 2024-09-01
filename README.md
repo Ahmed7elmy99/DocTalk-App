@@ -2,7 +2,7 @@
 
 DocTalk is Specialized Children's Learning and Rehabilitation App
  - An application designed to detect and treat speech problems in children through a multi-stage, multi-category approach.
-
+## Features
 ## Getting Started
 
 This project is a starting point for a Flutter application.
